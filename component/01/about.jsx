@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Link from 'next/link';
 import {motion} from 'framer-motion'
 import { FiArrowUpRight } from "react-icons/fi";
 import { FaStarHalfAlt } from "react-icons/fa";
@@ -63,7 +64,9 @@ function About() {
             className='flex justify-center md:justify-start'
             >
             <button className='bg-[#ffd061] hover:bg-[#f5c84a] ml-0 sm:ml-20 md:ml-52 cursor-pointer text-black flex items-center gap-3 px-4 sm:px-5 py-2 rounded-md font-semibold text-sm sm:text-base'>
-                CONTACT US
+                <Link href="/about">
+                 MORE ABOUT US
+                </Link>
                 <motion.span 
                 className='bg-[#383635] inline-block p-1 rounded-sm ml-2'
                 whileHover={{ rotate: 45 }}

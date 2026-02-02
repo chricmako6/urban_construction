@@ -17,10 +17,11 @@ function Navbar() {
     { href: '#services', label: 'Services' },
     { href: '#projects', label: 'Projects' },
     { href: '#contact', label: 'Contact' },
+    { href: '', label: 'Shop' },
   ];
 
   return (
-    <div className='w-full bg-[#383635] py-5 mx-auto'>
+    <div className='w-full bg-[#383635] py-5 mx-auto sticky top-0 left-0 z-100'>
       <div className='flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row'>
         {/* Logo */}
         <div>

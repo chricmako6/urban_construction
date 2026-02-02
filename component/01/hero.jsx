@@ -2,10 +2,18 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FiArrowUpRight } from 'react-icons/fi'
+import { BiArrowToTop } from "react-icons/bi";
 
 function Hero() {
+
+const handleScrollToTop = () => {
+window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+})
+}
   return (
-    <div className='w-full md:h-137.5 h-screen bg-cover bg-gray-300 bg-center relative flex items-center'>
+    <div className='pt-24 w-full md:h-137.5 h-screen bg-cover bg-gray-300 bg-center relative flex items-center'>
         <div className='gap-4 p-10 md:p-0'>
             {/* Animated heading with staggered children */}
             <motion.h1 
@@ -70,6 +78,9 @@ function Hero() {
                 </motion.span>
             </button>
             </motion.div>
+        </div>
+        <div onClick={handleScrollToTop} className='bg-[#ffd061] hover:bg-[#f5c84a] shadow-2xl rounded-full p-2.5 cursor-pointer fixed z-100 top-130 left-320'>
+           <BiArrowToTop className="w-5 h-5"/>
         </div>
     </div>
   )

@@ -11,7 +11,7 @@ import { BiArrowToTop } from 'react-icons/bi';
 import Aboutsession4 from '@/component/02/aboutsession4';
 import Footer from '@/component/01/footer';
 
-function PageAbout() {
+function PageServices() {
 const handleScrollToTop = () => {
     window.scrollTo({
     top: 0,
@@ -29,7 +29,7 @@ const handleScrollToTop = () => {
             backgroundRepeat: 'no-repeat'
         }}>
             <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-white'>
-                ABOUT US
+                SERVICES WE PROVIDES
             </h1>
             <div className='flex justify-center items-center my-5'>
                 <Link href="/">
@@ -42,19 +42,19 @@ const handleScrollToTop = () => {
         </div>
 
         <div className='my-30 '>
-            <AboutSession1 />
+            
         </div>
 
         <div className='my-30 '>
-            <Aboutsession2 />
+            
         </div>
 
         <div className='my-30 '>
-            <Aboutsession3 />
+            
         </div>
 
         <div className='my-30 '>
-            <Aboutsession4 />
+            
         </div>
 
 
@@ -72,4 +72,4 @@ const handleScrollToTop = () => {
   )
 }
 
-export default PageAbout
+export default PageServices

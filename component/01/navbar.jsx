@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react'
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import { href } from 'react-router-dom';
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,12 +13,12 @@ function Navbar() {
   };
 
   const navLinks = [
-    { href: '#', label: 'Home' },
+    { href: '/', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
     { href: '#projects', label: 'Projects' },
     { href: '#contact', label: 'Contact' },
-    { href: '', label: 'Shop' },
+    { href: '/shop', label: 'Shop' },
   ];
 
   return (

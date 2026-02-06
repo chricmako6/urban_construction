@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaPaintRoller } from 'react-icons/fa';
 import { GiBrickWall } from "react-icons/gi";
@@ -128,7 +129,9 @@ function PageService() {
             </div>
 
             <button className='bg-[#ffd061] hover:bg-[#f5c84a] w-fit md:w-42.5 cursor-pointer flex items-center gap-2 sm:gap-3 md:gap-3 px-4 sm:px-5 md:px-5 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
+              <Link href="services">
               Read More
+              </Link>
               <span className='bg-[#383635] inline-block p-1 rounded-sm ml-1 sm:ml-2 md:ml-2 hover:rotate-45 transition-transform duration-300'>
                 <FiArrowUpRight className='text-white w-4 sm:w-5 md:w-5 h-4 sm:h-5 md:h-5' />
               </span>

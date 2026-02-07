@@ -107,8 +107,8 @@ function page() {
             </div>
 
             <div className='flex-7 mx-5'>
-               <h1 className='my-5'>
-                {product?.title} 
+               <h1 className='my-5 text-2xl font-bold'>
+                {product?.title} {product?.id}
                </h1>
 
                {/* this is with radio */}

@@ -55,7 +55,7 @@ const [Open, setOpen] = useState(null);
            {productData.map((product, index) => (
             <div key={index}>
                 <div 
-                className="shadow-xs bg-white p-5 rounded-xl my-5 cursor-pointer">
+                className="shadow-xs w-80 bg-white p-5 rounded-xl my-5 cursor-pointer">
                     {/* this is the title */}
                     <span className="flex justify-between ">
                     <h1 className='font-bold'>{product.title}</h1>
@@ -102,12 +102,12 @@ const [Open, setOpen] = useState(null);
                         <p className="text-gray-700 leading-relaxed text-sm">Residential</p>
                     </span>
                     </motion.div>
-                </motion.span>
+                   </motion.span>
                 </div>
             </div>
             ))}
         
-            <span className='flex justify-between shadow-xs bg-white p-5 rounded-xl my-4'>
+            <span className='flex w-80 justify-between shadow-xs bg-white p-5 rounded-xl my-4'>
                 <h1 className='font-bold'>Duplex?</h1>
                  <span className=''>
                    <input type="reset" value="" />
@@ -118,7 +118,7 @@ const [Open, setOpen] = useState(null);
             {priceData.map((price, index) => (
             <div key={index}>
                 <div 
-                className="shadow-xs bg-white p-5 rounded-xl my-5 cursor-pointer">
+                className="shadow-xs w-80 bg-white p-5 rounded-xl my-5 cursor-pointer">
                     {/* this is the title */}
                     <span className="flex justify-between ">
                     <h1 className='font-bold'>{price.title}</h1>
@@ -143,19 +143,19 @@ const [Open, setOpen] = useState(null);
                     }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden">
-                    <motion.div className='p-3 flex items-center gap-3 border-gray-200'
+                    <motion.div className='py-3 flex items-center gap-3 border-gray-200'
                     initial={{ opacity: 0 }}
                     animate={{ opacity: Open === index ? 1 : 0 }}
                     transition={{ duration: 0.3, delay: 0.1 }}
                     >
                     <span className='flex gap-2 p-2 rounded-xl bg-gray-200 '>
-                      <p className="">Tshs</p>
-                      <input type="text" name="" id="" placeholder='0' className='w-16 text-end'/>
+                      <p className="py-1.5">Tshs</p>
+                      <input type="text" name="" id="" placeholder='0' className='w-16 text-end p-1.5'/>
                     </span>
                      to
                     <span className='flex gap-2 p-2 rounded-xl bg-gray-200'>
-                      <p className="">Tshs</p>
-                      <input type="text" name="" id="" placeholder='180k' className='w-16 text-end'/> 
+                      <p className="py-1.5">Tshs</p>
+                      <input type="text" name="" id="" placeholder='180k' className='w-16 text-end p-1.5'/> 
                     </span>
                     
                     </motion.div>

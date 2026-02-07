@@ -33,34 +33,34 @@ function Shopcard({ items }) {
             </p>
           </div>
           <div className="grid grid-cols-3 p-2 gap-2">
-            <div className="mx-auto text-xs p-1  w-20 border-r border-gray-400">
+            <div className="mx-auto text-xs p-1  w-20">
               <MdApartment className='w-6 h-6 mx-auto cursor-pointer'/>
-              <p className="text-center my-1.5">1 Floors</p>
+              <p className="text-center my-1.5">{item?.floors} Floors</p>
             </div>
 
-            <div className="mx-auto text-xs p-1  w-20 border-r border-gray-400">
+            <div className="mx-auto text-xs p-1  w-20 border-r border-l border-gray-400">
               <MdBedroomChild className='w-6 h-6 mx-auto cursor-pointer'/>
-              <p className="text-center my-1.5">1 Bedrooms</p>
+              <p className="text-center my-1.5">{item?.bedroom} Bedrooms</p>
             </div>
 
             <div className="mx-auto text-xs p-1  w-20">
               <MdOutlineBathroom className='w-6 h-6 mx-auto cursor-pointer'/>
-              <p className="text-center my-1.5">1 Bathrooms</p>
+              <p className="text-center my-1.5">{item?.bathroom} Bathrooms</p>
             </div>
 
-             <div className="mx-auto w-20 text-xs p-1 border-r border-gray-400">
+             <div className="mx-auto w-20 text-xs p-1 ">
               <CiLineHeight className='w-6 h-6 mx-auto cursor-pointer' />
-              <p className="text-center my-1.5">20 m</p>
+              <p className="text-center my-1.5">{item?.height} m</p>
             </div>
 
-            <div className="mx-auto text-xs p-1  w-20 border-r border-gray-400">
+            <div className="mx-auto text-xs p-1  w-20 border-r border-l border-gray-400">
               <AiOutlineColumnWidth className='w-6 h-6 mx-auto cursor-pointer'/>
-              <p className="text-center my-1.5">10 m</p>
+              <p className="text-center my-1.5">{item?.width} m</p>
             </div>
 
             <div className="mx-auto text-xs p-1  w-20">
               <PiMapPinAreaDuotone className='w-6 h-6 mx-auto cursor-pointer'/>
-              <p className="text-center my-1.5">130 Area</p>
+              <p className="text-center my-1.5">{item?.area} Area</p>
             </div>
           </div>
         </div>

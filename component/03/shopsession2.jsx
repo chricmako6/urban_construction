@@ -11,16 +11,30 @@ import { CiLineHeight } from "react-icons/ci";
 import { AiOutlineColumnWidth } from "react-icons/ai";
 
 function Shopsession2() {
+  const [sortOrder, setSortOrder] = useState("old");
+  const [showSort, setShowSort] = useState(false);
+
 
   const itemsPerPage = 9; 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(shopItems.length / itemsPerPage);
+  // const totalPages = Math.ceil(shopItems.length / itemsPerPage);
+  const sortedItems = [...shopItems].sort((a, b) => {
+  if (sortOrder === "old") {
+    return new Date(a.date) - new Date(b.date);
+  } else {
+    return new Date(b.date) - new Date(a.date);
+  }
+});
+
+const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = shopItems.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = shopItems.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -28,11 +42,50 @@ function Shopsession2() {
 
   return (
     <div>
-      <div className='flex justify-end items-center gap-2'>
-        <span className='font-bold'>Sort by : </span> Date, Old to New
-        <span className='rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer p-2'>
-          <IoIosArrowDown className='font-bold hover:rotate-180'/>
-        </span>
+
+      <div className='flex justify-end items-center gap-2 relative'>
+        <span className='font-bold'>Sort by :</span>
+
+        <div className='relative'>
+          <div
+            onClick={() => setShowSort(!showSort)}
+            className='flex items-center gap-2 cursor-pointer'
+           >
+            <span>
+              {sortOrder === "old" ? "Date, Old to New" : "Date, New to Old"}
+            </span>
+
+            <span className='rounded-full bg-[#ffd061] hover:bg-[#f5c84a] p-2'>
+              <IoIosArrowDown
+                className={`transition-transform ${showSort ? "rotate-180" : ""}`}
+              />
+            </span>
+          </div>
+
+          {showSort && (
+            <div className='absolute right-0 mt-2 bg-white shadow-lg rounded-lg p-2 w-48 z-50'>
+              <button
+                onClick={() => {
+                  setSortOrder("old");
+                  setShowSort(false);
+                }}
+                className='block w-full text-left px-3 py-2 hover:bg-gray-100 rounded'
+              >
+                Date, Old to New
+              </button>
+
+              <button
+                onClick={() => {
+                  setSortOrder("new");
+                  setShowSort(false);
+                }}
+                className='block w-full text-left px-3 py-2 hover:bg-gray-100 rounded'
+              >
+                Date, New to Old
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className='w-full mt-5'>
@@ -51,8 +104,8 @@ function Shopsession2() {
               />
 
               <div className='p-3'>
-                <h2 className='font-bold'>{item.title}</h2>
-                <p className='flex justify-between'>
+                <h2 className='font-bold'>{item.title}{item?.id ? ` - ID: ${item.id}` : ''}</h2>
+                <p className='flex justify-between items-center mt-2'>
                   <span className='my-2'>From {item.price}</span>
                   <span className='flex gap-1'>
                     <FaRegStar className='w-5 h-5'/>

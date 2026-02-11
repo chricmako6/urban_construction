@@ -9,25 +9,31 @@ const [openIndex, setOpenIndex] = useState(null);
 const [Open, setOpen] = useState(null);
 
  // data for Product type
-  const productData = [
-    {
-      title: 'Product type',
-    },
-    {
-      title: 'Number of Bedrooms',
-    },
-    {
-      title: 'Number of Bathrooms',
-    },
-    {
-      title: 'Number of Floors',
-    },
-    {
-      title: 'Area',
-    },
-  ]
+ const productData = [
+  {
+    title: 'Product type',
+    options: ['Apartments', 'Commercial', 'Hotels & Lodges', 'Residential']
+  },
+  {
+    title: 'Number of Bedrooms',
+    options: ['1 Bedroom', '2 Bedrooms', '3 Bedrooms', '4+ Bedrooms']
+  },
+  {
+    title: 'Number of Bathrooms',
+    options: ['1 Bathroom', '2 Bathrooms', '3 Bathrooms', '4+ Bathrooms']
+  },
+  {
+    title: 'Number of Floors',
+    options: ['1 Floor', '2 Floors', '3 Floors', '4+ Floors']
+  },
+  {
+    title: 'Area',
+    options: ['0-100 sqm', '100-200 sqm', '200-300 sqm', '300+ sqm']
+  },
+];
 
-    const priceData = [
+
+  const priceData = [
     {
       title: 'Price',
     },
@@ -85,35 +91,42 @@ const [Open, setOpen] = useState(null);
                     animate={{ opacity: openIndex === index ? 1 : 0 }}
                     transition={{ duration: 0.3, delay: 0.1 }}
                     >
-                    <span className='gap-2 flex'>
-                        <input type="checkbox" name="Rooms" id="" className='cursor-pointer'/>
-                        <p className="text-gray-700 leading-relaxed text-sm">Apartments</p>
-                    </span>
-                    <span className='gap-2 flex'>
-                        <input type="checkbox" name="Rooms" id="" className='cursor-pointer'/>
-                        <p className="text-gray-700 leading-relaxed text-sm">Commercial</p>
-                    </span>
-                    <span className='gap-2 flex'>
-                        <input type="checkbox" name="Rooms" id="" className='cursor-pointer'/>
-                        <p className="text-gray-700 leading-relaxed text-sm">Hotels & Lodges</p>
-                    </span>
-                    <span className='gap-2 flex'>
-                        <input type="checkbox" name="Rooms" id="" className='cursor-pointer'/>
-                        <p className="text-gray-700 leading-relaxed text-sm">Residential</p>
-                    </span>
+                    <div className="flex flex-col gap-2">
+                      {product.options.map((option, i) => (
+                        <label key={i} className='flex gap-2 items-center cursor-pointer'>
+                          <input
+                            type="checkbox"
+                            className='cursor-pointer'
+                          />
+                          <p className="text-gray-700 text-sm">{option}</p>
+                        </label>
+                      ))}
+                    </div>
+
                     </motion.div>
                    </motion.span>
+
                 </div>
             </div>
             ))}
         
-            <span className='flex w-80 justify-between shadow-xs bg-white p-5 rounded-xl my-4'>
-                <h1 className='font-bold'>Duplex?</h1>
-                 <span className=''>
-                   <input type="reset" value="" />
-                </span>
-            </span>
+            <span className='flex w-80 justify-between items-center shadow-xs bg-white p-5 rounded-xl my-4'>
+            <h1 className='font-bold'>Duplex?</h1>
 
+            {/* Toggle Switch */}
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" className="sr-only peer" />
+              
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer 
+                peer-checked:bg-[#ffd061] 
+                peer-focus:ring-2 peer-focus:ring-[#f5c84a]
+                after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                after:bg-white after:border after:rounded-full
+                after:h-5 after:w-5 after:transition-all
+                peer-checked:after:translate-x-full">
+              </div>
+            </label>
+           </span>
 
             {priceData.map((price, index) => (
             <div key={index}>

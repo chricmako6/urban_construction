@@ -6,7 +6,7 @@ import { FiArrowUpRight } from 'react-icons/fi';
 
 function Project() {
   return (
-    <div id='projects' className='mt-40 w-full justify-center'>
+    <div id='projects' className='w-full justify-center'>
         <div className='w-full px-4'>
             <motion.h1 
             initial={{ opacity: 0, y: 50 }}

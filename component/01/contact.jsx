@@ -38,7 +38,7 @@ function Contact() {
   };
 
   return (
-    <div id="contact" className="w-full mt-10 sm:mt-20 mb-10 px-4 sm:px-6 lg:px-8 h-auto">
+    <div id="contact" className="w-full px-4 sm:px-6 lg:px-8 h-auto">
       <style>{rotateStyle}</style>
       
       {/* Heading Section - Added responsive heading */}

@@ -64,14 +64,14 @@ function TestCard() {
       <div className="flex gap-2 sm:gap-3 justify-center items-center mt-3 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 md:static md:mt-27 w-full sm:w-auto">
         <button 
           onClick={handlePrevious}
-          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
+          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
           aria-label="Previous testimonial"
         >
           <FaArrowLeft className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#5e5f61]'/>
         </button>
         <button 
           onClick={handleNext}
-          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
+          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
           aria-label="Next testimonial"
         >
           <FaArrowRight className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#5e5f61]'/>

@@ -14,11 +14,11 @@ function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '#about', label: 'About' },
+    { href: '/about', label: 'About' },
     { href: '#services', label: 'Services' },
     { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' },
     { href: '/shop', label: 'Shop' },
+    { href: '/wishlist', label: 'Wishlist' },
   ];
 
   return (

@@ -19,7 +19,7 @@ function PageServices() {
    }
 
   return (
-    <div className='w-full'>
+    <div className='max-w-full'>
         <Navbar />
         <div className=" w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-72 h-40"
         style={{

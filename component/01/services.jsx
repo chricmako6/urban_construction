@@ -7,7 +7,7 @@ import PageService from '../02/pageService';
 function Services() {
   return (
     <>
-    <div id='services' className='w-full mt-20 mb-10 h-auto grid justify-center'>
+    <div id='services' className='w-full h-auto grid justify-center'>
         <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}

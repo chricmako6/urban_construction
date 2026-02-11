@@ -14,43 +14,43 @@ export default function Home() {
   return (
     <>
      {/* HERO SECTION */}
-      <div className="relative w-full min-h-screen mx-auto">
+      <div className="w-full min-h-screen mx-auto">
         <Navbar />
         <Hero />
       </div>
 
       {/* ABOUT US SECTION  */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
         <About />
       </div>
 
       {/* COUNTING SECTION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
        <Counting /> 
       </div>
 
       {/* SERVICES SECTION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
         <Services />
       </div>
 
        {/* SERVICES SECTION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
         <Project />
       </div>
 
         {/* TESTIMONIAL SECTIION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto mt-25 my-25 md:my-30">
         <Testimonial />
       </div>
 
        {/* FAQ SECTION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
         <Faq />
       </div>
 
       {/* CONTACT SECTION */}
-      <div className="w-full mx-auto">
+      <div className="w-full mx-auto my-25 md:my-30">
         <Contact />
       </div>
 

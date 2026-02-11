@@ -2,7 +2,7 @@
     { 
       id: 1, 
       title: "2 - Storey 2 Room House Plan - ID", 
-      price: "$ 151.20", 
+      price: "Tshs 151.20", 
       image: "/03.jpg",
       floors: "2",
       bedroom: "4",
@@ -14,7 +14,7 @@
     { 
       id: 2, 
       title: "3 - Storey 3 Room House Plan - ID", 
-      price: "$ 189.50", 
+      price: "Tshs 189.50", 
       image: "/path-to-image-2.jpg", 
       floors: "2",
       bedroom: "2",
@@ -26,7 +26,7 @@
     { 
       id: 3, 
       title: "Modern Villa Design - ID", 
-      price: "$ 210.75", 
+      price: "Tshs 210.75", 
       image: "/path-to-image-3.jpg", 
       floors: "2",
       bedroom: "4",
@@ -38,7 +38,7 @@
     { 
       id: 4, 
       title: "Single Story Cottage - ID", 
-      price: "$ 125.30", 
+      price: "Tshs 125.30", 
       image: "/path-to-image-4.jpg", 
       floors: "2",
       bedroom: "4",
@@ -50,7 +50,7 @@
     {
        id: 5, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
        floors: "2",
         bedroom: "4",
@@ -62,7 +62,7 @@
     {
        id: 6, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
        floors: "2",
       bedroom: "4",
@@ -74,7 +74,7 @@
     {
        id: 7, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
       floors: "2",
       bedroom: "4",
@@ -86,7 +86,7 @@
     { 
       id: 8, 
       title: "Single Story Cottage - ID", 
-      price: "$ 125.30", 
+      price: "Tshs 125.30", 
       image: "/path-to-image-4.jpg",
       floors: "2",
       bedroom: "4",
@@ -98,7 +98,7 @@
     {
        id: 9, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
        floors: "2",
       bedroom: "4",
@@ -110,7 +110,7 @@
     {
        id: 10, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
        floors: "2",
       bedroom: "4",
@@ -122,7 +122,7 @@
     {
        id: 11, 
        title: "Single Story Cottage - ID", 
-       price: "$ 125.30", 
+       price: "Tshs 125.30", 
        image: "/path-to-image-4.jpg", 
        floors: "20",
       bedroom: "4",

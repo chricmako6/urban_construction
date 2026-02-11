@@ -1,5 +1,6 @@
 "use client"
 import React,{useState} from 'react'
+import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { shopItems } from '@/data'
@@ -152,14 +153,16 @@ function page() {
                 </span>
 
                 {/* button for purchase */}
+               <Link href="/checkout">
                 <button
                 className='my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
                   <h1 
                   onClick={() => toast.success("Proceeding to checkout")}
-                  className='font-bold'>
-                    Buy Now {product?.price}
+                  className='font-bold '>
+                    Check Out
                   </h1>
                 </button>
+               </Link>
 
                 {/* add to favorite and descriptions */}
                 <div className="">

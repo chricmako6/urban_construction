@@ -69,7 +69,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
                   setSortOrder("old");
                   setShowSort(false);
                 }}
-                className='block w-full text-left px-3 py-2 hover:bg-gray-100 rounded'
+                className='block cursor-pointer w-full text-left px-3 my-1.5 py-2 hover:bg-[#f5c84a] bg-gray-100 rounded'
               >
                 Date, Old to New
               </button>
@@ -79,7 +79,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
                   setSortOrder("new");
                   setShowSort(false);
                 }}
-                className='block w-full text-left px-3 py-2 hover:bg-gray-100 rounded'
+                className='block cursor-pointer w-full text-left px-3 my-1.5 py-2 hover:bg-[#f5c84a] bg-gray-100 rounded'
               >
                 Date, New to Old
               </button>

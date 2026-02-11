@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react'
+import { FaHeart } from 'react-icons/fa';
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import { href } from 'react-router-dom';
@@ -18,6 +19,7 @@ function Navbar() {
     { href: '#services', label: 'Services' },
     { href: '#projects', label: 'Projects' },
     { href: '/shop', label: 'Shop' },
+    { href: '/checkout', label: 'Checkout' },
     { href: '/wishlist', label: 'Wishlist' },
   ];
 
@@ -32,10 +34,32 @@ function Navbar() {
         {/* Desktop Navigation */}
         <div className='hidden lg:flex justify-center items-center'>
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className='text-white px-4 hover:text-[#ffd061] transition-colors duration-300'>
-                {link.label}
-              </a>
-            ))}
+              // WISH LIST ICON WITH NOTIFICATION BADGE
+              link.label === "Wishlist" ? (
+                    <a 
+                      key={link.label} 
+                      href={link.href} 
+                      className='relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1'
+                    >
+                      Wishlist
+                      <FaHeart className="text-lg" />
+
+                      {/* Notification Badge */}
+                      <span className="absolute -top-1.5 right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                        0
+                      </span>
+                    </a>
+                  ) : (
+                    <a 
+                      key={link.label} 
+                      href={link.href} 
+                      className='text-white px-4 hover:text-[#ffd061] transition-colors duration-300'
+                    >
+                      {link.label}
+                    </a>
+                  )
+                  
+             ))}
 
             {/* Animated button */}
             <motion.div
@@ -102,15 +126,30 @@ function Navbar() {
       >
         <div className='flex flex-col gap-4 px-4 py-6 bg-[#2a2928]'>
           {navLinks.map((link) => (
-            <a 
-              key={link.label}
-              href={link.href} 
-              className='text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300'
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+            link.label === "Wishlist" ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className='relative text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-2'
+                  onClick={() => setMobileMenuOpen(false)}
+                 >
+                  Wishlist
+                  <FaHeart />
+                  <span className="absolute top-0 left-23 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    0
+                  </span>
+                </a>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className='text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300'
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              )
+            ))}
           
           {/* Mobile Get Quote Button */}
           <motion.div

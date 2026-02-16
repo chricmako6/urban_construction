@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
-import { shopItems } from '@/data'
+import { shopItems } from '@/app/utilities/data';
 import { useParams } from 'next/navigation'
 import { MdApartment, MdBedroomChild, MdOutlineBathroom } from 'react-icons/md'
 import { PiMapPinAreaDuotone } from 'react-icons/pi'
@@ -13,6 +13,8 @@ import { FaRegHeart, FaHeart  } from 'react-icons/fa'
 import { AiOutlineColumnWidth } from "react-icons/ai";
 import Navbar from '@/component/01/navbar'
 import Footer from '@/component/01/footer';
+import { TiShoppingCart } from 'react-icons/ti';
+import { BiArrowToTop } from 'react-icons/bi';
 
 function page() {
  const [Open, setOpen] = useState(null);
@@ -28,9 +30,9 @@ function page() {
   setIsFavorite(!isFavorite);
 
   if (!isFavorite) {
-    toast.success("Added to wishlist ❤️");
+    toast.success("Favorite ❤️");
   } else {
-    toast("Removed from wishlist");
+    toast("Removed from Favorite");
   }
 };
 
@@ -49,7 +51,7 @@ function page() {
                   onClick={() => setActiveImage(img)}
                   className={`w-24 h-24 mt-5 rounded-xl mx-auto cursor-pointer border-2 transition-all
                     ${activeImage === img ? "border-[#ffd061]" : "border-transparent"}
-                    hover:opacity-80`}
+                    hover:opacity-80 bg-cover shadow-xl`}
                 />
               ))}
             </div>
@@ -58,7 +60,23 @@ function page() {
             <div className='flex-10 p-2'>
               {/* this is the center image */}
               <div className='flex-10 p-2'>
-                <div className="relative overflow-hidden rounded-xl">
+                <div className="relative rounded-xl">
+
+                  {/* BUTTONS */}
+                  <div className="absolute flex top-44 justify-between w-full p-5">
+                    {/* PREV BUTTON */}
+                    <button className="bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-full p-2">
+                      <BiArrowToTop className="w-5 h-5 -rotate-90"/>
+                    </button>
+
+                    {/* NEXT BUTTON */}
+                    <div>
+                    <button className="bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-full p-2">
+                      <BiArrowToTop className="w-5 h-5 rotate-90"/>
+                    </button>
+                    </div>
+                  </div>
+                  
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={activeImage}
@@ -68,9 +86,10 @@ function page() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
-                      className='bg-black w-full h-96 rounded-xl'
+                      className='w-full h-96 rounded-xl shadow-xl object-cover bg-center'
                     />
                   </AnimatePresence>
+
                 </div>
               </div>
 
@@ -126,13 +145,26 @@ function page() {
                </div>
 
                 {/* this is with checkbox */}
-               <div className="p-2 my-3 border rounded-xl border-gray-300">
+               <div className="p-2 md:my-6 my-3 border rounded-xl border-gray-300">
                 <h1>Drawing Sets</h1>
                 <span className='gap-2 flex'>
                     <input type="checkbox" name="Rooms" id="" className='cursor-pointer'/>
                     <p className="text-gray-700 leading-relaxed text-sm">Architectural Drawings</p>
                 </span>
                </div>
+
+               {/* THIS IS FOR DROPDOWN */}
+                  <span 
+                  className="overflow-hidden">
+                  <h2 className="font-bold my-2">Description</h2>
+                  <span className='gap-2 flex'>
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Obcaecati ad veritatis ea iste eligendi animi quis facere ducimus asperiores, 
+                        facilis ex repellat doloribus rerum harum?
+                      </p>
+                  </span>
+                  </span>
 
                {/* delivery information */}
                <div className="p-2 my-3">
@@ -152,17 +184,35 @@ function page() {
                     <p className="text-gray-700 leading-relaxed text-sm">Multiple payment options</p>
                 </span>
 
-                {/* button for purchase */}
-               <Link href="/checkout">
-                <button
-                className='my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
-                  <h1 
-                  onClick={() => toast.success("Proceeding to checkout")}
-                  className='font-bold '>
-                    Check Out
-                  </h1>
-                </button>
-               </Link>
+                <div className="flex gap-4 my-3">
+                  {/* BUY NOW */}
+                  <div className='w-full'>
+                    <Link href="/checkout">
+                    <button
+                     onClick={() => toast.success("Proceeding to checkout")}
+                     className='my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
+                      <h1 className='font-bold'>
+                        Buy {product?.price}
+                      </h1>
+                    </button>
+                    </Link>
+                  </div>
+
+                  {/* ADD TO CART */}
+                  <div
+                  className='w-full'>
+                    <button
+                    onClick={() => toast.success("Added to Cart")}
+                     className='flex justify-center my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
+                      <h1 className='font-bold '>
+                        Add Cart
+                      </h1>
+                      <span className='px-1'>
+                        <TiShoppingCart className="text-lg w-5 h-5"/>
+                      </span>
+                    </button>
+                  </div>  
+                </div>
 
                 {/* add to favorite and descriptions */}
                 <div className="">
@@ -179,22 +229,10 @@ function page() {
                       />
                     )}
                     <p className="text-gray-700 leading-relaxed text-md">
-                      Add to Wishlist
+                      Favorite
                     </p>
                   </span>
 
-                  {/* THIS IS FOR DROPDOWN */}
-                    <span 
-                    className="overflow-hidden">
-                    <h2 className="font-bold my-2">Description</h2>
-                    <span className='gap-2 flex'>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Obcaecati ad veritatis ea iste eligendi animi quis facere ducimus asperiores, 
-                          facilis ex repellat doloribus rerum harum?
-                        </p>
-                    </span>
-                   </span>
                 </div>
                </div>
             </div>

@@ -1,0 +1,67 @@
+  export const shopItems = [
+    { 
+      id: 1, 
+      title: "2 - Storey 2 Room House Plan", 
+      price: "Tshs 151.20", 
+      image: "/assert/03.jpg",
+      date: "2025-01-10",
+      floors: "2",
+      bedroom: "4",
+      bathroom: "2",
+      height: "30",
+      width: "10",
+      area: "170"
+    },
+    { 
+      id: 2, 
+      title: "3 - Storey 3 Room House Plan", 
+      price: "Tshs 189.50", 
+      image: "/path-to-image-2.jpg", 
+      date: "2026-01-10",
+      floors: "2",
+      bedroom: "2",
+      bathroom: "1",
+      height: "30",
+      width: "90",
+      area: "900"
+    },
+    { 
+      id: 3, 
+      title: "Modern Villa Design", 
+      price: "Tshs 210.75", 
+      image: "/path-to-image-3.jpg", 
+      date: "2025-06-01",
+      floors: "2",
+      bedroom: "4",
+      bathroom: "2",
+      height: "30",
+      width: "10",
+      area: "170"
+    },
+    { 
+      id: 4, 
+      title: "Single Story Cottage", 
+      price: "Tshs 125.30", 
+      image: "/path-to-image-4.jpg", 
+      date: "2025-04-27",
+      floors: "2",
+      bedroom: "4",
+      bathroom: "2",
+      height: "30",
+      width: "10",
+      area: "170"
+    },
+    {
+       id: 5, 
+       title: "Single Story Cottage", 
+       price: "Tshs 125.30", 
+       image: "/path-to-image-4.jpg", 
+       date: "2025-12-02",
+       floors: "2",
+        bedroom: "4",
+        bathroom: "2",
+        height: "30",
+        width: "10",
+        area: "170"
+    },
+  ];

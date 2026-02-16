@@ -1,12 +1,14 @@
 'use client';
+import React, { useState, useContext } from 'react'
 import { motion } from 'framer-motion';
-import React, { useState } from 'react'
-import { FaHeart } from 'react-icons/fa';
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
-import { href } from 'react-router-dom';
+import { TiShoppingCart } from 'react-icons/ti';
+import { StoreContext } from '@/app/hooks/context/StoreContext';
 
 function Navbar() {
+  const { products } = useContext(StoreContext);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -19,8 +21,7 @@ function Navbar() {
     { href: '#services', label: 'Services' },
     { href: '#projects', label: 'Projects' },
     { href: '/shop', label: 'Shop' },
-    { href: '/checkout', label: 'Checkout' },
-    { href: '/wishlist', label: 'Wishlist' },
+    { href: '/cart', label: 'AddCart' },
   ];
 
   return (
@@ -35,18 +36,16 @@ function Navbar() {
         <div className='hidden lg:flex justify-center items-center'>
             {navLinks.map((link) => (
               // WISH LIST ICON WITH NOTIFICATION BADGE
-              link.label === "Wishlist" ? (
+              link.label === "AddCart" ? (
                     <a 
                       key={link.label} 
                       href={link.href} 
                       className='relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1'
                     >
-                      Wishlist
-                      <FaHeart className="text-lg" />
-
+                      <TiShoppingCart className="text-lg w-5 h-5"/>
                       {/* Notification Badge */}
-                      <span className="absolute -top-1.5 right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                        0
+                      <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                        {products.length}
                       </span>
                     </a>
                   ) : (
@@ -126,17 +125,16 @@ function Navbar() {
       >
         <div className='flex flex-col gap-4 px-4 py-6 bg-[#2a2928]'>
           {navLinks.map((link) => (
-            link.label === "Wishlist" ? (
+            link.label === "AddCart" ? (
                 <a
                   key={link.label}
                   href={link.href}
                   className='relative text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-2'
                   onClick={() => setMobileMenuOpen(false)}
                  >
-                  Wishlist
-                  <FaHeart />
-                  <span className="absolute top-0 left-23 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                    0
+                  <TiShoppingCart className="text-lg w-5 h-5"/>
+                  <span className="absolute top-0 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {products.length}
                   </span>
                 </a>
               ) : (

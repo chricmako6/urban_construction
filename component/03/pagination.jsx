@@ -30,8 +30,8 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
             onClick={() => onPageChange(number)}
             className={`px-4 py-2 rounded-md ${
               currentPage === number
-                ? "bg-gray-800 text-white"
-                : "bg-gray-100 hover:bg-white"
+                ? "bg-gray-800 text-white cursor-pointer"
+                : "bg-gray-100 hover:bg-white cursor-pointer"
             }`}
           >
             {number}

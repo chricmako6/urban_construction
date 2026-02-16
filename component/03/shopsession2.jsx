@@ -1,16 +1,24 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link';
 import Pagination from '@/component/03/pagination';
-import { shopItems } from '@/data';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegStar } from 'react-icons/fa'
 import { MdApartment, MdBedroomChild, MdOutlineBathroom } from 'react-icons/md'
 import { PiMapPinAreaDuotone } from 'react-icons/pi'
 import { CiLineHeight } from "react-icons/ci";
 import { AiOutlineColumnWidth } from "react-icons/ai";
+import { shopItems } from '@/app/utilities/data';
+import { TiShoppingCart } from 'react-icons/ti';
+import { StoreContext } from '@/app/hooks/context/StoreContext';
 
-function Shopsession2() {
+function Shopsession2({item}) {
+  const { addProduct } = useContext(StoreContext);
+
+  const handleAdd = () => {
+      addProduct(item);
+  }
+
   const [sortOrder, setSortOrder] = useState("old");
   const [showSort, setShowSort] = useState(false);
 
@@ -38,6 +46,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({ top:400, behavior: "smooth" });
   };
 
   return (
@@ -93,18 +102,27 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
           {currentItems.map((item) => (
             <div key={item.id} className='bg-white rounded-xl shadow-md relative'>
               
-              <span className='absolute px-4 font-bold text-white left-40 top-56 p-2 rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer'>
-                <Link href={`/shop/${item?.id}`}>+Quick Buy</Link>
+              <span 
+              onClick={() => addProduct(item)}
+              className='absolute px-4 font-bold text-white left-38 top-56 p-2 rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer'>
+                <span className='flex'>
+                  Add Cart
+                  <TiShoppingCart className="left-2 w-5 h-5"/>
+                </span>
               </span>
 
+              <Link href={`/shop/${item?.id}`}>
               <img
                 src={item.image}
                 alt={item.title}
-                className='h-70 w-full rounded-t-xl bg-gray-200 object-cover'
+                className='h-70 w-full shadow-md rounded-t-xl bg-gray-200 bg-center object-cover'
               />
-
+              </Link>
+              
               <div className='p-3'>
-                <h2 className='font-bold'>{item.title}{item?.id ? ` - ID: ${item.id}` : ''}</h2>
+                <Link href={`/shop/${item?.id}`}>
+                 <h2 className='font-bold'>{item.title}{item?.id ? ` - ID: ${item.id}` : ''}</h2>
+                </Link>
                 <p className='flex justify-between items-center mt-2'>
                   <span className='my-2'>From {item.price}</span>
                   <span className='flex gap-1'>

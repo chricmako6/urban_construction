@@ -41,7 +41,7 @@ const handleScrollToTop = () => {
             </div>
         </div>
 
-        <div className='my-30 '>
+        <div className='my-30'>
             <AboutSession1 />
         </div>
 
@@ -59,7 +59,7 @@ const handleScrollToTop = () => {
 
 
         {/* top button */}
-         <div onClick={handleScrollToTop} className='bg-[#ffd061] hover:bg-[#f5c84a] shadow-2xl rounded-full p-2.5 cursor-pointer fixed z-100 top-130 left-320'>
+         <div onClick={handleScrollToTop} className='bg-[#ffd061] hover:bg-[#f5c84a] shadow-2xl rounded-full p-2.5 cursor-pointer fixed z-100 md:top-130 top-170 md:left-320 left-90'>
             <BiArrowToTop className="w-5 h-5"/>
         </div>
 

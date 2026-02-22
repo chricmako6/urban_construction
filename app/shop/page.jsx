@@ -47,8 +47,8 @@ function PageServices() {
             </div>
         </div>
 
-        <div className='my-30 flex max-w-7xl gap-6 mx-auto'>
-            <div className='w-1/3'>
+        <div className='my-16 md:my-30 flex flex-col lg:flex-row max-w-7xl gap-6 mx-auto px-4'>
+            <div className='w-1/3 hidden lg:block'>
                 <Shopsession1 />
             </div>
             <div className='w-full'>

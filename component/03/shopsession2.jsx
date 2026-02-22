@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Link from 'next/link';
 import Pagination from '@/component/03/pagination';
 import { IoIosArrowDown } from "react-icons/io";
@@ -23,7 +23,23 @@ function Shopsession2({item}) {
   const [showSort, setShowSort] = useState(false);
 
 
-  const itemsPerPage = 9; 
+ const [itemsPerPage, setItemsPerPage] = useState(9);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(1); // small screens
+      } else {
+        setItemsPerPage(9); // large screens (default)
+      }
+    };
+
+    handleResize(); // run on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(1);
 
   // const totalPages = Math.ceil(shopItems.length / itemsPerPage);
@@ -98,13 +114,13 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
       </div>
 
       <div className='w-full mt-5'>
-        <div className='grid grid-cols-3 gap-5 bg-white p-5 rounded-xl shadow'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 bg-white p-5 rounded-xl shadow'>
           {currentItems.map((item) => (
             <div key={item.id} className='bg-white rounded-xl shadow-md relative'>
               
               <span 
               onClick={() => addProduct(item)}
-              className='absolute px-4 font-bold text-white left-38 top-56 p-2 rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer'>
+              className='absolute px-4 font-bold text-white lg:left-38 left-52 lg:top-56 top-40 p-2 rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer'>
                 <span className='flex'>
                   Add Cart
                   <TiShoppingCart className="left-2 w-5 h-5"/>
@@ -115,7 +131,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
               <img
                 src={item.image}
                 alt={item.title}
-                className='h-70 w-full shadow-md rounded-t-xl bg-gray-200 bg-center object-cover'
+                className='h-56 sm:h-64 md:h-70 w-full shadow-md rounded-t-xl bg-gray-200 bg-center object-cover'
               />
               </Link>
               

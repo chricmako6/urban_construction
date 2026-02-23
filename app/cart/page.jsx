@@ -7,12 +7,15 @@ import Footer from '@/component/01/footer';
 import CartProduct from '@/component/03/cartProduct';
 
 function pageCart() {
-  const { products, total } = useContext(StoreContext);
+  const { products, total,clearCart } = useContext(StoreContext);
   // const { removeProduct } = useContext(StoreContext);
   
   // const handleRemove = (item) => {
   //     removeProduct(item);
   // }
+
+  console.log(products);
+  
 
   return (
     <div className='max-w-full'>
@@ -26,7 +29,7 @@ function pageCart() {
               <p className='text-leading'> {products.length} Products in Your Cart</p>
             </div>
             <div>
-              <button className='cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-4'>
+              <button onClick={() =>clearCart()} className='cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-4'>
                 Clear Cart
               </button>
             </div>

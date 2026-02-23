@@ -13,11 +13,13 @@ import { TiShoppingCart } from 'react-icons/ti';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
 
 function Shopsession2({item}) {
-  const { addProduct } = useContext(StoreContext);
+  const { addProduct,products} = useContext(StoreContext);
 
-  const handleAdd = () => {
-      addProduct(item);
-  }
+  // const handleAdd = () => {
+  //     addProduct(item);
+  // }
+
+  
 
   const [sortOrder, setSortOrder] = useState("old");
   const [showSort, setShowSort] = useState(false);
@@ -118,14 +120,15 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
           {currentItems.map((item) => (
             <div key={item.id} className='bg-white rounded-xl shadow-md relative'>
               
-              <span 
+              <button 
+disabled={products.some((product) => product.id === item.id)}
               onClick={() => addProduct(item)}
-              className='absolute px-4 font-bold text-white lg:left-38 left-52 lg:top-56 top-40 p-2 rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer'>
+              className={`absolute px-4 font-bold lg:left-38 left-52 lg:top-56 top-40 p-2 rounded-full ${products.some((product) => product.id === item.id) ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] text-white'}`}>
                 <span className='flex'>
                   Add Cart
                   <TiShoppingCart className="left-2 w-5 h-5"/>
                 </span>
-              </span>
+              </button>
 
               <Link href={`/shop/${item?.id}`}>
               <img

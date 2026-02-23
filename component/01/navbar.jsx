@@ -5,6 +5,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import { TiShoppingCart } from 'react-icons/ti';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
+import Link from 'next/link';
 
 function Navbar() {
   const { products } = useContext(StoreContext);
@@ -37,25 +38,25 @@ function Navbar() {
             {navLinks.map((link) => (
               // WISH LIST ICON WITH NOTIFICATION BADGE
               link.label === "AddCart" ? (
-                    <a 
+                    <Link
                       key={link.label} 
                       href={link.href} 
                       className='relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1'
                     >
                       <TiShoppingCart className="text-lg w-5 h-5"/>
                       {/* Notification Badge */}
-                      <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                      <p className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                         {products.length}
-                      </span>
-                    </a>
+                      </p>
+                    </Link>
                   ) : (
-                    <a 
+                    <Link
                       key={link.label} 
                       href={link.href} 
                       className='text-white px-4 hover:text-[#ffd061] transition-colors duration-300'
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   )
                   
              ))}

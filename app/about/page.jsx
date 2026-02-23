@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link';
 import Navbar from '@/component/01/navbar'
 import { IoHome } from 'react-icons/io5'
@@ -10,8 +10,17 @@ import Aboutsession3 from '@/component/02/aboutsession3';
 import { BiArrowToTop } from 'react-icons/bi';
 import Aboutsession4 from '@/component/02/aboutsession4';
 import Footer from '@/component/01/footer';
+import { StoreContext } from '../hooks/context/StoreContext';
 
 function PageAbout() {
+      const { products, total } = useContext(StoreContext);
+      // const { removeProduct } = useContext(StoreContext);
+      
+      // const handleRemove = (item) => {
+      //     removeProduct(item);
+      // }
+    
+      console.log(products);
 const handleScrollToTop = () => {
     window.scrollTo({
     top: 0,

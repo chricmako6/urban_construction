@@ -1,21 +1,37 @@
 "use client";
 import React, {useContext, useState} from 'react'
+import Link from 'next/link';
 import Navbar from '@/component/01/navbar'
 import { StoreContext } from '@/app/hooks/context/StoreContext';
-import { shopItems } from '@/app/utilities/data';
 import Footer from '@/component/01/footer';
 import CartProduct from '@/component/03/cartProduct';
 
 function pageCart() {
-  const { products, total,clearCart } = useContext(StoreContext);
-  // const { removeProduct } = useContext(StoreContext);
+  const { products, clearCart } = useContext(StoreContext);
   
-  // const handleRemove = (item) => {
-  //     removeProduct(item);
-  // }
+  // Helper to extract numeric price
+  const getNumericPrice = (price) => {
+    if (typeof price === "string") {
+      const numericValue = parseFloat(price.replace(/[^\d.]/g, ""));
+      return isNaN(numericValue) ? 0 : numericValue;
+    }
+    return typeof price === "number" ? price : 0;
+  };
 
-  console.log(products);
-  
+  // Calculate subtotal from all cart items
+  const subtotal = products.reduce((acc ,  item) => {
+  const numericPrice = getNumericPrice(item.price);
+  const itemTotal = numericPrice * (item.quantity || 1);
+
+   return acc + itemTotal;
+  }, 0);
+
+  // Other calculations
+  const deliveryCost = 20;
+  const tax = 5;
+  const discount = subtotal * 0.1;
+
+  const finalTotal = subtotal + deliveryCost + tax - discount;
 
   return (
     <div className='max-w-full'>
@@ -56,28 +72,38 @@ function pageCart() {
                   <span>{products.length}</span>
                 </div>
 
-                <div className="flex justify-between">
+
+                <div className="flex justify-between py-1">
                   <span>Delivery Cost</span>
                   <span>$20</span>
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex justify-between py-1">
                   <span>Tax</span>
                   <span>$5</span>
                 </div>
 
-                <div className="flex justify-between border-b border-gray-300 mb-4 pb-4">
+
+                <div className="flex justify-between py-1">
                   <span>Discount</span>
-                  <span>$10</span>
+                  <span>10%</span>
                 </div>
-                <div className="flex justify-between font-bold text-lg">
-                  <span>Total</span>
-                  <span>${total}</span>
+                
+                <div className="flex justify-between py-1 border-b border-gray-300 mb-4 pb-4">
+                  <span>Subtotal</span>
+                  <span className="text-green-600">Tshs: <b>{subtotal.toFixed(2)}</b></span>
                 </div>
 
-                <button className='mt-4 cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 rounded-lg transition-colors duration-300'>
-                  Proceed to Checkout
-                </button>
+                <div className="flex justify-between font-bold text-lg">
+                  <span>Total</span>
+                  <span>${finalTotal.toFixed(2)}</span>
+                </div>
+
+                  <button className='mt-4 cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 rounded-lg transition-colors duration-300'>
+                  <Link href="/checkout">
+                    Proceed to Checkout
+                  </Link>
+                  </button>
               </div>
             </div>
 

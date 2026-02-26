@@ -14,10 +14,23 @@ export const StoreProvider = ({ children }) => {
   });
 
   const addProduct = (product) => {
-    const updatedProducts = [...state.products, product];
+    const existingProduct = state.products.find((item) => item.id === product.id);
+    
+    let updatedProducts;
+    if (existingProduct) {
+      // If product already exists, increment its quantity
+      updatedProducts = state.products.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
+          : item
+      );
+    } else {
+      // If new product, add it with quantity 1
+      updatedProducts = [...state.products, { ...product, quantity: 1 }];
+    }
 
     const total = updatedProducts.reduce(
-      (sum, item) => sum + Number(item.price || 0),
+      (sum, item) => sum + Number(item.price || 0) * (item.quantity || 1),
       0,
     );
 
@@ -25,13 +38,44 @@ export const StoreProvider = ({ children }) => {
     dispatch({ type: "update", payload: total });
   };
 
+  const incrementProduct = (product) => {
+    const updatedProducts = state.products.map((item) =>
+      item.id === product.id
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item
+    );
+
+    const total = updatedProducts.reduce(
+      (sum, item) => sum + Number(item.price || 0) * (item.quantity || 1),
+      0
+    );
+
+    dispatch({ type: "increment", payload: updatedProducts });
+    dispatch({ type: "update", payload: total });
+  };
+
+  const decrementProduct = (product) => {
+    const updatedProducts = state.products.map((item) =>
+      item.id === product.id && (item.quantity || 1) > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+
+    const total = updatedProducts.reduce(
+      (sum, item) => sum + Number(item.price || 0) * (item.quantity || 1),
+      0
+    );
+
+    dispatch({ type: "decrement", payload: updatedProducts });
+    dispatch({ type: "update", payload: total });
+  };
   const removeProduct = (product) => {
     const updatedProducts = state.products.filter(
       (item) => item.id !== product.id,
     );
 
     const total = updatedProducts.reduce(
-      (sum, item) => sum + Number(item.price || 0),
+      (sum, item) => sum + Number(item.price || 0) * (item.quantity || 1),
       0,
     );
 
@@ -56,6 +100,8 @@ export const StoreProvider = ({ children }) => {
         addProduct,
         removeProduct,
         clearCart,
+        incrementProduct,
+        decrementProduct,
       }}
     >
       {children}

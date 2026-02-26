@@ -12,13 +12,8 @@ import { shopItems } from '@/app/utilities/data';
 import { TiShoppingCart } from 'react-icons/ti';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
 
-function Shopsession2({item}) {
+function Shopsession2() {
   const { addProduct,products} = useContext(StoreContext);
-
-  // const handleAdd = () => {
-  //     addProduct(item);
-  // }
-
   
 
   const [sortOrder, setSortOrder] = useState("old");
@@ -30,7 +25,7 @@ function Shopsession2({item}) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setItemsPerPage(1); // small screens
+        setItemsPerPage(4); // small screens
       } else {
         setItemsPerPage(9); // large screens (default)
       }

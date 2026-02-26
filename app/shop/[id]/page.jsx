@@ -1,5 +1,5 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
@@ -15,9 +15,10 @@ import Navbar from '@/component/01/navbar'
 import Footer from '@/component/01/footer';
 import { TiShoppingCart } from 'react-icons/ti';
 import { BiArrowToTop } from 'react-icons/bi';
+import { StoreContext } from '@/app/hooks/context/StoreContext';
 
-function page() {
- const [Open, setOpen] = useState(null);
+function page({item}) {
+ const { addProduct, products } = useContext(StoreContext);
  const [isFavorite, setIsFavorite] = useState(false);
 
 
@@ -110,7 +111,7 @@ function page() {
                     <p className="text-center my-1.5">{product?.bathroom} Bathrooms</p>
                   </div>
       
-                    <div className="mx-auto w-40 text-md p-1 ">
+                  <div className="mx-auto w-40 text-md p-1 ">
                     <CiLineHeight className='w-8 h-8 mx-auto cursor-pointer' />
                     <p className="text-center my-1.5">{product?.height} m</p>
                   </div>
@@ -203,7 +204,10 @@ function page() {
                     <div
                     className='w-full'>
                       <button
-                      onClick={() => toast.success("Added to Cart")}
+                      onClick={() => {
+                        toast.success("Added to Cart")
+                        addProduct(item)
+                      }}
                       className='flex justify-center my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
                         <h1 className='font-bold '>
                           Add Cart

@@ -12,6 +12,18 @@ const storeReducer = (state, action) => {
         products: action.payload
       };
 
+    case "increment":
+      return {
+        ...state,
+        products: action.payload
+      };
+
+    case "decrement":
+      return {
+        ...state,
+        products: action.payload
+      };  
+
     case "remove":
       return {
         ...state,

@@ -45,9 +45,9 @@ function Navbar() {
                     >
                       <TiShoppingCart className="text-lg w-5 h-5"/>
                       {/* Notification Badge */}
-                      <p className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                      <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                         {products.length}
-                      </p>
+                      </span>
                     </Link>
                   ) : (
                     <Link

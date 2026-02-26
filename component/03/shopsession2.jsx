@@ -116,7 +116,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
             <div key={item.id} className='bg-white rounded-xl shadow-md relative'>
               
               <button 
-disabled={products.some((product) => product.id === item.id)}
+              disabled={products.some((product) => product.id === item.id)}
               onClick={() => addProduct(item)}
               className={`absolute px-4 font-bold lg:left-38 left-52 lg:top-56 top-40 p-2 rounded-full ${products.some((product) => product.id === item.id) ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] text-white'}`}>
                 <span className='flex'>

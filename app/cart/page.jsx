@@ -73,37 +73,50 @@ function pageCart() {
                 </div>
 
 
-                <div className="flex justify-between py-1">
+                <div className="flex leading-relaxed justify-between py-1">
                   <span>Delivery Cost</span>
                   <span>$20</span>
                 </div>
 
-                <div className="flex justify-between py-1">
+                <div className="flex leading-relaxed justify-between py-1">
                   <span>Tax</span>
                   <span>$5</span>
                 </div>
 
 
-                <div className="flex justify-between py-1">
+                <div className="flex leading-relaxed justify-between py-1">
                   <span>Discount</span>
                   <span>10%</span>
                 </div>
                 
-                <div className="flex justify-between py-1 border-b border-gray-300 mb-4 pb-4">
+                <div className="flex leading-relaxed justify-between py-1 border-b border-gray-300 mb-4 pb-4">
                   <span>Subtotal</span>
                   <span className="text-green-600">Tshs: <b>{subtotal.toFixed(2)}</b></span>
                 </div>
 
-                <div className="flex justify-between font-bold text-lg">
+                <div className="flex leading-relaxed justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span>${finalTotal.toFixed(2)}</span>
+                  {products.length === 0 ? (
+                    <span className="text-gray-500">Tshs: 0.00</span>
+                  ) : (
+                    <span className="text-green-600">Tshs: <b>{finalTotal.toFixed(2)}</b></span>
+                  )}
                 </div>
 
-                  <button className='mt-4 cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 rounded-lg transition-colors duration-300'>
-                  <Link href="/checkout">
-                    Proceed to Checkout
-                  </Link>
+                {products.length === 0 ? (
+                  <button
+                    disabled
+                    className="mt-4 bg-gray-300 text-gray-500 font-semibold py-2 rounded-lg cursor-not-allowed"
+                  >
+                    Cart is Empty
                   </button>
+                ) : (
+                  <Link href="/checkout">
+                    <button className="mt-4 bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 rounded-lg cursor-pointer transition-colors duration-300 w-full">
+                      Proceed to Checkout
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
 

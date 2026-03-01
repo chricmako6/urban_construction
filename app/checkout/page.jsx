@@ -16,8 +16,17 @@ function PageCheck() {
   const [orderId, setOrderId] = useState(null);
   const [selectedInfo, setSelectedInfo] = useState('person');
   const steps = ['person', 'payment', 'complete'];
-
   const currentStepIndex = steps.indexOf(selectedInfo);
+
+  const [formData, setFormData] = useState({
+  email: "",
+  phone: "",
+  location: "",
+  });
+  
+
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [errors, setErrors] = useState({});
 
   const goNext = () => {
     if (currentStepIndex < steps.length - 1) {
@@ -70,35 +79,77 @@ function PageCheck() {
           <div className='bg-gray-100 border border-gray-200 max-w-4xl mx-auto p-2 rounded-full flex justify-between'>
             {/* PERSONAL */}
             <button
+             disabled={currentStepIndex < 0}
               onClick={() => setSelectedInfo('person')}
               className={`rounded-full p-3 transition-all duration-300 cursor-pointer 
                 ${selectedInfo === 'person'
                   ? 'bg-[#ffd061] scale-110 shadow-md'
                   : 'border border-[#ffd061] hover:bg-[#f5c84a]'
+                }
+
+                ${currentStepIndex > 0
+                  ? 'bg-green-500 text-white'
+                  : selectedInfo === 'person'
+                  ? 'bg-[#ffd061]'
+                  : 'bg-gray-200'
                 }`}
-            >
-              <CgProfile className='w-6 h-6'/>
+             >
+              {currentStepIndex > 0 ? <FaCheck className='w-6 h-6'/> : <CgProfile className='w-6 h-6'/>}
+              
             </button>
 
             {/* PAYMENT */}
             <button
-              onClick={() => setSelectedInfo('payment')}
+             disabled={currentStepIndex < 0}
+              onClick={() => {
+                let newErrors = {};
+
+                if (!formData.email) newErrors.email = true;
+                if (!formData.phone) newErrors.phone = true;
+                if (!formData.location) newErrors.location = true;
+
+                setErrors(newErrors);
+
+                if (Object.keys(newErrors).length === 0) {
+                  setSelectedInfo("payment");
+                }
+              }}
               className={`rounded-full p-3 transition-all duration-300 cursor-pointer 
                 ${selectedInfo === 'payment'
                   ? 'bg-[#ffd061] scale-110 shadow-md'
                   : 'border border-[#ffd061] hover:bg-[#f5c84a]'
+                }
+
+                ${currentStepIndex > 1
+                  ? 'bg-green-500 text-white'
+                  : selectedInfo === 'payment'
+                  ? 'bg-[#ffd061]'
+                  : 'bg-gray-200'
                 }`}
             >
-              <RiSecurePaymentLine className='w-6 h-6'/>
+              {currentStepIndex > 1 ? <FaCheck className='w-6 h-6'/> : <RiSecurePaymentLine className='w-6 h-6'/>}
             </button>
 
             {/* COMPLETE */}
             <button
-              onClick={() => setSelectedInfo('complete')}
+             onClick={() => {
+                if (!paymentMethod) {
+                  setErrors({ payment: true });
+                  return (
+                    () => setSelectedInfo('complete')
+                  );
+                }}}
               className={`rounded-full p-3 transition-all duration-300 cursor-pointer
                 ${selectedInfo === 'complete'
                   ? 'bg-[#ffd061] scale-110 shadow-md'
                   : 'border border-[#ffd061] hover:bg-[#f5c84a]'
+                }
+
+                ${currentStepIndex > 1
+                  ? 'bg-green-500 text-white'
+                  : selectedInfo === 'payment'
+                  ? 'bg-[#ffd061]'
+                  : 'bg-gray-200'
                 }`}
             >
               <FaCheck className='w-6 h-6'/>
@@ -110,10 +161,10 @@ function PageCheck() {
           <div className="max-w-4xl mx-auto mt-8 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md">
             {/* THIS IS FOR PERSON */}
             {selectedInfo === 'person' && (
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 
                 {/* PERSONAL INFORMATION FORM */}
-                <div className="bg-white border border-gray-200 flex-10 p-4 rounded shadow-xs">
+                <div className="bg-white border border-gray-200 w-full md:flex-2 p-4 rounded shadow-xs">
                   <h1 className="font-semibold">
                     Personal Information
                   </h1>
@@ -143,7 +194,12 @@ function PageCheck() {
                       <input
                         type="email"
                         placeholder="Enter your email"
-                        className="w-full text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]"
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
+                        className={`w-full text-sm border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]
+                        ${errors.email ? "border-red-500" : "border-gray-300"}`}
                       />
                     </div>
 
@@ -155,7 +211,12 @@ function PageCheck() {
                       <input
                         type="tel"
                         placeholder="Enter your phone number"
-                        className="w-full text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        className={`w-full text-sm border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]
+                        ${errors.phone ? "border-red-500" : "border-gray-300"}`}
                       />
                     </div>
 
@@ -167,7 +228,12 @@ function PageCheck() {
                       <input
                         type="text"
                         placeholder="City / Region"
-                        className="w-full text-sm border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]"
+                        value={formData.location}
+                        onChange={(e) =>
+                          setFormData({ ...formData, location: e.target.value })
+                        }
+                        className={`w-full text-sm border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#ffd061]
+                        ${errors.location ? "border-red-500" : "border-gray-300"}`}
                       />
                     </div>
 
@@ -185,7 +251,17 @@ function PageCheck() {
 
                     <button 
                     onClick={() => {
-                      setSelectedInfo("payment");
+                      let newErrors = {};
+
+                      if (!formData.email) newErrors.email = true;
+                      if (!formData.phone) newErrors.phone = true;
+                      if (!formData.location) newErrors.location = true;
+
+                      setErrors(newErrors);
+
+                      if (Object.keys(newErrors).length === 0) {
+                        setSelectedInfo("payment");
+                      }
                     }}
                     className="my-3 p-2 w-full rounded-xl shadow-md cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a]">
                       Save & Continue
@@ -195,7 +271,7 @@ function PageCheck() {
                 </div>
 
                 {/* ORDER SUMMARY  */}
-                <div className="bg-white border border-gray-200 flex-7 p-4 h-fit rounded shadow-xs">
+                <div className="bg-white border border-gray-200 w-full md:flex-1 p-4 h-fit rounded shadow-xs">
                   <h1 className="font-bold border-b border-gray-200 p-3">
                     Your Cart (<span>{products.length}</span>)
                   </h1>
@@ -245,9 +321,9 @@ function PageCheck() {
 
             {/* THIS IS FOR PAYMENT */}
             {selectedInfo === 'payment' && (
-              <div className="flex  gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 {/* THIS IS FOR PAYMENT OPTIONS */}
-                <div className="bg-white border border-gray-200 flex-10 p-4 rounded shadow-xs">
+                <div className="bg-white border border-gray-200 w-full md:flex-2 p-4 rounded shadow-xs">
                   <h1 className="font-semibold">
                     Select Payment Option
                   </h1>
@@ -258,13 +334,27 @@ function PageCheck() {
                   {/* OPTIONS */}
                   <div className="mt-4">
                     <span className='gap-2 flex border border-gray-300 rounded-md p-3 cursor-pointer hover:bg-gray-100 transition-colors duration-300'>
-                      <input type="radio" name="Rooms" id="" className='cursor-pointer'/>
+                      <input
+                        type="radio"
+                        name="Rooms"
+                        value="paypal"
+                        checked={paymentMethod === "paypal"}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="cursor-pointer"
+                      />
                       <p className="text-gray-700 leading-relaxed text-sm">PayPal</p>
                     </span>
 
                     <div className="gap-2 my-4 border border-gray-300 rounded-md p-3 cursor-pointer">
                       <span className='flex gap-2'>
-                        <input type="radio" name="Rooms" id="" className='cursor-pointer'/>
+                        <input
+                          type="radio"
+                          name="Rooms"
+                          value="creditcard"
+                          checked={paymentMethod === "creditcard"}
+                          onChange={(e) => setPaymentMethod(e.target.value)}
+                          className="cursor-pointer"
+                        />
                         <p className="text-gray-700 leading-relaxed text-sm">Credit card</p>
                       </span>
                       <span className=''>
@@ -279,7 +369,7 @@ function PageCheck() {
                         <FaCreditCard className="absolute w-6 h-6 right-3 top-13 -translate-y-2/2 text-gray-400 text-sm pointer-events-none" />
                       </span>
 
-                      <div className="flex gap-4 mt-4">
+                      <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <span className=''>
                         <p className="text-gray-700 leading-relaxed text-xs">Name on Card</p>
                         <input type="text" 
@@ -305,34 +395,53 @@ function PageCheck() {
                     
 
                     <span className='gap-2 my-4 flex border border-gray-300 rounded-md p-3 cursor-pointer hover:bg-gray-100 transition-colors duration-300'>
-                      <input type="radio" name="Rooms" id="" className='cursor-pointer'/>
+                      <input
+                        type="radio"
+                        name="Rooms"
+                        value="GooglePay"
+                        checked={paymentMethod === "GooglePay"}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="cursor-pointer"
+                      />
                       <p className="text-gray-700 leading-relaxed text-sm">Google pay</p>
                     </span>
 
                     <span className='gap-2 my-4 flex border border-gray-300 rounded-md p-3 cursor-pointer hover:bg-gray-100 transition-colors duration-300'>
-                      <input type="radio" name="Rooms" id="" className='cursor-pointer'/>
+                      <input
+                        type="radio"
+                        name="Rooms"
+                        value="CashOnDelivery"
+                        checked={paymentMethod === "CashOnDelivery"}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="cursor-pointer"
+                      />
                       <p className="text-gray-700 leading-relaxed text-sm">Cash on delivery</p>
                     </span>
 
                     <button 
                       onClick={() => {
-                        const id = generateOrderId();
-                        setOrderId(id);
-                        setSelectedInfo("complete");
+                      if (!paymentMethod) {
+                        setErrors({ payment: true });
+                        return;
+                      }
 
-                        setTimeout(() => {
-                          clearCart();
-                          router.push("/");
-                        }, 60000);
-                      }}
+                      const id = generateOrderId();
+                      setOrderId(id);
+                      setSelectedInfo("complete");
+
+                      setTimeout(() => {
+                        clearCart();
+                        router.push("/");
+                      }, 60000);
+                    }}
                     className="my-3 p-2 w-full rounded-xl shadow-md cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a]">
-                      Pay | {finalTotal.toFixed(2)}
+                      Pay | Tsh:{finalTotal.toFixed(2)}
                     </button>
                   </div>
                 </div>
 
                 {/* THIS IS FOR PAYMENT SUMMARY */}
-                <div className="bg-white border border-gray-200 flex-7 p-4 h-fit rounded shadow-xs">
+                <div className="bg-white border border-gray-200 w-full md:flex-1 p-4 h-fit rounded shadow-xs">
                   <h1 className="font-bold border-b border-gray-200 p-3">
                     Your Cart (<span className=''>{products.length}</span>)
                   </h1>
@@ -359,7 +468,7 @@ function PageCheck() {
                     {/* THIS IS FOR TOTAL */}
                     <div className="flex border-t border-gray-200 justify-between items-center py-2.5 mt-3">
                       <p className="text-sm text-gray-400">Total</p>
-                      <span className="text-sm text-gray-600">Tshs: {finalTotal.toFixed(2)}</span>
+                      <span className="text-sm font-extrabold text-gray-600">Tshs: {finalTotal.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -368,10 +477,10 @@ function PageCheck() {
 
             {/* THIS IS FOR COMPLETE */}
             {selectedInfo === 'complete' && (
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 
                 {/* SUCCESS MESSAGE */}
-                <div className="bg-white border border-gray-200 flex-10 p-6 rounded shadow-xs text-center">
+               <div className="bg-white border border-gray-200 w-full md:flex-2 p-4 rounded shadow-xs">
 
                   {/* SUCCESS ICON */}
                   <div className="flex justify-center mb-4">
@@ -380,19 +489,19 @@ function PageCheck() {
                     </div>
                   </div>
 
-                  <h1 className="text-2xl font-bold">
+                  <h1 className="text-2xl text-center font-bold">
                     Payment Successful
                   </h1>
 
-                  <p className="text-gray-500 mt-2 text-sm">
+                  <p className="text-gray-500 text-center mt-2 text-sm">
                     Thank you for your purchase. Your order has been successfully placed.
                   </p>
 
-                  <p className="text-gray-400 mt-1 text-sm">
+                  <p className="text-gray-400 text-center mt-1 text-sm">
                     A confirmation email has been sent with your order details.
                   </p>
 
-                  <div className="mt-6 border-t border-gray-200 pt-4">
+                  <div className="mt-6 text-center border-t border-gray-200 pt-4">
                     <p className="text-sm text-gray-500">
                       Estimated delivery time:
                     </p>
@@ -420,7 +529,7 @@ function PageCheck() {
                 </div>
 
                 {/* FINAL ORDER SUMMARY */}
-                <div className="bg-white border border-gray-200 flex-7 p-4 h-fit rounded shadow-xs">
+                <div className="bg-white border border-gray-200 w-full md:flex-1 p-4 h-fit rounded shadow-xs">
                   <h1 className="font-bold border-b border-gray-200 p-3">
                     Order Summary
                   </h1>
@@ -482,7 +591,20 @@ function PageCheck() {
 
               {currentStepIndex < steps.length - 1 && (
                 <button
-                  onClick={goNext}
+                 onClick={() => {
+                      let newErrors = {};
+
+                      if (!formData.email) newErrors.email = true;
+                      if (!formData.phone) newErrors.phone = true;
+                      if (!formData.location) newErrors.location = true;
+
+                      setErrors(newErrors);
+
+                      if (Object.keys(newErrors).length === 0) {
+                        setSelectedInfo("payment");
+                      }
+                      () => goNext()
+                    }}
                   className="bg-[#ffd061] cursor-pointer px-4 py-2 rounded hover:bg-[#f5c84a]"
                 >
                   Next

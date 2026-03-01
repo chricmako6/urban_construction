@@ -160,9 +160,9 @@ function Contact() {
             
             {/* Message */}
             <textarea 
+              rows="4" 
               placeholder="Enter your message" 
-              rows="3"
-              className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffd061] focus:border-transparent transition resize-none"
+              className="w-full px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffd061] focus:border-transparent transition"
             ></textarea>
             
             {/* Submit Button */}

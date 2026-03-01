@@ -14,7 +14,7 @@ window.scrollTo({
 }
   return (
     <div className='pt-24 w-full md:h-137.5 h-screen bg-cover bg-gray-300 bg-center relative flex items-center'>
-        <div className='gap-4 p-10 md:p-0'>
+        <div className='gap-4 p-10 md:p-0 top-1/2 -translate-y-1/2 absolute'>
             {/* Animated heading with staggered children */}
             <motion.h1 
             initial={{ opacity: 0, y: 50 }}

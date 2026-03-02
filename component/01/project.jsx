@@ -57,16 +57,13 @@ function Project() {
             animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            className='group'
             >
-            <button className='bg-[#ffd061] shadow hover:bg-[#f5c84a] mt-70 ml-10 cursor-pointer text-black flex items-center px-5 py-2 rounded-md font-semibold'>
+            <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] mt-70 ml-10 cursor-pointer text-black flex items-center px-5 py-2 rounded-md font-semibold'>
                 RESTORATION
-                <motion.span 
-                className='bg-[#383635] inline-block p-1 rounded-sm ml-5'
-                whileHover={{ rotate: 45 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                >  
-                <FiArrowUpRight className='text-white w-5 h-5' />
-                </motion.span>
+                <span className='bg-[#383635] inline-block p-1 rounded-sm ml-5 group-hover/btn:rotate-45 transition-transform duration-300'>  
+                 <FiArrowUpRight className='text-white w-5 h-5' />
+                </span>
             </button>
             </motion.div>  
         </div>

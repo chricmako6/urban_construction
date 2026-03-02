@@ -30,7 +30,10 @@ function Navbar() {
       <div className='flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row'>
         {/* Logo */}
         <div>
-            <h1 className='text-white font-bold text-xl md:text-2xl'>UrbanBuild</h1>
+            <h1 className='text-white font-bold text-xl md:text-2xl'>
+              <img src="/assert/.png" 
+              alt="Jenganasi Logo" />
+            </h1>
         </div>
 
         {/* Desktop Navigation */}

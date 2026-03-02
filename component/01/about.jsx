@@ -61,18 +61,15 @@ function About() {
             animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-            className='flex justify-center md:justify-start'
+            className='group flex justify-center md:justify-start'
             >
-            <button className='bg-[#ffd061] shadow hover:bg-[#f5c84a] ml-0 sm:ml-20 md:ml-52 cursor-pointer text-black flex items-center gap-3 px-4 sm:px-5 py-2 rounded-md font-semibold text-sm sm:text-base'>
+            <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] ml-0 sm:ml-20 md:ml-52 cursor-pointer text-black flex items-center gap-3 px-4 sm:px-5 py-2 rounded-md font-semibold text-sm sm:text-base'>
                 <Link href="/about">
                  MORE ABOUT US
                 </Link>
                 <motion.span 
-                className='bg-[#383635] inline-block p-1 rounded-sm ml-2'
-                whileHover={{ rotate: 45 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                >
-                <FiArrowUpRight className='text-white w-5 h-5' />
+                className='bg-[#383635] inline-block p-1 rounded-sm ml-2 group-hover/btn:rotate-45 transition-transform duration-300'>
+                 <FiArrowUpRight className='text-white w-5 h-5' />
                 </motion.span>
             </button>
             </motion.div>  

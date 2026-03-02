@@ -175,14 +175,14 @@ function Contact() {
             ></textarea>
             
             {/* Submit Button */}
-            <div className='flex justify-center sm:justify-start'>
+            <div className='group flex justify-center sm:justify-start'>
               <button 
                 type='submit' 
-                className='bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 md:w-fit w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300'
+                className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 md:w-fit w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300'
               >
                 SEND A MESSAGE
                 <span 
-                  className='bg-[#383635] inline-block p-1 rounded-sm hover:rotate-45 transition-transform duration-300'
+                  className='bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300'
                 >
                   <FiArrowUpRight className='text-white w-4 h-4 sm:w-5 sm:h-5' />
                 </span>

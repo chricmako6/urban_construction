@@ -1,4 +1,5 @@
 import React from 'react'
+import { FiArrowUpRight } from 'react-icons/fi'
 
 function Aboutsession2() {
   return (
@@ -10,23 +11,70 @@ function Aboutsession2() {
         {/* LEFT SIDE */}
         <div className="flex flex-col gap-4 w-full md:w-1/2">
            
-           <div className="bg-yellow-200 h-32 md:h-37 rounded-xl flex items-center justify-center">
-            1
+           <div className="bg-yellow-200/60 h-37 rounded-xl shadow">
+            <div className="px-5 items-center justify-center h-full">
+              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] mt-5 py-2 px-6 cursor-pointer">
+                Our Vision
+              </button>
+              <div className="">
+                <p className="text-[#5e5f61] text-sm md:text-base py-2">
+                  To be the leading construction company in the region, known for excellence, innovation, and sustainable practices.
+                </p>
+              </div>
+            </div>
            </div>
 
-           <div className="bg-yellow-200 h-32 md:h-37 rounded-xl flex items-center justify-center">
-            2
+           <div className="bg-yellow-200/60 h-37 rounded-xl shadow">
+            <div className="px-5 items-center justify-center h-full">
+              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] mt-5 py-2 px-6 cursor-pointer">
+                Our  Mission
+              </button>
+              <div className="">
+                <p className="text-[#5e5f61] text-sm md:text-base py-2">
+                  Our mission is to deliver high-quality construction projects that exceed client expectations while prioritizing safety, sustainability, and community.
+                </p>
+              </div>
+            </div>
            </div>
 
-           <div className="bg-yellow-200 h-32 md:h-37 rounded-xl flex items-center justify-center">
-            3
+           <div className="bg-[#ffd061] h-37 rounded-xl shadow">
+            <div className="px-5 items-center justify-center h-full">
+              <button className=" font-bold md:text-lg rounded-md bg-yellow-200/60 mt-5 py-2 px-6 cursor-pointer">
+                Our History
+              </button>
+              <div className="">
+                <p className="text-[#5e5f61] text-sm md:text-base py-2">
+                  Jenganasi was founded in 2024 with a vision to build sustainable and innovative construction projects that stand the test of time.
+                </p>
+              </div>
+            </div>
            </div>
-
         </div>
     
         {/* RIGHT SIDE */}
-        <div className='bg-yellow-200 w-full md:w-1/2 h-60 md:h-120 rounded-xl flex items-center justify-center p-4 text-center md:text-left'>
-            image and description
+        <div className='shadow w-full md:w-1/2 h-75 md:h-120 rounded-xl p-5 text-center md:text-right relative'
+         style={{
+            backgroundImage: 'url(/assert/about_description.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+           }}>
+            <div className="absolute inset-0 bg-[#383635]/80 backdrop rounded-xl p-5 shadow-2xl shadow-black/20 ">
+              <h1 className="text-white md:text-3xl text-xl font-bold md:my-5 my-3">
+                Our Plan Makes You Feel More Comfortable in Your Construction Journey.
+              </h1>
+              <p className="text-white text-sm md:text-base md:my-5 my-3">
+                At Jenganasi, we are dedicated to transforming visions into reality through exceptional construction services. Our commitment to safety, sustainability, and client satisfaction sets us apart in the industry.
+              </p>
+            </div>
+            <span className="group justify-center md:justify-end flex top-50 md:top-90 relative ">
+                <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex items-center justify-center gap-3 px-5 my-2 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
+                    Contact Us
+                  <span className='bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300'>
+                    <FiArrowUpRight className='text-white w-4 sm:w-5 h-4 sm:h-5' />
+                  </span>
+                </button>
+            </span>
         </div>
 
       </div>

@@ -6,9 +6,11 @@ import { FiArrowUpRight } from 'react-icons/fi'
 function AboutSession1() {
   return (
     <div className='flex flex-col items-center justify-center px-4 md:px-0'>
-       <div className="w-full my-5 mx-auto">
-          <h1 className="text-center text-2xl md:text-3xl font-bold md:my-4 my-3 md:my-10">About Jenganasi</h1>
-          <p className="text-center text-sm sm:text-base text-[#5e5f61] mb-10 mx-auto max-w-2xl">
+       <div className="w-full md:my-5 my-3 mx-auto">
+          <h1 className="text-center text-2xl md:text-3xl font-bold md:my-5 my-3">
+            About Jenganasi
+          </h1>
+          <p className="text-center text-sm sm:text-base text-[#5e5f61] md:my-5 my-3 mx-auto max-w-2xl">
             At Jenganasi, we are dedicated to transforming visions into reality through exceptional construction services. 
             Our commitment to safety, sustainability, and client satisfaction sets us apart in the industry.
           </p>
@@ -17,15 +19,17 @@ function AboutSession1() {
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-5'>
         {/* LEFT SIDE */}
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-          
            <div className='w-full md:w-70 h-60 md:h-auto bg-gray-400 rounded-xl'>
             image
            </div>
 
            <div className='flex flex-col gap-4 w-full md:w-auto'>
-              
               <div className='h-60 md:h-90 w-full md:w-70 bg-gray-400 rounded-xl hidden md:block'>
-              1
+               <img 
+                src="/assert/tax.jpg" 
+                alt="Tax Jenganasi" 
+                className="w-full h-full object-cover rounded-xl"
+                />
               </div>
 
                <div className='w-full md:w-70 bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-xl flex'>
@@ -34,7 +38,6 @@ function AboutSession1() {
                     <p className="text-black text-center">Years of Experience</p>
                   </div>
               </div>
-
            </div>
         </div>
     
@@ -87,12 +90,12 @@ function AboutSession1() {
             </div>
 
             {/* BUTTON */}
-            <div>
-              <button className='bg-[#ffd061] hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex items-center justify-center md:justify-start gap-3 px-5 my-2 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
+            <div className='group'>
+              <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex items-center justify-center md:justify-start gap-3 px-5 my-2 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
                 <Link href="#">
                   Learn More
                 </Link>
-                <span className='bg-[#383635] inline-block p-1 rounded-sm hover:rotate-45 transition-transform duration-300'>
+                <span className='bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300'>
                   <FiArrowUpRight className='text-white w-4 sm:w-5 h-4 sm:h-5' />
                 </span>
               </button>

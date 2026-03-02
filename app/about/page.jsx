@@ -10,7 +10,6 @@ import Aboutsession3 from '@/component/02/aboutsession3';
 import { BiArrowToTop } from 'react-icons/bi';
 import Aboutsession4 from '@/component/02/aboutsession4';
 import Footer from '@/component/01/footer';
-import { StoreContext } from '../hooks/context/StoreContext';
 
 function PageAbout() {
     const handleScrollToTop = () => {
@@ -23,12 +22,12 @@ function PageAbout() {
     <div className='w-full'>
         <Navbar />
         <div className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40"
-        style={{
+         style={{
             backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/assert/03.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
-        }}>
+         }}>
             <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-white'>
                 ABOUT US
             </h1>
@@ -42,7 +41,7 @@ function PageAbout() {
             </div>
         </div>
 
-        <div className='my-15 md:my-30'>
+        <div className='my-10 md:my-25'>
             <AboutSession1 />
         </div>
 

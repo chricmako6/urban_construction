@@ -12,7 +12,7 @@ function Services() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className='mx-auto text-[#5e5f61] font-bold text-2xl md:text-3xl'
+            className='mx-auto font-bold text-2xl md:text-3xl md:my-4 my-2 text-center'
             >
             Solutions We Provide
         </motion.h1>

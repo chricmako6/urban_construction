@@ -13,7 +13,7 @@ function Faq() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className='text-center text-[10px] md:text-[15px] gap-2 text-[#5e5f61] font-bold my-4 flex items-center justify-center'
+            className='text-center text-[10px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:my-5 my-3 flex items-center justify-center'
         >
             <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
             FAQ
@@ -28,7 +28,7 @@ function Faq() {
             transition={{ duration: 0.7, ease: "easeOut", }}
             className='text-center'
         >
-            <h2 className='md:text-3xl font-bold text-[#5e5f61]'>
+            <h2 className='md:text-3xl font-bold'>
             Gots Questions? We've <br /> Got You Covered 
             </h2>
             <motion.p 
@@ -36,7 +36,7 @@ function Faq() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: "easeOut"}}
-            className='max-w-2xl mx-auto text-md md:text-md text-[#5e5f61] my-7'
+            className='max-w-2xl mx-auto text-md md:text-md text-[#5e5f61] md:my-5 my-3'
             >
             From project planning to final touches. We've answered the most 
             common questions to help you make informed decisions.

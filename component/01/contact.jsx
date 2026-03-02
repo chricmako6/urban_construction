@@ -47,7 +47,7 @@ function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-xl sm:text-2xl md:text-3xl font-bold text-[#5e5f61] mb-4"
+          className="text-xl sm:text-2xl md:text-3xl font-bold md:my-5 my-3"
         >
           Get In Touch
         </motion.h1>
@@ -110,10 +110,19 @@ function Contact() {
 
             {/* Social Media */}
             <div className='flex gap-6 sm:gap-8 mt-8'>
-              <FaFacebookF className='w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-[#ffd061] transition-colors duration-300'/>
-              <IoLogoYoutube className='w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-[#ffd061] transition-colors duration-300'/>
-              <IoLogoTiktok className='w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-[#ffd061] transition-colors duration-300'/>
-              <FaInstagram className='w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-[#ffd061] transition-colors duration-300'/>
+              <div className="hover:bg-[#ffd061] hover:text-[#5e5f61] rounded-full border border-[#ffd061] p-1 md:p-2 transition-colors duration-300">
+                <FaFacebookF className='w-4 h-4 sm:w-6 sm:h-6 cursor-pointer'/>
+              </div>
+              <div className="hover:bg-[#ffd061] hover:text-[#5e5f61] rounded-full border border-[#ffd061] p-1 md:p-2 transition-colors duration-300">
+                <IoLogoYoutube className='w-4 h-4 sm:w-6 sm:h-6 cursor-pointer'/>
+              </div>
+              <div className="hover:bg-[#ffd061] hover:text-[#5e5f61] rounded-full border border-[#ffd061] p-1 md:p-2 transition-colors duration-300">
+                <IoLogoTiktok className='w-4 h-4 sm:w-6 sm:h-6 cursor-pointer'/>
+              </div>
+              <div className="hover:bg-[#ffd061] hover:text-[#5e5f61] rounded-full border border-[#ffd061] p-1 md:p-2 transition-colors duration-300">
+                <FaInstagram className='w-4 h-4 sm:w-6 sm:h-6 cursor-pointer'/>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -169,7 +178,7 @@ function Contact() {
             <div className='flex justify-center sm:justify-start'>
               <button 
                 type='submit' 
-                className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-3 rounded-md font-semibold text-sm sm:text-base transition-colors duration-300'
+                className='bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 md:w-fit w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300'
               >
                 SEND A MESSAGE
                 <span 

@@ -52,7 +52,7 @@ function FaqCard() {
             onClick={() => toggleFaq(index)}
             className="w-full flex justify-between items-center p-4 bg-white hover:bg-gray-50 transition"
           >
-            <span className="text-left text-lg font-bold text-[#5e5f61]">
+            <span className="text-left md:text-lg font-bold text-[#5e5f61]">
               {faq.question}
             </span>
             <motion.div 

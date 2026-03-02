@@ -20,37 +20,37 @@ export default function Home() {
       </div>
 
       {/* ABOUT US SECTION  */}
-      <div className="w-full mx-auto my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30">
         <About />
       </div>
 
       {/* COUNTING SECTION */}
-      <div className="w-full mx-auto my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30">
        <Counting /> 
       </div>
 
       {/* SERVICES SECTION */}
-      <div className="w-full mx-auto my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30">
         <Services />
       </div>
 
-       {/* SERVICES SECTION */}
-      <div className="w-full mx-auto my-25 md:my-30">
+       {/* PROJECTS SECTION */}
+      <div className="w-full mx-auto my-15 md:my-30">
         <Project />
       </div>
 
         {/* TESTIMONIAL SECTIION */}
-      <div className="w-full mx-auto mt-25 my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30">
         <Testimonial />
       </div>
 
        {/* FAQ SECTION */}
-      <div className="w-full mx-auto my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30 bg-yellow-200/60 rounded-xl p-4">
         <Faq />
       </div>
 
       {/* CONTACT SECTION */}
-      <div className="w-full mx-auto my-25 md:my-30">
+      <div className="w-full mx-auto my-15 md:my-30">
         <Contact />
       </div>
 

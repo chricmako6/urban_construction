@@ -95,7 +95,7 @@ function PageService() {
         className='w-full md:w-1/2 bg-white rounded-md shadow-md p-4 sm:p-6 md:p-8'
       >
         <motion.div variants={slideUpVariants} className='flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-6 mb-4 sm:mb-6 md:mb-6'>
-          <div className='bg-yellow-500 hidden md:block w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0'>
+          <div className='bg-yellow-500 hidden md:block w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0 shadow-md'>
             image
           </div>
           <div className='flex flex-col justify-start flex-1'>
@@ -112,7 +112,7 @@ function PageService() {
         </motion.div>
         
         <motion.div variants={slideUpVariants} className='mb-6 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-6'>
-          <div className='bg-yellow-500 w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0'>
+          <div className='bg-yellow-500 w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0 shadow-md'>
             image
           </div>
 
@@ -128,7 +128,7 @@ function PageService() {
               </ul>
             </div>
 
-            <button className='bg-[#ffd061] hover:bg-[#f5c84a] w-fit md:w-42.5 cursor-pointer flex items-center gap-2 sm:gap-3 md:gap-3 px-4 sm:px-5 md:px-5 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
+            <button className='bg-[#ffd061] shadow hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex justify-center items-center gap-2 sm:gap-3 md:gap-3 px-4 sm:px-5 md:px-5 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
               <Link href="services">
               Read More
               </Link>

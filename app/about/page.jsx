@@ -13,21 +13,13 @@ import Footer from '@/component/01/footer';
 import { StoreContext } from '../hooks/context/StoreContext';
 
 function PageAbout() {
-      const { products, total } = useContext(StoreContext);
-      // const { removeProduct } = useContext(StoreContext);
-      
-      // const handleRemove = (item) => {
-      //     removeProduct(item);
-      // }
-    
-      console.log(products);
-const handleScrollToTop = () => {
-    window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-})
-}
-  return (
+    const handleScrollToTop = () => {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+    }
+    return (
     <div className='w-full'>
         <Navbar />
         <div className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40"
@@ -50,19 +42,19 @@ const handleScrollToTop = () => {
             </div>
         </div>
 
-        <div className='my-30'>
+        <div className='my-15 md:my-30'>
             <AboutSession1 />
         </div>
 
-        <div className='my-30 '>
+        <div className='my-15 md:my-30 '>
             <Aboutsession2 />
         </div>
 
-        <div className='my-30 '>
+        <div className='my-15 md:my-30 '>
             <Aboutsession3 />
         </div>
 
-        <div className='my-30 '>
+        <div className='my-15 md:my-30 '>
             <Aboutsession4 />
         </div>
 

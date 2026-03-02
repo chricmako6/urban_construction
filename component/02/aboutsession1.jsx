@@ -6,10 +6,15 @@ import { FiArrowUpRight } from 'react-icons/fi'
 function AboutSession1() {
   return (
     <div className='flex flex-col items-center justify-center px-4 md:px-0'>
-      
+       <div className="w-full my-5 mx-auto">
+          <h1 className="text-center text-2xl md:text-3xl font-bold md:my-4 my-3 md:my-10">About Jenganasi</h1>
+          <p className="text-center text-sm sm:text-base text-[#5e5f61] mb-10 mx-auto max-w-2xl">
+            At Jenganasi, we are dedicated to transforming visions into reality through exceptional construction services. 
+            Our commitment to safety, sustainability, and client satisfaction sets us apart in the industry.
+          </p>
+       </div>
       {/* Main grid container centered */}
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-5'>
-        
         {/* LEFT SIDE */}
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
           
@@ -19,8 +24,8 @@ function AboutSession1() {
 
            <div className='flex flex-col gap-4 w-full md:w-auto'>
               
-              <div className='h-60 md:h-90 w-full md:w-70 bg-gray-400 rounded-xl'>
-              image 
+              <div className='h-60 md:h-90 w-full md:w-70 bg-gray-400 rounded-xl hidden md:block'>
+              1
               </div>
 
                <div className='w-full md:w-70 bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-xl flex'>
@@ -39,7 +44,7 @@ function AboutSession1() {
             <div>
               <h1 className="text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold my-4 flex items-center justify-center md:justify-start">
                 <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
-                  ABOUT JENGANASI
+                  ABOUT SERVICES
                 <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/>
               </h1>
             </div>

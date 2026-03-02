@@ -67,7 +67,7 @@ window.scrollTo({
             whileTap={{ scale: 0.95 }}
             className='md:ml-52 mt-6'
             >
-            <button className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold'>
+            <button className='bg-[#ffd061] hover:bg-[#f5c84a] shadow cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold'>
                 SEE OUR WORKS
                 <motion.span 
                 className='bg-[#383635] inline-block p-1 rounded-sm ml-2'

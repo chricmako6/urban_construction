@@ -52,7 +52,7 @@ function Footer() {
                 placeholder="Enter your email" 
                 className="flex-1 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-gray-800 text-white rounded focus:outline-none focus:border-[#ffd061] border border-gray-700"
               />
-              <button className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer text-black flex items-center justify-center px-4 py-2 sm:py-1 rounded-md font-semibold transition w-fit md:min-w-11'>
+              <button className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer flex items-center justify-center px-4 py-2 sm:py-1 rounded-md font-semibold transition w-fit md:min-w-11'>
                 <FiArrowUpRight className='w-4 h-4 sm:w-5 sm:h-5 text-[#383635] font-bold hover:rotate-45 transition-transform' />
               </button>
             </div>

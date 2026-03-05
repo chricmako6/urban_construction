@@ -13,6 +13,7 @@ import Footer from "@/component/01/footer";
 export default function Home() {
   return (
     <>
+    <div className="overflow-hidden">
      {/* HERO SECTION */}
       <div className="w-full min-h-screen mx-auto">
         <Navbar />
@@ -58,6 +59,7 @@ export default function Home() {
       <div className="w-full mx-auto">
         <Footer />
       </div>
+    </div>
     </>
   );
 }

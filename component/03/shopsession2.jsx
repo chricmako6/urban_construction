@@ -64,10 +64,8 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
 
   return (
     <div>
-
       <div className='flex justify-end items-center gap-2 relative'>
         <span className='font-bold'>Sort by :</span>
-
         <div className='relative'>
           <div
             onClick={() => setShowSort(!showSort)}
@@ -109,7 +107,7 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
           )}
         </div>
       </div>
-
+ 
       <div className='w-full mt-5'>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 bg-white p-5 rounded-xl shadow'>
           {currentItems.map((item) => (

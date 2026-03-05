@@ -71,17 +71,13 @@ function Navbar() {
             transition={{ delay: 1, duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='flex'
+            className='flex group'
             >
-            <button className='bg-[#ffd061] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold'>
+            <button className='group/btn bg-[#ffd061] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold'>
                 Get a Quote
-                <motion.span 
-                className='bg-[#383635] inline-block p-1 rounded-sm ml-2'
-                whileHover={{ rotate: 45 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                >
-                <FiArrowUpRight className='text-white w-5 h-5' />
-                </motion.span>
+                <span className='bg-[#383635] inline-block p-1 rounded-sm ml-2 group-hover/btn:rotate-45 transition-transform duration-300'>
+                  <FiArrowUpRight className='text-white w-5 h-5' />
+                </span>
             </button>
             </motion.div>
         </div>

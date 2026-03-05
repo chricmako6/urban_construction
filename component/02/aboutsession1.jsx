@@ -20,7 +20,10 @@ function AboutSession1() {
         {/* LEFT SIDE */}
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
            <div className='w-full md:w-70 h-60 md:h-auto bg-gray-400 rounded-xl'>
-            image
+            <img src="/assert/about_discussio.png" 
+            alt="about discussion" 
+            className="w-full shadow min-h-full h-full justify-center object-cover rounded-xl"
+            />
            </div>
 
            <div className='flex flex-col gap-4 w-full md:w-auto'>
@@ -32,7 +35,7 @@ function AboutSession1() {
                 />
               </div>
 
-               <div className='w-full md:w-70 bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-xl flex'>
+               <div className='w-full shadow md:w-70 bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer rounded-xl flex'>
                   <div className="flex flex-col items-center justify-center p-7 w-full">
                     <h1 className="text-black text-3xl font-bold">25+</h1>
                     <p className="text-black text-center">Years of Experience</p>
@@ -42,7 +45,7 @@ function AboutSession1() {
         </div>
     
         {/* RIGHT SIDE */}
-        <div className='bg-yellow-200/60 w-full md:w-400 rounded-xl p-4'>
+        <div className='bg-yellow-200/60 shadow w-full md:w-400 rounded-xl p-4'>
             
             <div>
               <h1 className="text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold my-4 flex items-center justify-center md:justify-start">

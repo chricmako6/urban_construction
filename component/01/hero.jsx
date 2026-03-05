@@ -13,13 +13,14 @@ window.scrollTo({
 })
 }
   return (
-    <div className='pt-24 w-full h-screen bg-cover bg-center relative flex items-center'
+    <div className='pt-24 w-full min-h-screen lg:h-screen bg-cover bg-center relative flex items-center'
         style={{
             backgroundImage: 'url(/assert/hero_image.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}>
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className='gap-4 p-10 md:p-0 top-1/2 -translate-y-1/2 absolute'>
             {/* Animated heading with staggered children */}
             <motion.h1 
@@ -78,7 +79,7 @@ window.scrollTo({
                 </button>
             </motion.div>
         </div>
-        <div onClick={handleScrollToTop} className='bg-[#ffd061] hover:bg-[#f5c84a] shadow-2xl rounded-full p-2.5 cursor-pointer fixed z-100 md:top-130 top-170 md:left-320 left-90'>
+        <div onClick={handleScrollToTop} className='bg-[#ffd061] hover:bg-[#f5c84a] shadow-2xl rounded-full p-2.5 cursor-pointer fixed z-100 bottom-6 right-6'>
            <BiArrowToTop className="w-5 h-5"/>
         </div>
     </div>

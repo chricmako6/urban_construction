@@ -45,26 +45,25 @@ function Aboutsession4() {
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-8 mb-12'>
         
         <div className='md:w-1/2'>
-          <h2 className='mb-6 md:mb-10 flex items-center justify-center md:justify-start gap-2 text-[#5e5f61] text-sm md:text-base'>
-            <FaStarHalfAlt className='w-4 h-4 md:w-5 md:h-5 text-[#ffd061]'/> 
-            ABOUT US 
-            <FaStarHalfAlt className='w-4 h-4 md:w-5 md:h-5 text-[#ffd061]'/>
+          <h2 className='mx-auto text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:my-5 my-3 flex items-center justify-center md:justify-start'>
+            <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
+              ABOUT US 
+            <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/>
           </h2>
 
-          <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-center md:text-left'>
+          <h1 className='mx-auto font-bold text-2xl md:text-3xl md:my-4 my-2 text-center md:text-left'>
             Meet Our Professional Team
           </h1>
         </div>
 
-        <div className='md:w-1/2 flex flex-col items-center md:items-start'>
+        <div className='group md:w-1/2 flex flex-col items-center md:items-start'>
           <p className='mb-4 text-[#5e5f61] text-sm sm:text-base text-center md:text-left max-w-md'>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Sapiente incidunt quisquam nobis deleniti?
+            Our team of experts is dedicated to providing top-notch tax services, ensuring your financial success and peace of mind.
           </p>
 
-          <button className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-4 px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors duration-300'>
+          <button className='group/btn bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-4 px-4 sm:px-6 py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors duration-300'>
             VIEW MORE
-            <span className='bg-[#383635] inline-block p-1.5 rounded-md'>
+            <span className='bg-[#383635] group-hover/btn:rotate-45 transition-transform duration-300 inline-block p-1.5 rounded-md'>
               <FiArrowUpRight className='text-white w-4 h-4 sm:w-5 sm:h-5' />
             </span>
           </button>
@@ -100,7 +99,7 @@ function Aboutsession4() {
                   {member.socials.map((social, index) => (
                     <span 
                       key={index}
-                      className='p-1.5 md:p-2 rounded-full bg-white/90 cursor-pointer transition-all duration-300 hover:scale-110'
+                      className='p-1.5 md:p-2 rounded-full hover:text-[#f5c84a] bg-white/90 cursor-pointer transition-all duration-300 hover:scale-110'
                     >
                       {social.icon}
                     </span>

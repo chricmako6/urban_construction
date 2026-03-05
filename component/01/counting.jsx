@@ -17,7 +17,7 @@ function Counting() {
         // Animate from 0 -> value
         const controls = animate(motionValue, value, {
           duration: 2,
-          ease: "easeOut",
+          ease: "easeIn",
           onUpdate: (latest) => {
             setCount(Math.round(latest)); // Update state with numeric value
           },

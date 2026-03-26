@@ -8,6 +8,7 @@ import { BiArrowToTop } from 'react-icons/bi';
 import Footer from '@/component/01/footer';
 import Shopsession1 from '@/component/03/shopsession1';
 import Shopsession2 from '@/component/03/shopsession2';
+import axios from "axios";
 
 
 function PageServices() {
@@ -17,6 +18,7 @@ function PageServices() {
     behavior: 'smooth'
     })
    }
+
 
   return (
     <div className='max-w-full'>

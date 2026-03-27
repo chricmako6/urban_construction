@@ -12,7 +12,7 @@ export default function LoginPage() {
       }}
     >
       {/* Optional: Add overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
       
       <div className="relative w-full max-w-sm md:max-w-4xl bg-white/90 backdrop-blur-sm rounded-lg p-6 shadow-lg z-10">
         <LoginForm />

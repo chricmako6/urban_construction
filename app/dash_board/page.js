@@ -2,15 +2,15 @@ import React from 'react'
 import DashInfo from '@/component/04/dashInfo'
 import DashEventCalendar from '@/component/04/dashEventCalender'
 import DashFinanceChart from '@/component/04/dashFinanceChart'
-import { Breadcrumb } from '@/components/ui/breadcrumb'
+import { redirect } from 'next/navigation';
 
 
 
 export default function PageDashboard(){
+     redirect('/login');
     return (
         <div className='flex md:flex-row flex-col gap-4 p-4'>
 
-            <Breadcrumb/>
             <div className='w-full lg:w-3/3 col-span-2'>
                 {/* dashboard information */}
                 <div className='flex justify-between gap-4'>

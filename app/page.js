@@ -9,10 +9,10 @@ import Testimonial from "@/component/01/testimonial";
 import Faq from "@/component/01/faq";
 import Contact from "@/component/01/contact";
 import Footer from "@/component/01/footer";
-import { redirect } from 'next/navigation';
+
 
 export default function Home() {
-   redirect('/login');
+  
   return (
     <>
     <div className="overflow-hidden">

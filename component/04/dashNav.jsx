@@ -52,19 +52,19 @@ function DashNav() {
            {/* Dropdown */}
           <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
             <div className="py-1">
-              <a href="/dashboard/profile" className="hover:text-amber-200 font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
+              <a href="/dashboard/profile" className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
                 <FaUserAlt className='w-5 h-5' />
                 Profile
               </a>
-              <a href="/dashboard/#" className="hover:text-amber-200 font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
+              <a href="/dashboard/#" className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
                 <BiSolidMessageAltDetail className='w-5 h-5' />
                 Inbox
               </a>
-              <a href="/dashboard/setting" className="hover:text-amber-200font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
+              <a href="/dashboard/setting" className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
                 <IoSettingsSharp className='w-5 h-5'/>
                 Setting
               </a>
-              <a href="/dashboard/#" className="hover:text-amber-200 font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
+              <a href="/dashboard/#" className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
                 <BiSupport className='w-5 h-5' />
                 Support
               </a>

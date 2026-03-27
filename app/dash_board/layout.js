@@ -17,9 +17,9 @@ export default function DashboardLayout({children}) {
 // 
 
   return (
-    <div className="flex h-full bg-gray-100 text-gray-900">
+    <div className="flex h-auto text-gray-900">
         <DashSide />
-      <main className="w-[86%] md:w-[92%] lg:w-[84%] bg-[#f7f8fa]">
+      <main className="w-[86%] md:w-[90%] lg:w-[84%] bg-[#f7f8fa]">
         <DashNav />
         {children}
       </main>

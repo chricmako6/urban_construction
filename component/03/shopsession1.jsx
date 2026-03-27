@@ -64,16 +64,16 @@ const [Open, setOpen] = useState(null);
                 className="shadow-xs w-80 bg-white p-5 rounded-xl my-5 cursor-pointer">
                     {/* this is the title */}
                     <span className="flex justify-between ">
-                    <h1 className='font-bold'>{product.title}</h1>
-                    <motion.span className='rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer p-2'
-                    onClick={() => toggleData(index)}
-                    animate={{ rotate: openIndex === index ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}>
-                    {openIndex === index ? 
-                        ( <IoIosArrowDown className='font-bold text-xs'/> ) : 
-                        ( <IoIosArrowDown className='font-bold text-xs'/>)
-                    }
-                    </motion.span>
+                      <h1 className='font-bold'>{product.title}</h1>
+                      <motion.span className='rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer p-2'
+                      onClick={() => toggleData(index)}
+                      animate={{ rotate: openIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}>
+                      {openIndex === index ? 
+                          ( <IoIosArrowDown className='font-bold text-xs'/> ) : 
+                          ( <IoIosArrowDown className='font-bold text-xs'/>)
+                      }
+                      </motion.span>
                     </span>
 
                     {/* THIS IS FOR DROPDOWN */}

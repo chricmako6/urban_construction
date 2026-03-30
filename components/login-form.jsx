@@ -48,7 +48,7 @@ export function LoginForm({ className, ...props }) {
       if (isSignUp) {
         // SIGN UP REQUEST
         const res = await axios.post(
-          "http://localhost:4000/api/auth/register",
+          "https://urban-construction-tau.vercel.app/api/auth/register",
           {
             name: formData.name,
             email: formData.email,
@@ -59,10 +59,13 @@ export function LoginForm({ className, ...props }) {
         console.log("Signup success:", res.data);
       } else {
         // LOGIN REQUEST
-        const res = await axios.post("http://localhost:4000/api/auth/login", {
-          email: formData.email,
-          password: formData.password,
-        });
+        const res = await axios.post(
+          "https://urban-construction-tau.vercel.app/api/auth/login",
+          {
+            email: formData.email,
+            password: formData.password,
+          },
+        );
 
         console.log("Login success:");
 
@@ -101,9 +104,7 @@ export function LoginForm({ className, ...props }) {
                 </p>
               </div>
 
-              {error && (
-                <div className="text-red-500 text-sm">{error}</div>
-              )}
+              {error && <div className="text-red-500 text-sm">{error}</div>}
 
               {/* SIGN UP FIELD */}
               {isSignUp && (

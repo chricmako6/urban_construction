@@ -1,16 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/component/01/toastprovider";
 import { Providers } from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunito = Nunito({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-nunito",
 });
 
 export const metadata = {
@@ -21,16 +16,12 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${nunito.className} ${nunito.variable} antialiased`}>
         <Providers>
-          <ToastProvider>
-           {children}
-          </ToastProvider>
+          <ToastProvider>{children}</ToastProvider>
         </Providers>
       </body>
     </html>
   );
 }
-export default RootLayout
+export default RootLayout;

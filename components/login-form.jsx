@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios"; // ✅ ADDED: Axios import
+import axios from "axios";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,8 +13,12 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input, PasswordInput } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export function LoginForm({ className, ...props }) {
+  const router = useRouter();
   const [isSignUp, setIsSignUp] = useState(false);
 
   // ADDED: form state
@@ -46,9 +50,8 @@ export function LoginForm({ className, ...props }) {
 
     try {
       if (isSignUp) {
-        // SIGN UP REQUEST
         const res = await axios.post(
-          "https://urban-construction-tau.vercel.app/api/auth/register",
+          "http://localhost:4000/api/auth/register",
           {
             name: formData.name,
             email: formData.email,
@@ -56,21 +59,49 @@ export function LoginForm({ className, ...props }) {
           },
         );
 
-        console.log("Signup success:", res.data);
+        const user = auth.currentUser;
+
+        if (!user) {
+          console.log("No user found");
+          return;
+        }
+
+        await user.reload();
+
+        if (!user.emailVerified) {
+          router.push("/verification");
+        } else {
+          setTimeout(() => {
+            router.push("/dash_board");
+          }, 3000);
+        }
+        console.log("Signup success:");
       } else {
         // LOGIN REQUEST
-        const res = await axios.post(
-          "https://urban-construction-tau.vercel.app/api/auth/login",
-          {
-            email: formData.email,
-            password: formData.password,
-          },
+        await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password,
         );
 
-        console.log("Login success:");
+        const user = auth.currentUser;
 
-        // OPTIONAL: store token
-        localStorage.setItem("token", res.data.token);
+        if (!user) {
+          console.log("No user found");
+          return;
+        }
+
+        await user.reload();
+
+        if (!user.emailVerified) {
+          router.push("/verification");
+        } else {
+          setTimeout(() => {
+            router.push("/dash_board");
+          }, 3000);
+        }
+
+        console.log("Login success:");
       }
 
       setFormData({

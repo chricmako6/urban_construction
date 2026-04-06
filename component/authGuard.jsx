@@ -1,55 +1,55 @@
-// "use client";
+"use client";
 
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { onAuthStateChanged } from "firebase/auth";
-// import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 
-// function AuthGuard({ children }) {
-//   const router = useRouter();
-//   const [loading, setLoading] = useState(true);
+function AuthGuard({ children }) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged( async (user) => {
-//       if (!user) {
-//         router.push("/login");
-//         return;
-//       }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged( async (user) => {
+      if (!user) {
+        router.push("/login");
+        return;
+      }
 
-//       // Reload user to get latest emailVerified status
-//       await user.reload();
+      // Reload user to get latest emailVerified status
+      await user.reload();
 
-//       // Check Firestore user document
-//       const userRef = doc(db, "users", user.uid);
-//       const userSnap = await getDoc(userRef);
+      // Check Firestore user document
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
 
-//       // If user document does NOT exist
-//       if (!userSnap.exists()) {
-//         router.push("/login");
-//         return;
-//       }
+      // If user document does NOT exist
+      if (!userSnap.exists()) {
+        router.push("/login");
+        return;
+      }
 
-//       const userData = userSnap.data();
+      const userData = userSnap.data();
 
-//       // Check email verification (from Firestore OR Firebase)
-//       if (!user.emailVerified || userData.emailVerified === false) {
-//         router.push("/verification");
-//         return;
-//       }
+      // Check email verification (from Firestore OR Firebase)
+      if (!user.emailVerified || userData.emailVerified === false) {
+        router.push("/verification");
+        return;
+      }
 
-//       // If verified → go to dashboard
-//       router.push("/dashboard");
+      // If verified → go to dashboard
+      router.push("/dashboard");
 
-//       setLoading(false);
-//     });
+      setLoading(false);
+    });
 
-//     return () => unsubscribe();
-//   }, [router]);
+    return () => unsubscribe();
+  }, [router]);
 
-//   // Optional: prevent flashing content
-//   if (loading) return null;
+  // Optional: prevent flashing content
+  if (loading) return null;
 
-//   return children;
-// }
+  return children;
+}
 
-// export default AuthGuard;
+export default AuthGuard;

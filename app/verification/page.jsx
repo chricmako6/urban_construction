@@ -5,6 +5,7 @@ import axios from "axios";
 import { sendEmailVerification } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FiArrowUpRight } from "react-icons/fi";
+import { auth } from "@/lib/firebase";
 
 const VerificationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,7 @@ const VerificationPage = () => {
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const user = getAuth().currentUser;
+      const user = auth.currentUser;
 
       if (user) {
         await user.reload();

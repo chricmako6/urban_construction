@@ -25,7 +25,7 @@ const VerificationPage = () => {
         if (user.emailVerified) {
           // UPDATE BACKEND (THIS IS THE REAL FIX)
           await axios.post(
-            "https://urban-construction-tau.vercel.app/api/auth/verify-email",
+            "https://jenganasisi-backend.vercel.app/api/auth/verify-email",
             {
               uid: user.uid,
             },

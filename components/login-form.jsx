@@ -55,7 +55,8 @@ export function LoginForm({ className, ...props }) {
     try {
       if (isSignUp) {
         await axios.post(
-          "https://urban-construction-tau.vercel.app/api/auth/register",
+          // "https://jenganasisi-backend.vercel.app/api/auth/register",
+          "http://localhost:4000/api/auth/register",
           {
             name: formData.name,
             email: formData.email,

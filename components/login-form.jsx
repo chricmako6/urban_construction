@@ -16,6 +16,7 @@ import { Input, PasswordInput } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Loading from "@/component/loading";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
@@ -41,67 +42,54 @@ export function LoginForm({ className, ...props }) {
     });
   };
 
-  // ADDED: form submit (LOGIN + SIGNUP)
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
     setError("");
 
+    const startTime = Date.now();
+
     try {
       if (isSignUp) {
-        const res = await axios.post(
-          "http://localhost:4000/api/auth/register",
-          {
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-          },
-        );
+        await axios.post("http://localhost:4000/api/auth/register", {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        });
 
-        const user = auth.currentUser;
-
-        if (!user) {
-          console.log("No user found");
-          return;
-        }
-
-        await user.reload();
-
-        if (!user.emailVerified) {
-          router.push("/verification");
-        } else {
-          setTimeout(() => {
-            router.push("/dash_board");
-          }, 3000);
-        }
-        console.log("Signup success:");
-      } else {
-        // LOGIN REQUEST
+        // login after signup (IMPORTANT)
         await signInWithEmailAndPassword(
           auth,
           formData.email,
           formData.password,
         );
+      } else {
+        await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password,
+        );
+      }
 
-        const user = auth.currentUser;
+      const user = auth.currentUser;
 
-        if (!user) {
-          console.log("No user found");
-          return;
-        }
+      if (!user) return;
 
-        await user.reload();
+      await user.reload();
 
-        if (!user.emailVerified) {
-          router.push("/verification");
-        } else {
-          setTimeout(() => {
-            router.push("/dash_board");
-          }, 3000);
-        }
+      // Ensure loader shows at least 4 seconds
+      const elapsed = Date.now() - startTime;
+      if (elapsed < 4000) {
+        await delay(4000 - elapsed);
+      }
 
-        console.log("Login success:");
+      if (!user.emailVerified) {
+        router.push("/verification");
+      } else {
+        router.push("/dash_board");
       }
 
       setFormData({
@@ -110,6 +98,11 @@ export function LoginForm({ className, ...props }) {
         password: "",
       });
     } catch (err) {
+      const elapsed = Date.now() - startTime;
+      if (elapsed < 4000) {
+        await delay(4000 - elapsed);
+      }
+
       setError(err.response?.data?.message || "Something went wrong");
       console.error(err);
     } finally {
@@ -119,6 +112,7 @@ export function LoginForm({ className, ...props }) {
 
   return (
     <div className={cn("flex flex-col", className)} {...props}>
+      {loading && <Loading isSignUp={isSignUp} />}
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2 bg-gray-100">
           {/* UPDATED: added onSubmit */}

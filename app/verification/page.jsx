@@ -24,9 +24,12 @@ const VerificationPage = () => {
 
         if (user.emailVerified) {
           // UPDATE BACKEND (THIS IS THE REAL FIX)
-          await axios.post("http://localhost:4000/api/auth/verify-email", {
-            uid: user.uid,
-          });
+          await axios.post(
+            "https://urban-construction-tau.vercel.app/api/auth/verify-email",
+            {
+              uid: user.uid,
+            },
+          );
 
           setTimeout(() => {
             router.push("/dash_board");

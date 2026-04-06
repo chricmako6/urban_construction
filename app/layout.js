@@ -18,7 +18,7 @@ function RootLayout({ children }) {
     <html lang="en">
       <body className={`${nunito.className} ${nunito.variable} antialiased`}>
         <Providers>
-          <ToastProvider>{children}</ToastProvider>
+            <ToastProvider>{children}</ToastProvider>
         </Providers>
       </body>
     </html>

@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
 
 function AuthGuard({ children }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged( async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         router.push("/login");
         return;
@@ -37,9 +38,7 @@ function AuthGuard({ children }) {
         return;
       }
 
-      // If verified → go to dashboard
-      router.push("/dashboard");
-
+     // Allow access instead of forcing redirect
       setLoading(false);
     });
 
@@ -47,7 +46,13 @@ function AuthGuard({ children }) {
   }, [router]);
 
   // Optional: prevent flashing content
-  if (loading) return null;
+ if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-12 h-12 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
 
   return children;
 }

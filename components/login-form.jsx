@@ -14,9 +14,14 @@ import {
 } from "@/components/ui/field";
 import { Input, PasswordInput } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { auth } from "@/lib/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/lib/firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import Loading from "@/component/loading";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
@@ -42,7 +47,7 @@ export function LoginForm({ className, ...props }) {
     });
   };
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,35 +58,44 @@ export function LoginForm({ className, ...props }) {
     const startTime = Date.now();
 
     try {
-      if (isSignUp) {
-        await axios.post(
-          "https://jenganasisi-backend.vercel.app/api/auth/register",
-          // "http://localhost:4000/api/auth/register",
-          {
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-          },
-        );
+      let userCredential;
 
-        // login after signup (IMPORTANT)
-        await signInWithEmailAndPassword(
+      if (isSignUp) {
+        // CREATE USER WITH FIREBASE
+        userCredential = await createUserWithEmailAndPassword(
           auth,
           formData.email,
           formData.password,
         );
+
+        const user = userCredential.user;
+
+        // SEND EMAIL VERIFICATION
+        await sendEmailVerification(user);
+
+        // CHECK IF USER DOC ALREADY EXISTS
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, {
+          name: formData.name,
+          email: formData.email,
+          role: "user",
+          status: "pending",
+          isApproved: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        });
       } else {
-        await signInWithEmailAndPassword(
+        // LOGIN USER
+        userCredential = await signInWithEmailAndPassword(
           auth,
           formData.email,
           formData.password,
         );
       }
 
-      const user = auth.currentUser;
+      const user = userCredential.user;
 
-      if (!user) return;
-
+      // Reload to get latest verification status
       await user.reload();
 
       // Ensure loader shows at least 4 seconds
@@ -90,12 +104,14 @@ export function LoginForm({ className, ...props }) {
         await delay(4000 - elapsed);
       }
 
+      // Redirect logic
       if (!user.emailVerified) {
         router.push("/verification");
       } else {
         router.push("/dash_board");
       }
 
+      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -107,7 +123,38 @@ export function LoginForm({ className, ...props }) {
         await delay(4000 - elapsed);
       }
 
-      setError(err.response?.data?.message || "Something went wrong");
+      // Clean Firebase error messages
+      let message = "An unexpected error occurred. Please try again.";
+
+      // Firebase-specific errors
+      const firebaseErrors = {
+        "auth/email-already-in-use":
+          "This email is already registered. Please log in instead.",
+        "auth/invalid-email": "Please enter a valid email address.",
+        "auth/weak-password":
+          "Your password must be at least 6 characters long.",
+        "auth/user-not-found": "No account found with this email.",
+        "auth/invalid-credential": "Invalid Credentials. Please try again.",
+        "auth/network-request-failed":
+          "Network error. Check your internet connection and try again.",
+        "auth/too-many-requests":
+          "Too many attempts. Please wait a moment and try again.",
+        "auth/user-disabled":
+          "This account has been disabled. Contact support.",
+      };
+
+      // Use mapped message if exists
+      if (firebaseErrors[err.code]) {
+        message = firebaseErrors[err.code];
+      }
+      // If Firebase gives a message, clean it and show it
+      else if (err.message) {
+        message = err.message
+          .replace("Firebase: Error (", "")
+          .replace(").", "");
+      }
+
+      setError(message);
       console.error(err);
     } finally {
       setLoading(false);

@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { sendEmailVerification, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FiArrowUpRight } from "react-icons/fi";
-import { auth } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const VerificationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -56,6 +57,11 @@ const VerificationPage = () => {
 
       await user.reload();
 
+      // Fetch user data from Firestore to check approval status
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+
       // Smooth UX delay
       const elapsed = Date.now() - startTime;
       if (elapsed < 2000) {
@@ -68,10 +74,12 @@ const VerificationPage = () => {
           "Email verified successfully. Waiting for admin approval...",
         );
 
-        // Redirect after short delay
-        setTimeout(() => {
-          router.push("/verification");
-        }, 3000);
+        if (userData?.isApproved === true) {
+          // Redirect after short delay
+          setTimeout(() => {
+            router.push("/dash_board");
+          }, 5000);
+        }
       } else {
         setMessage(
           "Email not verified yet. Please check your inbox or resend the verification email.",
@@ -95,25 +103,37 @@ const VerificationPage = () => {
     const interval = setInterval(async () => {
       const user = auth.currentUser;
 
-      if (user) {
-        try {
-          await user.reload();
+      if (!user) return;
 
-          if (!user.emailVerified) {
-            setIsVerified(true);
-            setMessage("Email for verification has been sent successfully.");
+      try {
+        await user.reload();
 
-            clearInterval(interval);
+        // Fetch user data from Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        const userData = userDoc.data();
 
-            setTimeout(() => {
-              router.push("/verification");
-            }, 2000);
-          }
-        } catch (err) {
-          console.log("Auto-check failed:", err.message);
+        // Correct condition - check both email verification AND approval
+        if (user.emailVerified && userData?.isApproved === true) {
+          setIsVerified(true);
+          setMessage("You have already approved...");
+
+          clearInterval(interval);
+
+          setTimeout(() => {
+            router.push("/dash_board");
+          }, 5000);
+        } else if (user.emailVerified && userData?.isApproved === false) {
+          setIsVerified(true);
+          setMessage(
+            "Email verified successfully. Waiting for admin approval...",
+          );
+          clearInterval(interval);
         }
+      } catch (err) {
+        console.log("Auto-check failed:", err.message);
       }
-    }); // safe interval
+    }, 3000); // run every 1 second (safe)
 
     return () => clearInterval(interval);
   }, [router]);
@@ -146,20 +166,33 @@ const VerificationPage = () => {
   // WAIT FOR AUTH CHECK
   if (checkingUser) {
     return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center z-50">
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
         {/* Spinner */}
-        <div className="w-14 h-14 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin"></div>
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
 
         {/* Text */}
-        <p className="mt-4 font-medium">Checking your account...</p>
+        <p className="mt-6 text-lg font-semibold text-gray-800">
+          Checking your account
+        </p>
+
+        {/* Sub text */}
+        <p className="text-sm text-gray-500 mt-1">
+          Please wait while we verify your session...
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-6 px-4 text-center">
+    <div className="flex flex-col items-center justify-center h-screen gap-6 px-4 text-center transition-opacity duration-500">
       {loading && (
-        <div className="w-12 h-12 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin"></div>
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
       )}
 
       {/* TITLE */}
@@ -179,9 +212,16 @@ const VerificationPage = () => {
         <button
           onClick={handleCheckVerification}
           disabled={loading}
-          className="group bg-[#ffd061] hover:bg-[#f5c84a] text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold"
+          className="group bg-[#ffd061] hover:bg-[#f5c84a] text-black cursor-pointer flex items-center gap-3 px-5 py-2 rounded-md font-semibold"
         >
-          {loading ? "Checking..." : "I’ve Verified"}
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+              Checking...
+            </span>
+          ) : (
+            "I’ve Verified"
+          )}
           <span className="bg-[#383635] p-1 rounded-sm group-hover:rotate-45 transition-transform">
             <FiArrowUpRight className="text-white w-5 h-5" />
           </span>
@@ -190,19 +230,12 @@ const VerificationPage = () => {
 
       {/* RESEND */}
       {!isVerified && (
-        <>
-          <button
-            onClick={handleResendEmail}
-            className="text-sm underline hover:text-[#f5c84a]"
-          >
-            Resend Verification Email
-          </button>
-          {message && (
-            <p className="text-sm font-medium text-red-600 max-w-md">
-              {message}
-            </p>
-          )}
-        </>
+        <button
+          onClick={handleResendEmail}
+          className="text-sm underline hover:text-[#f5c84a]"
+        >
+          Resend Verification Email
+        </button>
       )}
 
       {message && (

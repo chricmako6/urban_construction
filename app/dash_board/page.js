@@ -2,12 +2,12 @@ import React from 'react'
 import DashInfo from '@/component/04/dashInfo'
 import DashEventCalendar from '@/component/04/dashEventCalender'
 import DashFinanceChart from '@/component/04/dashFinanceChart'
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
 
 
 export default function PageDashboard(){
-     redirect('/login');
+    //  redirect('/login');
     return (
         <div className='flex md:flex-row flex-col gap-4 p-4'>
 

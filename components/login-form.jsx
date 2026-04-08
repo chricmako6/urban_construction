@@ -105,7 +105,7 @@ export function LoginForm({ className, ...props }) {
       }
 
       // Redirect logic
-      if (!user.emailVerified) {
+      if (!user.emailVerified || !user.isApproved) {
         router.push("/verification");
       } else {
         router.push("/dash_board");
@@ -226,7 +226,7 @@ export function LoginForm({ className, ...props }) {
                 <PasswordInput
                   id="password"
                   placeholder="********"
-                  className="items-center pt-2.5"
+                  className="items-center"
                   value={formData.password}
                   onChange={handleChange}
                   required

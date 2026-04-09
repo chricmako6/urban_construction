@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { FiSearch, FiMoreHorizontal } from "react-icons/fi";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -9,58 +10,7 @@ import { ImBin } from "react-icons/im";
 
 const ITEMS_PER_PAGE = 6;
 
-// RENAME STATIC DATA
-const productsData = [
-  {
-    name: "Casual Sunglass",
-    category: "Sunglass",
-    stock: "124 Low Stock",
-    price: "$47",
-    status: "Published",
-  },
-  {
-    name: "T-Shirt",
-    category: "Clothes",
-    stock: "124",
-    price: "$47",
-    status: "Published",
-  },
-  {
-    name: "Green Tea",
-    category: "Beauty",
-    stock: "Out of Stock",
-    price: "$47",
-    status: "Draft",
-  },
-  {
-    name: "Denim Shirt",
-    category: "Clothes",
-    stock: "124 Low Stock",
-    price: "$47",
-    status: "Inactive",
-  },
-  {
-    name: "T-Shirt",
-    category: "Clothes",
-    stock: "124",
-    price: "$47",
-    status: "Published",
-  },
-  {
-    name: "Green Tea",
-    category: "Beauty",
-    stock: "Out of Stock",
-    price: "$47",
-    status: "Draft",
-  },
-  {
-    name: "Denim Shirt",
-    category: "Clothes",
-    stock: "124 Low Stock",
-    price: "$47",
-    status: "Inactive",
-  },
-];
+const API = "http://localhost:4000/api/products";
 
 const getStatusStyle = (status) => {
   switch (status) {
@@ -86,69 +36,66 @@ export default function pageProduct() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  // FETCH + FALLBACK
+ // ✅ FETCH ALL PRODUCTS
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(API);
+
+      const data = res.data?.products || res.data;
+
+      setProducts(data);
+      setFiltered(data);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setProducts([]);
+      setFiltered([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ SEARCH API
+  const searchProducts = async (query) => {
+    try {
+      setLoading(true);
+
+      const res = await axios.post(`${API}/search`, {
+        name: query,
+      });
+
+      const data = res.data?.products || res.data;
+
+      setFiltered(data);
+      setCurrentPage(1);
+    } catch (err) {
+      console.error("Search error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // INITIAL LOAD
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const q = query(
-          collection(db, "products"),
-          orderBy("createdAt", "desc"),
-        );
-
-        const snapshot = await getDocs(q);
-
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        if (data.length === 0) {
-          // USE STATIC DATA
-          const fallback = productsData.map((item, index) => ({
-            id: index,
-            ...item,
-            stock: item.stock === "Out of Stock" ? 0 : parseInt(item.stock),
-            price: parseFloat(item.price.replace("$", "")),
-            image: "/placeholder.png",
-          }));
-
-          setProducts(fallback);
-          setFiltered(fallback);
-        } else {
-          setProducts(data);
-          setFiltered(data);
-        }
-      } catch (err) {
-        console.error(err);
-
-        // IF ERROR → FALLBACK
-        const fallback = productsData.map((item, index) => ({
-          id: index,
-          ...item,
-          stock: item.stock === "Out of Stock" ? 0 : parseInt(item.stock),
-          price: parseFloat(item.price.replace("$", "")),
-          image: "/placeholder.png",
-        }));
-
-        setProducts(fallback);
-        setFiltered(fallback);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProducts();
   }, []);
 
-  // SEARCH + FILTER
+  // HANDLE SEARCH + FILTER
+  useEffect(() => {
+    if (search) {
+      const delay = setTimeout(() => {
+        searchProducts(search);
+      }, 500); // debounce
+
+      return () => clearTimeout(delay);
+    } else {
+      setFiltered(products);
+    }
+  }, [search]);
+
   useEffect(() => {
     let data = [...products];
-
-    if (search) {
-      data = data.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
-    }
 
     if (statusFilter) {
       data = data.filter((item) => item.status === statusFilter);
@@ -156,7 +103,8 @@ export default function pageProduct() {
 
     setFiltered(data);
     setCurrentPage(1);
-  }, [search, statusFilter, products]);
+  }, [statusFilter, products]);
+
 
   // PAGINATION
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
@@ -204,6 +152,7 @@ export default function pageProduct() {
           <thead className="bg-gray-50 text-gray-600">
             <tr>
               <th className="p-3 text-left">Product</th>
+              <th className="p-3 text-left">ID</th>
               <th className="p-3 text-center">Category</th>
               <th className="p-3 text-center">Stock</th>
               <th className="p-3 text-center">Price</th>
@@ -229,7 +178,7 @@ export default function pageProduct() {
               </tr>
             ) : (
               currentData.map((item) => (
-                <tr key={item.id} className="border-b hover:bg-gray-50">
+                <tr key={item.id || item._id} className="border-b hover:bg-gray-50">
                   <td className="p-3 flex items-center gap-3">
                     <img
                       src={item.image || "/placeholder.png"}
@@ -238,7 +187,9 @@ export default function pageProduct() {
                     <span className="font-medium">{item.name}</span>
                   </td>
 
-                  <td className="p-3 text-gray-600 text-center">{item.category}</td>
+                   <td className="p-3 text-gray-600 text-left">{item?.id || item._id}</td>
+
+                  <td className="p-3 text-gray-600 text-left">{item.categories}</td>
 
                   <td className="p-3 text-center">
                     <span
@@ -258,7 +209,7 @@ export default function pageProduct() {
                     </span>
                   </td>
 
-                  <td className="p-3 text-center">${item.price}</td>
+                  <td className="p-3 text-center">{item.price}</td>
 
                   <td className="p-3 text-center">
                     <span

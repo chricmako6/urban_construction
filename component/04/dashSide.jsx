@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
 
-function dashSide() {
+function dashSide({ setPageLoading }) {
   const [openIndex, setOpenIndex] = useState(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -15,14 +15,14 @@ function dashSide() {
       title: "Dashboard",
       options: [
         { name: "summary", path: "/dash_board" },
-        { name: "notifications", path: "/dash_board/add-product" },
+        { name: "notifications", path: "/dash_board/notifications" },
       ],
     },
     {
       title: "Products",
       options: [
         { name: "all products", path: "/dash_board/products" },
-        { name: "add product", path: "/dash_board/add-product" },
+        { name: "add product", path: "/dash_board/product-add" },
       ],
     },
     {
@@ -33,7 +33,7 @@ function dashSide() {
       title: "Users",
       options: [
         { name: "all users", path: "/dash_board/users" },
-        { name: "add user", path: "/dash_board/add-user" },
+        { name: "add user", path: "/dash_board/user-add" },
       ],
     },
     {

@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { FiSearch, FiMoreHorizontal } from "react-icons/fi";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { FaEdit, FaEye } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
+import Link from "next/link";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 
-const API = "http://localhost:4000/api/products";
+// const API = "http://localhost:4000/api/products";
+const API = "https://jenganasisi-backend.vercel.app/api/products";
 
 const getStatusStyle = (status) => {
   switch (status) {
@@ -36,7 +36,7 @@ export default function pageProduct() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
- // ✅ FETCH ALL PRODUCTS
+ // FETCH ALL PRODUCTS
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -56,25 +56,39 @@ export default function pageProduct() {
     }
   };
 
-  // ✅ SEARCH API
-  const searchProducts = async (query) => {
-    try {
-      setLoading(true);
+  // SEARCH API
+const searchProducts = useCallback(async (query) => {
+  try {
+    setLoading(true);
 
-      const res = await axios.post(`${API}/search`, {
-        name: query,
-      });
+    let res;
+
+    // IF looks like ID (long string)
+    if (query.length > 10 && !query.includes(" ")) {
+      res = await axios.get(`${API}/${query}`);
+      const data = res.data;
+      setFiltered(data ? [data] : []);
+    }
+
+    //  DEFAULT → NAME SEARCH
+    else if (query.trim().toLowerCase() !== "") {
+      res = await axios.get(
+        `${API}/search?name=${query}`
+      );
 
       const data = res.data?.products || res.data;
 
       setFiltered(data);
-      setCurrentPage(1);
-    } catch (err) {
-      console.error("Search error:", err);
-    } finally {
-      setLoading(false);
     }
-  };
+
+    setCurrentPage(1);
+  } catch (err) {
+    console.error("Search error:", err);
+    setFiltered([]);
+  } finally {
+    setLoading(false);
+  }
+}, []);
 
   // INITIAL LOAD
   useEffect(() => {
@@ -82,17 +96,17 @@ export default function pageProduct() {
   }, []);
 
   // HANDLE SEARCH + FILTER
-  useEffect(() => {
-    if (search) {
-      const delay = setTimeout(() => {
-        searchProducts(search);
-      }, 500); // debounce
+useEffect(() => {
+  if (search) {
+    const delay = setTimeout(() => {
+      searchProducts(search);
+    }, 500);
 
-      return () => clearTimeout(delay);
-    } else {
-      setFiltered(products);
-    }
-  }, [search]);
+    return () => clearTimeout(delay);
+  } else {
+    setFiltered(products);
+  }
+}, [search, products, searchProducts]);
 
   useEffect(() => {
     let data = [...products];
@@ -118,7 +132,9 @@ export default function pageProduct() {
         <h2 className="text-lg font-semibold">Products List</h2>
 
         <button className="px-4 py-2 cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] rounded-md font-semibold">
-          + Add Product
+          <Link href="/dash_board/product-add">
+            + Add Product
+          </Link>
         </button>
       </div>
 

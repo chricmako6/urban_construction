@@ -145,7 +145,7 @@ useEffect(() => {
           <input
             type="text"
             placeholder="Search product..."
-            className="ml-2 outline-none w-full text-sm"
+            className="ml-2 outline-none focus:ring-1 focus:ring-[#ffd061] w-full text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -163,7 +163,7 @@ useEffect(() => {
       </div>
 
       {/* TABLE */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto h-125">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-600">
             <tr>

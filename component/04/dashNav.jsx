@@ -1,6 +1,7 @@
 "use client";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
@@ -12,8 +13,10 @@ import { FaRegBell } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
 function DashNav() {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -43,6 +46,37 @@ function DashNav() {
 
     return () => unsubscribe();
   }, []);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      await signOut(getAuth());
+      router.push("/login"); 
+    } catch (error) {
+      console.error("Logout error:", error);
+      setLoggingOut(false);
+    }
+  };
+
+  if (loggingOut) {
+    return (
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
+
+        <p className="mt-6 text-lg font-semibold text-gray-800">Logging out</p>
+
+        <p className="text-sm text-gray-500 mt-1">
+          Please wait while we end your session...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-between p-4 ">
@@ -119,7 +153,7 @@ function DashNav() {
               </a>
               <hr className="my-1 border-gray-200" />
               <a
-                onClick={() => signOut(getAuth())}
+                onClick={handleLogout}
                 className="font-bold items-center gap-2 flex px-3 py-2 text-xs hover:text-red-600 "
               >
                 <RiLogoutCircleLine className="w-5 h-5" />

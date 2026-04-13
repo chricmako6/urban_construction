@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import imageCompression from "browser-image-compression";
 import { FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 function pageAddProduct() {
   const router = useRouter();
+  const [images, setImages] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
 
   const [form, setForm] = useState({
     name: "",
@@ -30,7 +33,6 @@ function pageAddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Optional validation (safe)
     if (!form.name || !form.price || !form.stock) {
       setError("Product name, price, and stock are required");
       return;
@@ -41,17 +43,34 @@ function pageAddProduct() {
     setError("");
 
     try {
+      const formData = new FormData();
+
+      // append text fields
+      Object.keys(form).forEach((key) => {
+        formData.append(key, form[key]);
+      });
+
+      // append images
+      imageFiles.forEach((file) => {
+        formData.append("images", file); // backend should expect "images"
+      });
+
       const res = await axios.post(
-        // "http://localhost:4000/api/products/add",
         "https://jenganasisi-backend.vercel.app/api/products/add",
-        form,
+        // "http://localhost:4000/api/products/add",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
 
       console.log(res.data);
 
       setSuccess("Product added successfully");
 
-      // reset form
+      // reset
       setForm({
         name: "",
         image: "",
@@ -67,13 +86,15 @@ function pageAddProduct() {
         area: "",
       });
 
-      // REDIRECT AFTER SUCCESS (IMPORTANT)
+      setImages([]);
+      setImageFiles([]);
+
       setTimeout(() => {
-        router.push("/dash_board/products"); // change if your route is different
+        router.push("/dash_board/products");
       }, 1000);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Something went wrong ❌");
+      setError(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -81,6 +102,39 @@ function pageAddProduct() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+
+    try {
+      const compressedFiles = await Promise.all(
+        files.map(async (file) => {
+          return await imageCompression(file, {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          });
+        }),
+      );
+
+      // ✅ store REAL files for backend
+      setImageFiles((prev) => [...prev, ...compressedFiles]);
+
+      // ✅ preview (same UI as before)
+      const previewUrls = compressedFiles.map((file) =>
+        URL.createObjectURL(file),
+      );
+
+      setImages((prev) => [...prev, ...previewUrls]);
+    } catch (error) {
+      console.error("Image compression error:", error);
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+    setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   useEffect(() => {
@@ -110,13 +164,41 @@ function pageAddProduct() {
         {success && <p className="text-green-600 mb-4">{success}</p>}
         {error && <p className="text-red-600 mb-4">{error}</p>}
 
-        {/* YOUR UI BELOW (UNCHANGED) */}
-
         {/* IMAGE */}
-        <div className="flex flex-col gap-1 md:col-span-2">
-          <label className="font-medium">Upload Image</label>
-          <div className="ml-3 cursor-pointer bg-[#ffd061] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#f5c84a] hover:rotate-90 transition-all duration-300 shadow-md border-2 border-[#ffd061]">
+        <div className="flex flex-col gap-2 md:col-span-2">
+          <label className="font-medium">Upload Images</label>
+
+          <label className="ml-3 cursor-pointer bg-[#ffd061] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#f5c84a] hover:rotate-90 transition-all duration-300 shadow-md border-2 border-[#ffd061]">
             <FaPlus className="text-black text-sm" />
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+          </label>
+
+          {/* PREVIEW GALLERY */}
+          <div className="flex flex-wrap gap-3 mt-3">
+            {images.map((img, index) => (
+              <div key={index} className="relative group">
+                <img
+                  src={img}
+                  alt="preview"
+                  className="w-55 h-70 object-cover rounded-lg border"
+                />
+
+                {/* DELETE BUTTON */}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute cursor-pointer top-1 right-1 bg-black/60 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 

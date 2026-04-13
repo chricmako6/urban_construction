@@ -13,6 +13,7 @@
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.13.6",
     "breadcrumb": "^1.0.0",
+    "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "firebase": "^12.11.0",

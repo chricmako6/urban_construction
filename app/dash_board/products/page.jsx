@@ -36,7 +36,7 @@ export default function pageProduct() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
- // FETCH ALL PRODUCTS
+  // FETCH ALL PRODUCTS
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -57,38 +57,36 @@ export default function pageProduct() {
   };
 
   // SEARCH API
-const searchProducts = useCallback(async (query) => {
-  try {
-    setLoading(true);
+  const searchProducts = useCallback(async (query) => {
+    try {
+      setLoading(true);
 
-    let res;
+      let res;
 
-    // IF looks like ID (long string)
-    if (query.length > 10 && !query.includes(" ")) {
-      res = await axios.get(`${API}/${query}`);
-      const data = res.data;
-      setFiltered(data ? [data] : []);
+      // IF looks like ID (long string)
+      if (query.length > 10 && !query.includes(" ")) {
+        res = await axios.get(`${API}/${query}`);
+        const data = res.data;
+        setFiltered(data ? [data] : []);
+      }
+
+      //  DEFAULT → NAME SEARCH
+      else if (query.trim().toLowerCase() !== "") {
+        res = await axios.get(`${API}/search?name=${query}`);
+
+        const data = res.data?.products || res.data;
+
+        setFiltered(data);
+      }
+
+      setCurrentPage(1);
+    } catch (err) {
+      console.error("Search error:", err);
+      setFiltered([]);
+    } finally {
+      setLoading(false);
     }
-
-    //  DEFAULT → NAME SEARCH
-    else if (query.trim().toLowerCase() !== "") {
-      res = await axios.get(
-        `${API}/search?name=${query}`
-      );
-
-      const data = res.data?.products || res.data;
-
-      setFiltered(data);
-    }
-
-    setCurrentPage(1);
-  } catch (err) {
-    console.error("Search error:", err);
-    setFiltered([]);
-  } finally {
-    setLoading(false);
-  }
-}, []);
+  }, []);
 
   // INITIAL LOAD
   useEffect(() => {
@@ -96,17 +94,17 @@ const searchProducts = useCallback(async (query) => {
   }, []);
 
   // HANDLE SEARCH + FILTER
-useEffect(() => {
-  if (search) {
-    const delay = setTimeout(() => {
-      searchProducts(search);
-    }, 500);
+  useEffect(() => {
+    if (search) {
+      const delay = setTimeout(() => {
+        searchProducts(search);
+      }, 500);
 
-    return () => clearTimeout(delay);
-  } else {
-    setFiltered(products);
-  }
-}, [search, products, searchProducts]);
+      return () => clearTimeout(delay);
+    } else {
+      setFiltered(products);
+    }
+  }, [search, products, searchProducts]);
 
   useEffect(() => {
     let data = [...products];
@@ -119,6 +117,28 @@ useEffect(() => {
     setCurrentPage(1);
   }, [statusFilter, products]);
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?",
+    );
+    if (!confirmDelete) return;
+
+    try {
+    //  await axios.delete(`http://localhost:4000/api/products/remove/${id}`);
+    await axios.delete(`https://jenganasisi-backend.vercel.app/api/products/remove/${id}`);
+
+      // remove from UI instantly (better UX)
+      setProducts((prev) =>
+        prev.filter((item) => (item._id || item.id) !== id),
+      );
+      setFiltered((prev) =>
+        prev.filter((item) => (item._id || item.id) !== id),
+      );
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Failed to delete product");
+    }
+  };
 
   // PAGINATION
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
@@ -132,9 +152,7 @@ useEffect(() => {
         <h2 className="text-lg font-semibold">Products List</h2>
 
         <button className="px-4 py-2 cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] rounded-md font-semibold">
-          <Link href="/dash_board/product-add">
-            + Add Product
-          </Link>
+          <Link href="/dash_board/product-add">+ Add Product</Link>
         </button>
       </div>
 
@@ -145,7 +163,7 @@ useEffect(() => {
           <input
             type="text"
             placeholder="Search product..."
-            className="ml-2 outline-none focus:ring-1 focus:ring-[#ffd061] w-full text-sm"
+            className="ml-2 outline-none w-full text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -194,18 +212,25 @@ useEffect(() => {
               </tr>
             ) : (
               currentData.map((item) => (
-                <tr key={item.id || item._id} className="border-b hover:bg-gray-50">
+                <tr
+                  key={item.id || item._id}
+                  className="border-b hover:bg-gray-50"
+                >
                   <td className="p-3 flex items-center gap-3">
                     <img
-                      src={item.image || "/placeholder.png"}
-                      className="w-12 h-12 rounded-md object-cover"
+                      src={item.images?.[0] || "/placeholder.png"}
+                      className="w-15 h-15 rounded-md object-cover"
                     />
                     <span className="font-medium">{item.name}</span>
                   </td>
 
-                   <td className="p-3 text-gray-600 text-left">{item?.id || item._id}</td>
+                  <td className="p-3 text-gray-600 text-left">
+                    {item?.id || item._id}
+                  </td>
 
-                  <td className="p-3 text-gray-600 text-left">{item.categories}</td>
+                  <td className="p-3 text-gray-600 text-left">
+                    {item.category}
+                  </td>
 
                   <td className="p-3 text-center">
                     <span
@@ -225,7 +250,7 @@ useEffect(() => {
                     </span>
                   </td>
 
-                  <td className="p-3 text-center">{item.price}</td>
+                  <td className="p-3 text-center">Tshs:{item.price}</td>
 
                   <td className="p-3 text-center">
                     <span
@@ -240,36 +265,36 @@ useEffect(() => {
                   <td className="p-3 text-right">
                     <div className="relative group">
                       <button className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
-                        <FiMoreHorizontal className="w-5 h-5"/>
+                        <FiMoreHorizontal className="w-5 h-5" />
 
                         <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
-                        <div className="py-1">
-                          <a
-                            href="#"
-                            className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
-                          >
-                            <FaEye className="w-5 h-5" />
-                            View
-                          </a>
-                          <a
-                            href="#"
-                            className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
-                          >
-                            <FaEdit className="w-5 h-5" />
-                            Edit
-                          </a>
-                          
-                         
-                          <hr className="my-1 border-gray-200" />
-                          <a className="font-bold items-center gap-2 flex px-3 py-2 text-xs hover:text-red-600 ">
-                            <ImBin className="w-5 h-5" />
-                            Delete
-                          </a>
-                        </div>
-                      </div>
-                      </button>
+                          <div className="py-1">
+                            <a
+                              href="#"
+                              className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
+                            >
+                              <FaEye className="w-5 h-5" />
+                              View
+                            </a>
+                            <a
+                             href={`/dash_board/product-add/${item._id || item.id}`}
+                              className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
+                            >
+                              <FaEdit className="w-5 h-5" />
+                              Edit
+                            </a>
 
-                      
+                            <hr className="my-1 border-gray-200" />
+                            <a
+                              onClick={() => handleDelete(item._id || item.id)}
+                              className="font-bold items-center gap-2 flex px-3 py-2 text-xs hover:text-red-600 "
+                            >
+                              <ImBin className="w-5 h-5" />
+                              Delete
+                            </a>
+                          </div>
+                        </div>
+                      </button>
                     </div>
                   </td>
                 </tr>

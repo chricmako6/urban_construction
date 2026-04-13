@@ -124,8 +124,10 @@ export default function pageProduct() {
     if (!confirmDelete) return;
 
     try {
-    //  await axios.delete(`http://localhost:4000/api/products/remove/${id}`);
-    await axios.delete(`https://jenganasisi-backend.vercel.app/api/products/remove/${id}`);
+      //  await axios.delete(`http://localhost:4000/api/products/remove/${id}`);
+      await axios.delete(
+        `https://jenganasisi-backend.vercel.app/api/products/remove/${id}`,
+      );
 
       // remove from UI instantly (better UX)
       setProducts((prev) =>
@@ -277,7 +279,7 @@ export default function pageProduct() {
                               View
                             </a>
                             <a
-                             href={`/dash_board/product-add/${item._id || item.id}`}
+                              href={`/dash_board/product-add/${item._id || item.id}`}
                               className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
                             >
                               <FaEdit className="w-5 h-5" />

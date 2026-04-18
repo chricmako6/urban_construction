@@ -16,24 +16,32 @@ function PageService() {
   const services = {
     construction: {
       title: "CONSTRUCTION",
+      image1: "/assert/service-construction1.jpg",
+      image2: "/assert/service-construction2.jpg",
       icon: <GiBrickWall className='w-5 h-5' />,
       description: "Full-service construction from ground up. We handle everything from planning to completion with precision and expertise.",
       features: ["New Builds", "Commercial Construction", "Residential Projects", "Structural Work"]
     },
     renovation: {
       title: "RENOVATION",
+       image1: "/assert/service-renovation1.jpg",
+       image2: "/assert/service-renovation2.jpg",
       icon: <FaPaintRoller className='w-5 h-5' />,
       description: "Transform your existing space with our renovation services. Modern updates while preserving structural integrity.",
       features: ["Kitchen Remodeling", "Bathroom Updates", "Interior Redesign", "Space Optimization"]
     },
     restoration: {
       title: "RESTORATION",
+       image1: "/assert/service-restore1.jpg",
+       image2: "/assert/service-restore2.jpg",
       icon: <TiSpanner className='w-5 h-5' />,
       description: "Preserve and restore historical or damaged structures with our specialized restoration techniques.",
       features: ["Historical Preservation", "Damage Repair", "Structural Reinforcement", "Heritage Conservation"]
     },
     consulting: {
       title: "CONSULTING",
+       image1: "/assert/service-consulting1.jpg",
+       image2: "/assert/service-consulting2.jpg",
       icon: <PiUserGearFill className='w-5 h-5' />,
       description: "Expert advice for your construction projects. From planning to execution, we provide comprehensive guidance.",
       features: ["Project Planning", "Budget Analysis", "Material Selection", "Compliance Guidance"]
@@ -95,9 +103,20 @@ function PageService() {
         className='w-full md:w-1/2 bg-white rounded-md shadow-md p-4 sm:p-6 md:p-8'
       >
         <motion.div variants={slideUpVariants} className='flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-6 mb-4 sm:mb-6 md:mb-6'>
-          <div className='bg-yellow-500 hidden md:block w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0 shadow-md'>
-            image
-          </div>
+          <img
+          src={currentService.image1}
+          alt={currentService.title}
+          className="
+            hidden md:block
+            w-full sm:w-64 md:w-80
+            h-48 md:h-64
+            object-cover object-center
+            rounded-xl
+            shadow-lg
+            transition-transform duration-500
+            hover:scale-105
+          "
+        />
           <div className='flex flex-col justify-start flex-1'>
             <div className='flex items-center gap-2 sm:gap-3 md:gap-3 mb-2 sm:mb-3 md:mb-3'>
               <span className='w-10 sm:w-12 md:w-12 h-10 sm:h-12 md:h-12 bg-[#ffd061] flex justify-center items-center rounded-md shrink-0'>
@@ -112,9 +131,20 @@ function PageService() {
         </motion.div>
         
         <motion.div variants={slideUpVariants} className='mb-6 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-6'>
-          <div className='bg-yellow-500 w-full sm:w-64 md:w-37.5 h-40 sm:h-48 md:h-37.5 shrink-0 shadow-md'>
-            image
-          </div>
+          <img
+            src={currentService.image2}
+            alt={currentService.title}
+            className="
+              hidden md:block
+              w-full sm:w-64 md:w-80
+              h-48 md:h-64
+              object-cover object-center
+              rounded-xl
+              shadow-lg
+              transition-transform duration-500
+              hover:scale-105
+            "
+          />
 
           <div className='flex flex-col justify-between flex-1'>
             <div>
@@ -122,7 +152,7 @@ function PageService() {
                 {currentService.features.map((feature, index) => (
                   <li key={index} className='flex items-center gap-2 sm:gap-3 md:gap-3 py-1 sm:py-2 md:py-2'>
                     <span className='w-2 h-2 bg-[#ffd061] rounded-full shrink-0'></span>
-                    <span className='text-sm sm:text-base text-[#5e5f61]'>{feature}</span>
+                    <span className=' sm:text-base text-[#5e5f61]'>{feature}</span>
                   </li>
                 ))}
               </ul>

@@ -7,6 +7,7 @@ import imageCompression from "browser-image-compression";
 import { useParams, useRouter } from "next/navigation";
 
 const API = "https://jenganasisi-backend.vercel.app/api/products";
+// const API = "http://localhost:4000/api/products";
 
 export default function EditProduct() {
   const { id } = useParams();
@@ -40,13 +41,28 @@ export default function EditProduct() {
         const res = await axios.get(`${API}/${id}`);
         const data = res.data;
 
+        // Load ALL fields
         setForm({
           name: data.name || "",
-          price: data.price || "",
+          image: data.image || "",
           category: data.category || "",
           stock: data.stock || "",
-          status: data.status || "",
+          price: data.price || "",
+          description: data.description || "",
+          floor: data.floor || "",
+          bedrooms: data.bedrooms || "",
+          bathrooms: data.bathrooms || "",
+          length: data.length || "",
+          width: data.width || "",
+          area: data.area || "",
         });
+
+        // Load existing images
+        if (data.images && Array.isArray(data.images)) {
+          setImages(data.images);
+        } else if (data.image) {
+          setImages([data.image]);
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -66,10 +82,10 @@ export default function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.price || !form.stock) {
-      setError("Product name, price, and stock are required");
-      return;
-    }
+    // if (!form.name || !form.price || !form.stock) {
+    //   setError("Product name, price, and stock are required");
+    //   return;
+    // }
 
     setLoading(true);
     setSuccess("");
@@ -78,22 +94,44 @@ export default function EditProduct() {
     try {
       const formData = new FormData();
 
-      // append text fields
+      // Object.keys(form).forEach((key) => {
+      //   formData.append(key, form[key]);
+      // });    // append text fields
+  
       Object.keys(form).forEach((key) => {
+      if (form[key] !== "" && form[key] !== null) {
         formData.append(key, form[key]);
+      }
+    });
+
+      // append new images
+      imageFiles.forEach((file) => {
+        formData.append("images", file);
       });
 
+      // keep old images if no new uploaded
+      if (imageFiles.length === 0) {
+        formData.append("image", JSON.stringify(images));
+      }
+
       await axios.put(
-        `https://jenganasisi-backend.vercel.app/api/products/update/${id}`,
-        form,
+        `${API}/update/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       alert("Product updated successfully!");
 
-      router.push("/dash_board/products"); // go back to list
+      router.push("/dash_board/products");
     } catch (err) {
       console.error(err);
       alert("Update failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -113,15 +151,13 @@ export default function EditProduct() {
             maxWidthOrHeight: 800,
             useWebWorker: true,
           });
-        }),
+        })
       );
 
-      // store REAL files for backend
       setImageFiles((prev) => [...prev, ...compressedFiles]);
 
-      // preview (same UI as before)
       const previewUrls = compressedFiles.map((file) =>
-        URL.createObjectURL(file),
+        URL.createObjectURL(file)
       );
 
       setImages((prev) => [...prev, ...previewUrls]);
@@ -132,7 +168,7 @@ export default function EditProduct() {
 
   if (loading)
     return (
-      <div className="flex flex-col items-center gap-4 ">
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
           <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
@@ -145,9 +181,9 @@ export default function EditProduct() {
     <div className="p-6">
       {/* HEADER */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">Add New Product</h1>
+        <h1 className="text-2xl font-bold">Edit Product</h1>
         <p className="text-gray-500 text-sm">
-          Fill in the details below to add a new product
+          Update the product details below
         </p>
       </div>
 
@@ -174,7 +210,6 @@ export default function EditProduct() {
             />
           </label>
 
-          {/* PREVIEW GALLERY */}
           <div className="flex flex-wrap gap-3 mt-3">
             {images.map((img, index) => (
               <div key={index} className="relative group">
@@ -184,7 +219,6 @@ export default function EditProduct() {
                   className="w-55 h-70 object-cover rounded-lg border"
                 />
 
-                {/* DELETE BUTTON */}
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}

@@ -6,6 +6,8 @@ import imageCompression from "browser-image-compression";
 import { FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
+const API = "https://jenganasisi-backend.vercel.app/api/products";
+
 function pageAddProduct() {
   const router = useRouter();
   const [images, setImages] = useState([]);
@@ -56,8 +58,7 @@ function pageAddProduct() {
       });
 
       const res = await axios.post(
-        "https://jenganasisi-backend.vercel.app/api/products/add",
-        // "http://localhost:4000/api/products/add",
+        `${API}/add`,
         formData,
         {
           headers: {
@@ -118,10 +119,10 @@ function pageAddProduct() {
         }),
       );
 
-      // ✅ store REAL files for backend
+      // store REAL files for backend
       setImageFiles((prev) => [...prev, ...compressedFiles]);
 
-      // ✅ preview (same UI as before)
+      // preview (same UI as before)
       const previewUrls = compressedFiles.map((file) =>
         URL.createObjectURL(file),
       );
@@ -145,6 +146,17 @@ function pageAddProduct() {
       }));
     }
   }, [form.length, form.width]);
+
+   if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
+        <p className="text-sm tracking-wide font-bold">Loading...</p>
+      </div>
+    );
 
   return (
     <div className="p-6">

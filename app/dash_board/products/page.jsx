@@ -147,6 +147,17 @@ export default function pageProduct() {
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentData = filtered.slice(start, start + ITEMS_PER_PAGE);
 
+   if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
+        <p className="text-sm tracking-wide font-bold">Loading...</p>
+      </div>
+    );
+
   return (
     <div className="bg-white rounded-xl shadow-sm p-5 m-5">
       {/* HEADER */}

@@ -1,7 +1,7 @@
 "use client";
 import DashNav from "@/component/04/dashNav";
 import DashSide from "@/component/04/dashSide";
-import AuthGuard from "@/component/authGuard";
+import AuthGuard from "@/lib/authGuard";
 
 export default function DashboardLayout({ children }) {
   return (

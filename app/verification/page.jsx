@@ -31,7 +31,7 @@ const VerificationPage = () => {
       }
 
       if (!user) {
-        router.push("/login"); // redirect if not logged in
+        router.replace("/login"); // redirect if not logged in
       } else {
         setCheckingUser(false);
       }
@@ -49,7 +49,7 @@ const VerificationPage = () => {
       const user = auth.currentUser;
 
       if (!user) {
-        router.push("/login");
+        router.replace("/login");
         return;
       }
 
@@ -77,7 +77,7 @@ const VerificationPage = () => {
         if (userData?.isApproved === true) {
           // Redirect after short delay
           setTimeout(() => {
-            router.push("/dash_board");
+            router.replace("/dash_board");
           }, 5000);
         }
       } else {
@@ -121,7 +121,7 @@ const VerificationPage = () => {
           clearInterval(interval);
 
           setTimeout(() => {
-            router.push("/dash_board");
+            router.replace("/dash_board");
           }, 5000);
         } else if (user.emailVerified && userData?.isApproved === false) {
           setIsVerified(true);
@@ -145,7 +145,7 @@ const VerificationPage = () => {
 
       if (!user) {
         setMessage("Session expired. Please login again.");
-        router.push("/login");
+        router.replace("/login");
         return;
       }
 

@@ -18,8 +18,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import Loading from "@/component/loading";
+import Loading from "@/lib/loading";
+import { handleAuthRedirect } from "@/lib/authRedirect";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export function LoginForm({ className, ...props }) {
@@ -48,6 +51,7 @@ export function LoginForm({ className, ...props }) {
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+// login with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -97,18 +101,20 @@ export function LoginForm({ className, ...props }) {
       // Reload to get latest verification status
       await user.reload();
 
-      // Ensure loader shows at least 4 seconds
-      const elapsed = Date.now() - startTime;
-      if (elapsed < 4000) {
-        await delay(4000 - elapsed);
-      }
+      // // Ensure loader shows at least 4 seconds
+      // const elapsed = Date.now() - startTime;
+      // if (elapsed < 4000) {
+      //   await delay(4000 - elapsed);
+      // }
 
-      // Redirect logic
-      if (!user.emailVerified || !user.isApproved) {
-        router.push("/verification");
-      } else {
-        router.push("/dash_board");
-      }
+      // // Redirect logic
+      // if (!user.emailVerified || !user.isApproved) {
+      //   router.push("/verification");
+      // } else {
+      //   router.push("/dash_board");
+      // }
+
+      await handleAuthRedirect(user, router);
 
       // Reset form
       setFormData({
@@ -155,6 +161,40 @@ export function LoginForm({ className, ...props }) {
 
       setError(message);
       console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // login with google
+    const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      // create user if not exists
+      if (!snap.exists()) {
+        await setDoc(userRef, {
+          name: user.displayName || "Google User",
+          email: user.email,
+          role: "user",
+          status: "active",
+          isApproved: true,
+          createdAt: new Date().toISOString(),
+        });
+      }
+
+     await handleAuthRedirect(user, router);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -267,6 +307,7 @@ export function LoginForm({ className, ...props }) {
                   variant="outline"
                   type="button"
                   className="cursor-pointer"
+                  onClick={handleGoogleLogin}
                 >
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                     <path

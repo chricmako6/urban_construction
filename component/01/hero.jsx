@@ -1,10 +1,11 @@
 'use client'
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { BiArrowToTop } from "react-icons/bi";
 
 function Hero() {
+    const [index, setIndex] = useState(0);
 
 const handleScrollToTop = () => {
 window.scrollTo({
@@ -12,15 +13,42 @@ window.scrollTo({
     behavior: 'smooth'
 })
 }
+const backgrounds = [
+  "/assert/hero1.jpg",
+  "/assert/hero2.jpg",
+];
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIndex((prev) => (prev + 1) % backgrounds.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, []);
+
   return (
-    <div className='pt-24 w-full min-h-screen lg:h-screen bg-cover bg-center relative flex items-center'
-        style={{
-            backgroundImage: 'url(/assert/hero_image.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}>
+    <div className="pt-24 w-full min-h-screen lg:h-screen relative flex items-center overflow-hidden">
+  
+        {/* BACKGROUND SLIDES */}
+        {backgrounds.map((img, i) => (
+            <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{
+                opacity: i === index ? 1 : 0,
+                scale: i === index ? 1 : 1.1,
+            }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+                backgroundImage: `url(${img})`,
+            }}
+            />
+        ))}
+
+        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/50"></div>
+
         <div className='gap-4 p-10 md:p-0 top-1/2 -translate-y-1/2 absolute'>
             {/* Animated heading with staggered children */}
             <motion.h1 

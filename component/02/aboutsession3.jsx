@@ -1,21 +1,18 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { FaQuoteRight } from 'react-icons/fa'
 import { motion, AnimatePresence } from "framer-motion";
 
-
 function Aboutsession3() {
 
-   const titles = [
-      "Tax Research for Achieving Financial Mastery in the Building Construction Sector",
+  const titles = [
+    "Tax Research for Achieving Financial Mastery in the Building Construction Sector",
+    "Strategic Tax Compliance for Promoting Transparency and Accountability in Construction Projects",
+    "Effective Tax Planning for Strengthening Financial Control in the Construction Industry",
+    "Advanced Tax Research Strategies for Sustainable Financial Mastery in Construction Enterprises"
+  ];
 
-      "Strategic Tax Compliance for Promoting Transparency and Accountability in Construction Projects",
-
-      "Effective Tax Planning for Strengthening Financial Control in the Construction Industry",
-
-      "Advanced Tax Research Strategies for Sustainable Financial Mastery in Construction Enterprises"
-   ];
-
-   const descriptions = [
+  const descriptions = [
     `This analysis focuses on integrating tax intelligence into financial decision-making in the construction sector.
      It evaluates how accurate tax forecasting, deductible expense identification, and compliance monitoring contribute
      to stronger financial performance in building projects. Moreover, it underlines the value of tax awareness in safeguarding
@@ -37,6 +34,7 @@ function Aboutsession3() {
       it highlights the importance of tax research in optimizing financial performance, minimizing tax liabilities, and ensuring 
       long-term sustainability in the construction industry.`
   ];
+
   const [index, setIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -49,45 +47,83 @@ function Aboutsession3() {
 
     return () => clearInterval(interval);
   }, [isHovered]);
+
+  // 🔥 SECTION ANIMATION (NEW - safe addition)
+  const sectionFade = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
   return (
-    <div className='flex flex-col items-center justify-center bg-[#383635] p-6 md:p-20 rounded-3xl'>
-      {/* Main grid container centered */}
+    <motion.div 
+      variants={sectionFade}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      className='flex flex-col items-center justify-center bg-[#383635] p-6 md:p-20 rounded-3xl'
+    >
+      
+      {/* MAIN GRID */}
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-5'>
         
         {/* LEFT SIDE */}
-        <div className="flex flex-col bg-red-200 gap-4 w-full md:w-2/3 h-auto md:h-125 rounded-xl p-5"
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex flex-col bg-red-200 gap-4 w-full md:w-2/3 h-auto md:h-125 rounded-xl p-5"
           style={{
             backgroundImage: 'url(/assert/tax_services.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
-          }}>
-           <div className='mt-10 md:mt-80 bg-[#383635]/80 backdrop-blur-lg border border-white/20 rounded-2xl md:p-5 p-3 shadow-2xl shadow-black/20'>
+          }}
+        >
+           <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className='mt-10 md:mt-80 bg-[#383635]/80 backdrop-blur-lg border border-white/20 rounded-2xl md:p-5 p-3 shadow-2xl shadow-black/20'
+           >
               <FaQuoteRight className='text-white/90 mb-4' />
               <h1 className='font-bold text-white tracking-tight text-xl md:text-2xl'>
                 Tax Research for <br />
                 Financial Mastery
               </h1>
-           </div>
-        </div>
+           </motion.div>
+        </motion.div>
     
         {/* RIGHT SIDE */}
-        <div className='relative cursor-pointer w-full md:w-2/2 h-90 md:h-auto rounded-xl flex items-center justify-center p-4 text-center md:text-left'
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className='relative cursor-pointer w-full md:w-2/2 h-90 md:h-auto rounded-xl flex items-center justify-center p-4 text-center md:text-left'
           style={{
             backgroundImage: 'url(/assert/tax_research.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
-          }}>
-          <div className="absolute inset-0 bg-[#383635]/55 backdrop rounded-xl p-5 shadow-2xl shadow-black/20"
+          }}
           onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}>
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          
+          {/* OVERLAY */}
+          <motion.div 
+            className="absolute inset-0 bg-[#383635]/55 backdrop rounded-xl p-5 shadow-2xl shadow-black/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
+                  initial={{ opacity: 0, y: 25, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -25, scale: 0.98 }}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
                  >
                   <h1 className="text-white md:text-3xl text-xl font-bold md:my-5 my-3">
@@ -99,11 +135,12 @@ function Aboutsession3() {
                   </p>
                 </motion.div>
               </AnimatePresence>
-          </div>
-        </div>
+          </motion.div>
+
+        </motion.div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,6 +1,7 @@
 'use client'
 import React, { useContext } from 'react'
 import Link from 'next/link';
+import { motion } from "framer-motion"
 import Navbar from '@/component/01/navbar'
 import { IoHome } from 'react-icons/io5'
 import { GoDot, GoDotFill } from "react-icons/go";
@@ -21,25 +22,56 @@ function PageAbout() {
     return (
     <div className='w-full'>
         <Navbar />
-        <div className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40"
-         style={{
-            backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/assert/03.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-         }}>
-            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-white'>
+        <div
+            className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40 relative overflow-hidden"
+            style={{
+                backgroundImage:
+                'linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(/assert/03.jpg)',
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+            }}
+            >
+            {/* subtle animated overlay glow */}
+            <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"
+                animate={{ opacity: [0.6, 0.8, 0.6] }}
+                transition={{ duration: 4, repeat: Infinity }}
+            />
+
+            {/* CONTENT */}
+            <motion.h1
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-white relative z-10 tracking-wide"
+            >
                 ABOUT US
-            </h1>
-            <div className='flex justify-center items-center my-5'>
+            </motion.h1>
+
+            {/* NAV DOTS */}
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="flex justify-center items-center my-5 relative z-10"
+            >
                 <Link href="/">
-                <IoHome className='w-5 h-5 mr-2 text-white hover:text-[#ffd061] cursor-pointer'/>
+                <IoHome className="w-5 h-5 mr-2 text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
                 </Link>
-                <GoDotFill className='text-white hover:text-[#ffd061] cursor-pointer'/>
-                <GoDot className='text-white hover:text-[#ffd061] cursor-pointer'/>
-                <GoDotFill className='text-white hover:text-[#ffd061] cursor-pointer'/>
+
+                <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+                <GoDot className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+                <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+            </motion.div>
+
+            {/* soft floating highlight line */}
+            <motion.div
+                className="absolute bottom-4 w-20 h-[2px] bg-[#ffd061] rounded-full"
+                animate={{ scaleX: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity }}
+            />
             </div>
-        </div>
 
         <div className='my-10 md:my-25'>
             <AboutSession1 />

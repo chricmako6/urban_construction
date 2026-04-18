@@ -48,7 +48,7 @@ export default function Home() {
       </div>
 
        {/* FAQ SECTION */}
-      <div className="w-full mx-auto my-15 md:my-30 bg-yellow-200/60 rounded-xl p-4">
+      <div className="w-full mx-auto my-15 md:my-30 bg-yellow-200/60 rounded-xl ">
         <Faq />
       </div>
 

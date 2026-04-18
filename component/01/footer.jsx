@@ -7,7 +7,7 @@ import { MdOutlineLocationOn, MdOutlinePhoneIphone, MdOutlineMailOutline } from 
 function Footer() {
   return (
     <footer className="w-full bg-[#1a1a1a] text-white py-8 sm:py-10 md:py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 p-10">
         {/* Main Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
           {/* Logo & Description */}

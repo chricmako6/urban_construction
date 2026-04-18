@@ -38,7 +38,7 @@ function Counting() {
   return (
     <div
       ref={ref}
-      className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 bg-[#383635] py-8 md:py-15 gap-4 md:gap-3 px-6 md:px-0 mx-auto"
+      className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 bg-[#383635] p-5 py-8 md:py-15 gap-4 md:gap-3 px-6 md:px-0 mx-auto"
     >
       <div className="flex gap-5 md:gap-45 justify-center">
         <div className="text-center">

@@ -189,7 +189,7 @@ function PageService() {
   };
 
   return (
-    <div className='w-full flex flex-col md:flex-row gap-4 md:gap-5 mx-auto px-4 sm:px-6 md:px-0'>
+    <div className='w-full py-3 md:py-5 flex flex-col md:flex-row gap-4 md:gap-5 mx-auto px-4 sm:px-6 md:px-0'>
       {/* SERVICE OPTIONS */}
          <motion.div variants={slideUpVariants} initial="initial" animate="animate" className='flex md:flex-col ml-0 md:ml-55 order-first md:order-0'>
          {Object.entries(services).map(([key, service]) => (

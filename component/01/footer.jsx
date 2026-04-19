@@ -6,10 +6,10 @@ import { MdOutlineLocationOn, MdOutlinePhoneIphone, MdOutlineMailOutline } from 
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#1a1a1a] text-white py-8 sm:py-10 md:py-12">
+    <footer className="w-full bg-[#1a1a1a] text-white pt-16 md:pt-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 p-10">
         {/* Main Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-16 md:pb-32">
           {/* Logo & Description */}
           <div className="sm:text-left">
             <div className="flex items-center gap-2 mb-3 sm:mb-4 sm:justify-start">
@@ -46,16 +46,17 @@ function Footer() {
             <p className="text-gray-400 text-xs sm:text-sm md:text-base mb-3 sm:mb-4 max-w-md sm:max-w-none mx-auto sm:mx-0">
               Enter your email to commercial receipt our clients share their experiences of working with us.
             </p>
-            <div className="flex sm:flex-row gap-2 max-w-sm sm:max-w-none mx-auto sm:mx-0">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="flex-1 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-gray-800 text-white rounded focus:outline-none focus:border-[#ffd061] border border-gray-700"
-              />
-              <button className='bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer flex items-center justify-center px-4 py-2 sm:py-1 rounded-md font-semibold transition w-fit md:min-w-11'>
-                <FiArrowUpRight className='w-4 h-4 sm:w-5 sm:h-5 text-[#383635] font-bold hover:rotate-45 transition-transform' />
-              </button>
-            </div>
+            <div className="flex max-w-sm sm:max-w-none mx-auto sm:mx-0 rounded-md overflow-hidden border border-gray-700">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="flex-1 px-4 py-2 text-sm bg-gray-800 text-white focus:outline-none"
+            />
+
+            <button className='group bg-[#ffd061] hover:bg-[#f5c84a] px-4 flex items-center justify-center transition'>
+              <FiArrowUpRight className='w-5 h-5 text-[#383635] group-hover:rotate-45 transition-transform' />
+            </button>
+          </div>
           </div>
         </div>
 
@@ -63,7 +64,7 @@ function Footer() {
         <div className="border-t border-gray-800 my-6 sm:my-8"></div>
 
         {/* Footer Bottom */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 py-3 md:py-5">
           <p className="text-gray-500 text-xs sm:text-sm md:text-base text-center sm:text-left order-2 sm:order-1">
             Copyright © 2026 UrbanBuild. All rights reserved.
           </p>

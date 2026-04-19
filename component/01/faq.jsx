@@ -6,14 +6,14 @@ import FaqCard from './faqCard'
 
 function Faq() {
   return (
-    <div className='w-full justify-center p-10'>
+    <div className='py-16 md:py-32 w-full justify-center'>
         <div className='w-full px-4'>
             <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className='text-center text-[10px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:my-5 my-3 flex items-center justify-center'
+            className='text-center text-[10px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:py-5 py-3 flex items-center justify-center'
         >
             <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
             FAQ
@@ -36,7 +36,7 @@ function Faq() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: "easeOut"}}
-            className='max-w-2xl mx-auto text-md md:text-md text-[#5e5f61] md:my-5 my-3'
+            className='max-w-2xl mx-auto text-md md:text-md text-[#5e5f61] md:py-5 py-3'
             >
             From project planning to final touches. We've answered the most 
             common questions to help you make informed decisions.

@@ -7,12 +7,13 @@ import PageService from '../02/pageService';
 function Services() {
   return (
     <>
-    <div id='services' className='w-full h-auto grid justify-center'>
+    <div className='py-16 md:py-32'>
+        <div id='services' className='w-full h-auto grid justify-center'>
         <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className='mx-auto font-bold text-2xl md:text-3xl md:my-4 my-2 text-center'
+            className='mx-auto font-bold text-2xl md:text-3xl md:py-5 py-3 text-center'
             >
             Solutions We Provide
         </motion.h1>
@@ -22,16 +23,18 @@ function Services() {
         initial={{ opacity: 0, y: 20}}
         animate={{ opacity: 1, y: 0}}
         transition={{ delay: 0.8, duration: 0.6 }}
-        className='text-center text-sm sm:text-base md:text-md text-[#5e5f61] text-md md:text-md my-5'
+        className='text-center text-sm sm:text-base md:text-md text-[#5e5f61] text-md md:py-5 py-3 '
         >
         Offering tailored construction solutions, from planning to completion, <br />
         with a focus on quality and innovation.
         </motion.p>
-    </div>
+       </div>
 
-    <div>
-      <PageService />
+        <div>
+          <PageService />
+        </div>
     </div>
+    
     </>
   )
 }

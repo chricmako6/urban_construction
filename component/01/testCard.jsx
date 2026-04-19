@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FiArrowUpLeft, FiArrowUpRight } from 'react-icons/fi';
 
 function TestCard() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -64,18 +65,25 @@ function TestCard() {
       <div className="flex gap-2 sm:gap-3 justify-center items-center mt-3 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 md:static md:mt-27 w-full sm:w-auto">
         <button 
           onClick={handlePrevious}
-          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
+          className="group/btn p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded-sm transition hover:bg-[#f5c84a]"
           aria-label="Previous testimonial"
         >
-          <FaArrowLeft className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#5e5f61]'/>
+          <span className='bg-[#383635] rounded-sm inline-block p-1 group-hover/btn:-rotate-45 transition-transform duration-300'>
+            <FiArrowUpLeft className='text-white w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5' />
+          </span>
         </button>
+
+       
         <button 
           onClick={handleNext}
-          className="p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded transition hover:bg-[#f5c84a]"
+          className="group/btn p-2 h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-15 lg:w-15 cursor-pointer hover:text-[#ffd061] bg-[#ffd061] flex justify-center items-center rounded-sm transition hover:bg-[#f5c84a]"
           aria-label="Next testimonial"
         >
-          <FaArrowRight className='w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#5e5f61]'/>
+          <span className='bg-[#383635] rounded-sm inline-block p-1 group-hover/btn:rotate-45 transition-transform duration-300'>
+            <FiArrowUpRight className='text-white w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5' />
+          </span>
         </button>
+        
       </div>
     </div>
   );

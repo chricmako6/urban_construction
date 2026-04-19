@@ -7,14 +7,14 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 function About() {
   return (
-    <div id='about' className='w-full mt-25 mb-25 md:mt-20 md:mb-20 gap-4 sm:gap-6 h-auto grid grid-cols-1 md:grid-cols-2 items-center px-4 sm:px-6 md:px-0'>
+    <div id='about' className='w-full py-16 md:py-32 gap-4 sm:gap-6 h-auto grid grid-cols-1 md:grid-cols-2 items-center px-4 sm:px-6 md:px-0'>
         <div className=''>
              <motion.h1 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className='md:ml-52 mx-auto text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:my-5 my-3 flex items-center justify-center md:justify-start'
+                className='md:ml-52 mx-auto text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:py-5 py-3 flex items-center justify-center md:justify-start'
             >
                 <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
                 ABOUT US 
@@ -36,7 +36,7 @@ function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                className='ml-0 sm:ml-20 md:ml-52 text-sm sm:text-base md:text-md text-[#5e5f61] md:my-5 my-3 text-center md:text-left'
+                className='ml-0 sm:ml-20 md:ml-52 text-sm sm:text-base md:text-md text-[#5e5f61] md:py-5 py-3 text-center md:text-left'
                 >
                 At Urban Build, we are dedicated to transforming visions into reality through exceptional construction services. 
                 Our commitment to safety, sustainability, and client satisfaction sets us apart in the industry.
@@ -50,7 +50,7 @@ function About() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
             >
-                <h1 className='ml-0 sm:ml-20 md:ml-52 text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:my-5 my-3 flex items-center justify-center md:justify-start'>
+                <h1 className='ml-0 sm:ml-20 md:ml-52 text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold md:py-5 py-3 flex items-center justify-center md:justify-start'>
                 Signature
                 </h1>
             </motion.div>

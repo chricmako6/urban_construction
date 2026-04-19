@@ -38,7 +38,7 @@ function Contact() {
   };
 
   return (
-    <div id="contact" className="w-full px-4 sm:px-6 lg:px-8 h-auto">
+    <div id="contact" className="py-16 md:py-32 w-full px-4 sm:px-6 lg:px-8 h-auto">
       <style>{rotateStyle}</style>
       
       {/* Heading Section - Added responsive heading */}
@@ -47,7 +47,7 @@ function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="text-xl sm:text-2xl md:text-3xl font-bold md:my-5 my-3"
+          className="text-xl sm:text-2xl md:text-3xl font-bold md:py-5 py-3"
         >
           Get In Touch
         </motion.h1>
@@ -77,7 +77,7 @@ function Contact() {
           </p>
 
           {/* Icons Section */}
-          <div className="space-y-4 sm:space-y-5 mt-4">
+          <div className="space-y-4 sm:space-y-5 py-3 md:py-5">
             {/* Chat */}
             <div className="flex gap-3 sm:gap-4">
               <IoChatbubbleEllipsesOutline className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 text-[#ffd061] font-bold mt-1" />
@@ -128,7 +128,7 @@ function Contact() {
         </div>
 
         {/* REQUEST A QUOTE Section */}
-        <div className="pt-8 lg:pt-0 lg:pl-6">
+        <div className="py-3 md:py-5 lg:pt-0 lg:pl-6">
           <h2 className="font-bold text-xl sm:text-2xl mb-3 sm:mb-4">Request A Quote</h2>
           <p className='text-[#5e5f61] text-sm sm:text-base mb-6'>
             From project planning to final touches. We've answered the most common questions to help you make informed decisions.

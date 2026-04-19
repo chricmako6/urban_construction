@@ -35,7 +35,7 @@ function PageServices() {
                     >
                     {/* subtle animated overlay glow */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"
+                        className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60"
                         animate={{ opacity: [0.6, 0.8, 0.6] }}
                         transition={{ duration: 4, repeat: Infinity }}
                     />
@@ -68,20 +68,40 @@ function PageServices() {
         
                     {/* soft floating highlight line */}
                     <motion.div
-                        className="absolute bottom-4 w-20 h-[2px] bg-[#ffd061] rounded-full"
+                        className="absolute bottom-4 w-20 h-0.5 bg-[#ffd061] rounded-full"
                         animate={{ scaleX: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
                         transition={{ duration: 3, repeat: Infinity }}
                     />
                     </div>
-        <div className='mx-auto my-10 md:my-25 max-w-6xl px-4'>
-            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-center'>
-                Shop All
-            </h1>
-            <p className='text-sm sm:text-base md:text-md text-[#5e5f61] md:my-5 my-3 text-center'>
-              Explore our collection of modern house plans, designed to inspire your next architectural project. 
-              Whether you're looking for a sleek urban design or a spacious family home, our curated selection offers a variety of styles and layouts to suit your needs.
-            </p>
-        </div>
+        <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className='mx-auto my-10 md:my-25 max-w-6xl px-4'
+    >
+      {/* Title */}
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className='text-xl sm:text-2xl md:text-3xl font-bold text-center'
+      >
+        Shop All
+      </motion.h1>
+
+      {/* Description */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        className='text-sm sm:text-base md:text-md text-[#5e5f61] md:my-5 my-3 text-center max-w-2xl mx-auto'
+      >
+        Explore our collection of modern house plans, designed to inspire your next architectural project. 
+        Whether you're looking for a sleek urban design or a spacious family home, our curated selection 
+        offers a variety of styles and layouts to suit your needs.
+      </motion.p>
+    </motion.div>
 
         <div className='my-16 md:my-30 flex flex-col lg:flex-row max-w-7xl gap-6 mx-auto px-4'>
             <div className='w-1/3 hidden lg:block'>

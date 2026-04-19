@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext, useState, useEffect } from 'react'
 import Link from 'next/link';
+import axios from 'axios';
 import Pagination from '@/component/03/pagination';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegStar } from 'react-icons/fa'
@@ -8,19 +9,34 @@ import { MdApartment, MdBedroomChild, MdOutlineBathroom } from 'react-icons/md'
 import { PiMapPinAreaDuotone } from 'react-icons/pi'
 import { CiLineHeight } from "react-icons/ci";
 import { AiOutlineColumnWidth } from "react-icons/ai";
-import { shopItems } from '@/app/utilities/data';
 import { TiShoppingCart } from 'react-icons/ti';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
 
 function Shopsession2() {
   const { addProduct,products} = useContext(StoreContext);
   
+  const [items, setItems] = useState([]); 
+  const [loading, setLoading] = useState(true);
 
   const [sortOrder, setSortOrder] = useState("old");
   const [showSort, setShowSort] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(9);
 
+   // FETCH DATA FROM API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("https://jenganasisi-backend.vercel.app/api/products");
+        setItems(res.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
- const [itemsPerPage, setItemsPerPage] = useState(9);
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,8 +55,8 @@ function Shopsession2() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  // const totalPages = Math.ceil(shopItems.length / itemsPerPage);
-  const sortedItems = [...shopItems].sort((a, b) => {
+  // const totalPages = Math.ceil(items.length / itemsPerPage);
+  const sortedItems = [...items].sort((a, b) => {
   if (sortOrder === "old") {
     return new Date(a.date) - new Date(b.date);
   } else {
@@ -54,13 +70,22 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  // const currentItems = shopItems.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
   const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top:400, behavior: "smooth" });
   };
+
+    // LOADING STATE (professional touch)
+  if (loading) {
+    return (
+      <div className="text-center py-20 text-gray-500">
+        Loading products...
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -125,15 +150,15 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
 
               <Link href={`/shop/${item?.id}`}>
               <img
-                src={item.image}
-                alt={item.title}
+                src={item.images?.[0] || "/fallback.jpg"}
+                alt={item.name}
                 className='h-56 sm:h-64 md:h-70 w-full shadow-md rounded-t-xl bg-gray-200 bg-center object-cover'
               />
               </Link>
               
               <div className='p-3'>
                 <Link href={`/shop/${item?.id}`}>
-                 <h2 className='font-bold'>{item.title}{item?.id ? ` - ID: ${item.id}` : ''}</h2>
+                 <h2 className='font-bold'>{item.name}{item?.id ? ` - ID: ${item.id}` : ''}</h2>
                 </Link>
                 <p className='flex justify-between items-center mt-2'>
                   <span className='my-2'>From {item.price}</span>
@@ -148,32 +173,32 @@ const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
               <div className="grid grid-cols-3 p-2 gap-2">
                 <div className="mx-auto text-xs w-20">
                   <MdApartment className='w-6 h-6 mx-auto'/>
-                  <p className="text-center my-1.5">{item?.floors} Floors</p>
+                  <p className="text-center my-1.5">{item.floor} Floors</p>
                 </div>
 
                 <div className="mx-auto text-xs w-20 border-r border-l border-gray-400">
                   <MdBedroomChild className='w-6 h-6 mx-auto'/>
-                  <p className="text-center my-1.5">{item?.bedroom} Bedrooms</p>
+                  <p className="text-center my-1.5">{item.bedrooms} Bedrooms</p>
                 </div>
 
                 <div className="mx-auto text-xs w-20">
                   <MdOutlineBathroom className='w-6 h-6 mx-auto'/>
-                  <p className="text-center my-1.5">{item?.bathroom} Bathrooms</p>
+                  <p className="text-center my-1.5">{item.bathrooms} Bathrooms</p>
                 </div>
 
                 <div className="mx-auto text-xs w-20">
                   <CiLineHeight className='w-6 h-6 mx-auto' />
-                  <p className="text-center my-1.5">{item?.height} m</p>
+                  <p className="text-center my-1.5">{item.length} m</p>
                 </div>
 
                 <div className="mx-auto text-xs w-20 border-r border-l border-gray-400">
                   <AiOutlineColumnWidth className='w-6 h-6 mx-auto'/>
-                  <p className="text-center my-1.5">{item?.width} m</p>
+                  <p className="text-center my-1.5">{item.width} m</p>
                 </div>
 
                 <div className="mx-auto text-xs w-20">
                   <PiMapPinAreaDuotone className='w-6 h-6 mx-auto'/>
-                  <p className="text-center my-1.5">{item?.area}</p>
+                  <p className="text-center my-1.5">{item.area}</p>
                 </div>
               </div>
 

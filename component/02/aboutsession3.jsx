@@ -60,7 +60,7 @@ function Aboutsession3() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className='flex flex-col items-center justify-center bg-[#383635] p-6 md:p-20 rounded-3xl'
+      className='flex flex-col items-center justify-center bg-[#383635] p-6 md:p-20'
     >
       
       {/* MAIN GRID */}

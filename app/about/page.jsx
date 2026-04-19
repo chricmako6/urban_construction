@@ -34,7 +34,7 @@ function PageAbout() {
             >
             {/* subtle animated overlay glow */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"
+                className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60"
                 animate={{ opacity: [0.6, 0.8, 0.6] }}
                 transition={{ duration: 4, repeat: Infinity }}
             />
@@ -67,7 +67,7 @@ function PageAbout() {
 
             {/* soft floating highlight line */}
             <motion.div
-                className="absolute bottom-4 w-20 h-[2px] bg-[#ffd061] rounded-full"
+                className="absolute bottom-4 w-20 h-0.5 bg-[#ffd061] rounded-full"
                 animate={{ scaleX: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 3, repeat: Infinity }}
             />

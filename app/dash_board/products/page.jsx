@@ -124,7 +124,6 @@ export default function pageProduct() {
     if (!confirmDelete) return;
 
     try {
-      //  await axios.delete(`http://localhost:4000/api/products/remove/${id}`);
       await axios.delete(
         `https://jenganasisi-backend.vercel.app/api/products/remove/${id}`,
       );

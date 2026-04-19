@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { motion } from 'framer-motion';
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
@@ -11,6 +11,11 @@ function Navbar() {
   const { products } = useContext(StoreContext);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -47,10 +52,13 @@ function Navbar() {
                       className='relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1'
                     >
                       <TiShoppingCart className="text-lg w-5 h-5"/>
-                      {/* Notification Badge */}
-                      <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                        {products.length}
-                      </span>
+                      {/* cart Badge */}
+                      {
+                        mounted &&
+                        <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                         {products.length}
+                        </span>
+                      }
                     </Link>
                   ) : (
                     <Link
@@ -61,7 +69,6 @@ function Navbar() {
                       {link.label}
                     </Link>
                   )
-                  
              ))}
 
             {/* Animated button */}

@@ -1,9 +1,9 @@
 "use client"
-import React,{useContext, useState} from 'react'
+import React,{useContext, useState, useEffect} from 'react'
 import Link from 'next/link';
+import axios from 'axios';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
-import { shopItems } from '@/app/utilities/data';
 import { useParams } from 'next/navigation'
 import { MdApartment, MdBedroomChild, MdOutlineBathroom } from 'react-icons/md'
 import { PiMapPinAreaDuotone } from 'react-icons/pi'
@@ -16,15 +16,24 @@ import Footer from '@/component/01/footer';
 import { TiShoppingCart } from 'react-icons/ti';
 import { BiArrowToTop } from 'react-icons/bi';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
+// import { shopItems } from '@/app/utilities/data';
 
 function page({item}) {
+ const {id} = useParams()
  const { addProduct, products } = useContext(StoreContext);
  const [isFavorite, setIsFavorite] = useState(false);
+ const [product, setProduct] = useState(null);
+ const [loading, setLoading] = useState(true);
+ const [activeImage, setActiveImage] = useState(null);
 
+  useEffect(() => {
+    if (product?.images?.length > 0) {
+      setActiveImage(product.images[0]);
+    }
+  }, [product]);
 
- const {id} = useParams()
- const product = shopItems.find((item) => item.id === Number(id))
-  const [activeImage, setActiveImage] = useState(product?.image);
+//  const product = shopItems.find((item) => item.id === Number(id))
+// const [activeImage, setActiveImage] = useState(product?.image);
 
 //  this is for the toast message 
   const toggleFavorite = () => {
@@ -37,6 +46,37 @@ function page({item}) {
   }
 };
 
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      const res = await axios.get(
+        `https://jenganasisi-backend.vercel.app/api/products/${id}`
+      );
+      setProduct(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (id) fetchProduct();
+}, [id]);
+
+if (loading) {
+  return(
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-[#ffd061]/30 rounded-full"></div>
+          <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
+        </div>
+
+        <p className="mt-6 text-lg font-semibold text-gray-800">Loading...</p>
+      </div>
+  )
+}
+if (!product) return <div>Product not found</div>;
+
 
   return (
     <div className='w-full'>
@@ -45,11 +85,11 @@ function page({item}) {
           <div className='flex flex-col lg:flex-row gap-4 max-w-7xl my-15 mx-auto md:p-6 p-4 rounded-md bg-white shadow-md'>
             {/* clickable thumbnails */}
               <div className='flex flex-row lg:flex-col gap-3'>
-                {[product.image, product.image, product.image].map((img, index) => (
+                {product.images?.map((img, index) => (
                   <img
                     key={index}
                     src={img}
-                    alt=""
+                    alt={product?.name}
                     onClick={() => setActiveImage(img)}
                     className={`w-24 h-24 mt-5 rounded-xl mx-auto cursor-pointer border-2 transition-all
                       ${activeImage === img ? "border-[#ffd061]" : "border-transparent"}
@@ -83,7 +123,7 @@ function page({item}) {
                       <motion.img
                         key={activeImage}
                         src={activeImage}
-                        alt="image"
+                        alt={product?.name}
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
@@ -130,7 +170,7 @@ function page({item}) {
 
               <div className='flex-7 mx-5'>
                 <h1 className='my-5 text-2xl font-bold'>
-                  {product?.title} {product?.id}
+                  {product?.name} {product?.id}
                 </h1>
 
                 {/* this is with radio */}
@@ -161,9 +201,7 @@ function page({item}) {
                     <h2 className="font-bold my-2">Description</h2>
                     <span className='gap-2 flex'>
                         <p className="text-gray-700 leading-relaxed text-sm">
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Obcaecati ad veritatis ea iste eligendi animi quis facere ducimus asperiores, 
-                          facilis ex repellat doloribus rerum harum?
+                          {product?.description}
                         </p>
                     </span>
                     </span>

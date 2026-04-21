@@ -4,6 +4,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaBoxOpen, FaUsers } from "react-icons/fa";
+import { BsCartCheck } from "react-icons/bs";
+import { IoNotifications, IoSettingsSharp } from "react-icons/io5";
+import { HiUsers } from "react-icons/hi";
+import { MdSpaceDashboard } from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
+import { PiNotepadFill } from "react-icons/pi";
 
 function dashSide({ setPageLoading }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -13,36 +20,42 @@ function dashSide({ setPageLoading }) {
   const setData = [
     {
       title: "Dashboard",
+      icon: <MdSpaceDashboard />,
       options: [
-        { name: "summary", path: "/dash_board" },
-        { name: "notifications", path: "/dash_board/notifications" },
+        { name: "summary", path: "/dash_board", icon: <PiNotepadFill /> },
+        { name: "notifications", path: "/dash_board/notifications", icon: <IoNotifications />  },
       ],
     },
     {
       title: "Products",
+      icon: <FaBoxOpen />,
       options: [
-        { name: "all products", path: "/dash_board/products" },
-        { name: "add product", path: "/dash_board/product-add" },
+        { name: "all products", path: "/dash_board/products", icon: <FaBoxOpen /> },
+        { name: "add product", path: "/dash_board/product-add", icon: <AiOutlinePlus />  },
       ],
     },
     {
       title: "Checkouts",
+      icon: <BsCartCheck />,
       options: [{ name: "checkouts", path: "/dash_board/checkouts" }],
     },
     {
       title: "Users",
+      icon: <FaUsers />,
       options: [
         { name: "all users", path: "/dash_board/users" },
-        { name: "add user", path: "/dash_board/user-add" },
+        { name: "add user", path: "/dash_board/user-add", icon: <AiOutlinePlus /> },
       ],
     },
     {
       title: "Customers",
+      icon: <HiUsers />,
       options: [{ name: "all customers info", path: "/dash_board/customers" }],
     },
     {
       title: "Settings",
-      options: [{ name: "logout", path: "/logout" }],
+      icon: <IoSettingsSharp />,
+      options: [{ name: "setup", path: "#" }],
     },
   ];
 
@@ -74,8 +87,11 @@ function dashSide({ setPageLoading }) {
           <div key={index}>
             <div className="shadow-xs w-70 bg-gray-100 rounded-xl my-3.5 cursor-pointer overflow-hidden">
               <div className="p-5" onClick={() => toggleData(index)}>
-                <span className="flex justify-between">
-                  <h1 className="font-bold">{item.title}</h1>
+                <span className="flex justify-between items-center">
+                  <span className="flex gap-2 items-center">
+                    <span className="text-lg text-gray-700 ">{item.icon}</span>
+                    <h1 className="font-bold">{item.title}</h1>
+                  </span>
                   {item.options && (
                     <motion.span
                       className="rounded-full bg-[#ffd061] hover:bg-[#f5c84a] cursor-pointer p-2"
@@ -109,13 +125,14 @@ function dashSide({ setPageLoading }) {
                       {item.options.map((option, i) => (
                         <div
                           key={i}
-                          className={`flex gap-2 items-center cursor-pointer px-3 py-2 rounded-lg transition-colors ${
+                          className={`flex gap-1.5 items-center cursor-pointer px-3 py-2 rounded-lg transition-colors ${
                             isActivePath(option.path)
                               ? "bg-[#ffd061] text-black"
                               : "text-gray-700 hover:text-[#f5c84a] hover:bg-gray-200"
                           }`}
                           onClick={() => handleNavigation(option.path)}
                         >
+                          <span className="">{option.icon}</span>
                           <p className="">{option.name}</p>
                         </div>
                       ))}

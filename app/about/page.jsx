@@ -23,7 +23,7 @@ function PageAbout() {
     <div className='w-full'>
         <Navbar />
         <div
-            className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40 relative overflow-hidden"
+            className="py-16 md:py-32 w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center relative overflow-hidden"
             style={{
                 backgroundImage:
                 'linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(/assert/03.jpg)',
@@ -73,19 +73,19 @@ function PageAbout() {
             />
             </div>
 
-        <div className='my-10 md:my-25'>
+        <div className=''>
             <AboutSession1 />
         </div>
 
-        <div className='my-15 md:my-30 '>
+        <div className=''>
             <Aboutsession2 />
         </div>
 
-        <div className='my-15 md:my-30 '>
+        <div className=' '>
             <Aboutsession3 />
         </div>
 
-        <div className='my-15 md:my-30 '>
+        <div className=' '>
             <Aboutsession4 />
         </div>
 

@@ -16,6 +16,7 @@ import Footer from '@/component/01/footer';
 import { TiShoppingCart } from 'react-icons/ti';
 import { BiArrowToTop } from 'react-icons/bi';
 import { StoreContext } from '@/app/hooks/context/StoreContext';
+import { FiArrowUpRight } from 'react-icons/fi';
 // import { shopItems } from '@/app/utilities/data';
 
 function page({item}) {
@@ -71,7 +72,7 @@ if (loading) {
           <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
         </div>
 
-        <p className="mt-6 text-lg font-semibold text-gray-800">Loading...</p>
+        <p className="mt-6 md:text-lg text-base font-semibold text-gray-800">Loading...</p>
       </div>
   )
 }
@@ -81,10 +82,10 @@ if (!product) return <div>Product not found</div>;
   return (
     <div className='w-full'>
         <Navbar />
-        <div className="md:p-0 p-4">
-          <div className='flex flex-col lg:flex-row gap-4 max-w-7xl my-15 mx-auto md:p-6 p-4 rounded-md bg-white shadow-md'>
+        <div className="p-3 md:p-6 py-16 md:py-32">
+          <div className='overflow-hidden flex flex-col lg:flex-row gap-4 max-w-7xl mx-auto md:p-6 p-4 rounded-md bg-white shadow-md'>
             {/* clickable thumbnails */}
-              <div className='flex flex-row lg:flex-col gap-3'>
+              <div className='flex flex-row lg:flex-col gap-3 '>
                 {product.images?.map((img, index) => (
                   <img
                     key={index}
@@ -135,7 +136,7 @@ if (!product) return <div>Product not found</div>;
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 p-2 gap-4 mt-5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 p-2 gap-4 py-3 md:py-5">
                   <div className="mx-auto text-md p-1 w-full lg:w-40">
                     <MdApartment className='w-8 h-8 mx-auto cursor-pointer'/>
                     <p className="text-center my-1.5">{product?.floors} Floors</p>
@@ -228,13 +229,32 @@ if (!product) return <div>Product not found</div>;
                     {/* BUY NOW */}
                     <div className='w-full'>
                       <Link href="/checkout">
-                      <button
+                      {/* <button
                       onClick={() => toast.success("Proceeding to checkout")}
                       className='my-3 p-2 w-full rounded-xl shadow-md cursor-pointer text-gray-100 bg-[#ffd061] hover:bg-[#f5c84a]'>
                         <h1 className='font-bold'>
                           Buy {product?.price}
                         </h1>
-                      </button>
+                      </button> */}
+
+                        {/* Animated button */}
+                        <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                        className='group flex justify-center md:justify-start py-3 md:py-5'
+                        >
+                        <button 
+                        onClick={() => toast.success("Proceeding to checkout")}
+                        className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-3 px-4 sm:px-5 py-2 rounded-md font-semibold text-sm sm:text-base'>
+                              Tshs: {product?.price}
+                            <motion.span 
+                            className='bg-[#383635] inline-block p-1 rounded-sm ml-2 group-hover/btn:rotate-45 transition-transform duration-300'>
+                              <FiArrowUpRight className='text-white w-5 h-5' />
+                            </motion.span>
+                        </button>
+                        </motion.div> 
                       </Link>
                     </div>
 

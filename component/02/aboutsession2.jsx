@@ -16,7 +16,7 @@ function Aboutsession2() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center px-4 md:px-0'>
+    <div className='py-16 md:py-32 flex flex-col items-center justify-center px-4 md:px-0'>
       
       {/* MAIN GRID */}
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-5'>
@@ -26,7 +26,7 @@ function Aboutsession2() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-col gap-4 w-full md:w-1/2"
+          className=" flex flex-col gap-4 w-full md:w-1/2"
         >
            
            {/* VISION */}
@@ -35,8 +35,8 @@ function Aboutsession2() {
             whileHover={{ scale: 1.02 }}
             className="bg-yellow-200/60 h-37 rounded-xl shadow"
            >
-            <div className="px-5 items-center justify-center h-full">
-              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] mt-5 py-2 px-6 cursor-pointer">
+            <div className="py-3 px-5 items-center justify-center h-full">
+              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] py-2 px-6 cursor-pointer">
                 Our Vision
               </button>
               <p className="text-[#5e5f61] text-sm md:text-base py-2">
@@ -51,8 +51,8 @@ function Aboutsession2() {
             whileHover={{ scale: 1.02 }}
             className="bg-yellow-200/60 h-37 rounded-xl shadow"
            >
-            <div className="px-5 items-center justify-center h-full">
-              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] mt-5 py-2 px-6 cursor-pointer">
+            <div className="py-3 px-5 items-center justify-center h-full">
+              <button className="text-white font-bold md:text-lg rounded-md bg-[#ffd061] py-2 px-6 cursor-pointer">
                 Our  Mission
               </button>
               <p className="text-[#5e5f61] text-sm md:text-base py-2">
@@ -67,8 +67,8 @@ function Aboutsession2() {
             whileHover={{ scale: 1.02 }}
             className="bg-[#ffd061] h-37 rounded-xl shadow"
            >
-            <div className="px-5 items-center justify-center h-full">
-              <button className="font-bold md:text-lg rounded-md bg-yellow-200/60 mt-5 py-2 px-6 cursor-pointer">
+            <div className="py-3 px-5 items-center justify-center h-full">
+              <button className="font-bold md:text-lg rounded-md bg-yellow-200/60 py-2 px-6 cursor-pointer">
                 Our History
               </button>
               <p className="text-[#5e5f61] text-sm md:text-base py-2">
@@ -109,8 +109,11 @@ function Aboutsession2() {
 
           {/* BUTTON */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="group justify-center md:justify-end flex top-50 md:top-90 relative"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className="group justify-center md:justify-end flex top-50 md:top-90 relative"
           >
             <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex items-center justify-center gap-3 px-5 my-2 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
               Contact Us

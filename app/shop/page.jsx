@@ -23,57 +23,58 @@ function PageServices() {
   return (
     <div className='max-w-full'>
         <Navbar />
-                <div
-                    className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40 relative overflow-hidden"
-                    style={{
-                        backgroundImage:
-                        'linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(/assert/03.jpg)',
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    >
-                    {/* subtle animated overlay glow */}
-                    <motion.div
-                        className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60"
-                        animate={{ opacity: [0.6, 0.8, 0.6] }}
-                        transition={{ duration: 4, repeat: Infinity }}
-                    />
-        
-                    {/* CONTENT */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.7, ease: "easeOut" }}
-                        className="text-xl sm:text-2xl md:text-3xl font-bold text-white relative z-10 tracking-wide"
-                    >
-                        MAP SHOP
-                    </motion.h1>
-        
-                    {/* NAV DOTS */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="flex justify-center items-center my-5 relative z-10"
-                    >
-                        <Link href="/">
-                        <IoHome className="w-5 h-5 mr-2 text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
-                        </Link>
-        
-                        <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
-                        <GoDot className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
-                        <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
-                    </motion.div>
-        
-                    {/* soft floating highlight line */}
-                    <motion.div
-                        className="absolute bottom-4 w-20 h-0.5 bg-[#ffd061] rounded-full"
-                        animate={{ scaleX: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                    />
-                    </div>
-        <motion.div
+          <div
+              className="w-full shadow-xl rounded-b-3xl flex flex-col justify-center items-center md:h-52 h-40 relative overflow-hidden"
+              style={{
+                  backgroundImage:
+                  'linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(/assert/03.jpg)',
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+              }}
+              >
+              {/* subtle animated overlay glow */}
+              <motion.div
+                  className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-black/60"
+                  animate={{ opacity: [0.6, 0.8, 0.6] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+              />
+  
+              {/* CONTENT */}
+              <motion.h1
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-white relative z-10 tracking-wide"
+              >
+                  MAP SHOP
+              </motion.h1>
+  
+              {/* NAV DOTS */}
+              <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                  className="flex justify-center items-center my-5 relative z-10"
+              >
+                  <Link href="/">
+                  <IoHome className="w-5 h-5 mr-2 text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+                  </Link>
+  
+                  <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+                  <GoDot className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+                  <GoDotFill className="text-white hover:text-[#ffd061] cursor-pointer transition-colors duration-300" />
+              </motion.div>
+  
+              {/* soft floating highlight line */}
+              <motion.div
+                  className="absolute bottom-4 w-20 h-0.5 bg-[#ffd061] rounded-full"
+                  animate={{ scaleX: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+              />
+        </div>
+
+      <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}

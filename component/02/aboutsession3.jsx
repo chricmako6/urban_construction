@@ -48,7 +48,7 @@ function Aboutsession3() {
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  // 🔥 SECTION ANIMATION (NEW - safe addition)
+  // SECTION ANIMATION (NEW - safe addition)
   const sectionFade = {
     hidden: { opacity: 0, y: 40 },
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -60,7 +60,7 @@ function Aboutsession3() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className='flex flex-col items-center justify-center bg-[#383635] p-6 md:p-20'
+      className='flex flex-col items-center justify-center bg-[#383635] py-16 md:py-32 px-4 md:px-0'
     >
       
       {/* MAIN GRID */}

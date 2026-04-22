@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 
 function AboutSession1() {
 
-  // 🔥 animation variants (clean & reusable)
+  // animation variants (clean & reusable)
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -19,7 +19,7 @@ function AboutSession1() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center px-4 md:px-0'>
+    <div className='py-16 md:py-32 flex flex-col items-center justify-center px-4 md:px-0'>
       
       {/* HEADER */}
       <motion.div 
@@ -104,12 +104,13 @@ function AboutSession1() {
           
           {/* TITLE */}
           <motion.div variants={fadeIn}>
-            <h1 className="text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold my-4 flex items-center justify-center md:justify-start">
+            <h1 className="text-text-[10px] sm:text-[12px] md:text-[15px] gap-2 text-[#5e5f61] font-bold py-3 md:py-5 flex items-center justify-center md:justify-start">
               <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/> 
               ABOUT SERVICES
               <FaStarHalfAlt className='w-3.5 h-3.5 text-[#ffd061]'/>
             </h1>
           </motion.div>
+          
 
           {/* HEADING */}
           <motion.div variants={fadeUp}>
@@ -150,9 +151,11 @@ function AboutSession1() {
 
           {/* BUTTON */}
           <motion.div 
-            variants={fadeUp}
-            whileHover={{ scale: 1.05 }}
-            className='group'
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className='group'
           >
             <button className='group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] w-full md:w-42.5 cursor-pointer flex items-center justify-center md:justify-start gap-3 px-5 my-2 py-2 rounded-md font-semibold text-sm sm:text-base mt-4'>
               <Link href="#">

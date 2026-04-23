@@ -7,7 +7,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 function About() {
   return (
-    <div id='about' className='w-full py-16 md:py-32 gap-4 sm:gap-6 h-auto grid grid-cols-1 md:grid-cols-2 items-center px-4 sm:px-6 md:px-0'>
+    <div id='about' className='w-full py-10 md:py-20 gap-4 sm:gap-6 h-auto grid grid-cols-1 md:grid-cols-2 items-center px-4 sm:px-6 md:px-0'>
         <div className=''>
              <motion.h1 
                 initial={{ opacity: 0, x: -50 }}

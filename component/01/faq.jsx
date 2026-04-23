@@ -6,7 +6,7 @@ import FaqCard from './faqCard'
 
 function Faq() {
   return (
-    <div className='py-16 md:py-32 w-full justify-center'>
+    <div className='py-10 md:py-20 w-full justify-center'>
         <div className='w-full px-4'>
             <motion.h1 
             initial={{ opacity: 0, y: 50 }}

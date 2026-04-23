@@ -38,7 +38,7 @@ function Contact() {
   };
 
   return (
-    <div id="contact" className="py-16 md:py-32 w-full px-4 sm:px-6 lg:px-8 h-auto">
+    <div id="contact" className="py-10 md:py-20 w-full px-4 sm:px-6 lg:px-8 h-auto">
       <style>{rotateStyle}</style>
       
       {/* Heading Section - Added responsive heading */}

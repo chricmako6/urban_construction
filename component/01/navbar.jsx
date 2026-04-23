@@ -39,8 +39,8 @@ function Navbar() {
             <Image
               src="/assert/logo.png"
               alt="Logo"
-              width={145}
-              height={135}
+              width={130}
+              height={130}
             />
         </div>
 

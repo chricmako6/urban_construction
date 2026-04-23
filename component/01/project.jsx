@@ -37,7 +37,7 @@ function Project() {
   }, []);
 
   return (
-    <div id='projects' className='py-16 md:py-32 w-full justify-center'>
+    <div id='projects' className='py-10 md:py-20 w-full justify-center'>
       
       {/* HEADER */}
       <div className='w-full px-4'>

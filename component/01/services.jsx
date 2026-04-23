@@ -7,7 +7,7 @@ import PageService from '../02/pageService';
 function Services() {
   return (
     <>
-    <div className='py-16 md:py-32'>
+    <div className='py-10 md:py-20'>
         <div id='services' className='w-full h-auto grid justify-center'>
         <motion.h1 
             initial={{ opacity: 0, y: 50 }}

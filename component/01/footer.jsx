@@ -28,7 +28,7 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full bg-[#1a1a1a] text-white pt-16 md:pt-32">
+    <footer className="w-full bg-[#1a1a1a] text-white pt-10 md:pt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 p-10">
         {/* Main Content */}
         <motion.div
@@ -36,7 +36,7 @@ function Footer() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-16 md:pb-32"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pb-10 md:pb-20"
         >
           {/* Logo & Description */}
           <motion.div variants={fadeUp}>

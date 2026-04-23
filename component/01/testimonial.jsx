@@ -8,7 +8,7 @@ import TestCard from './testCard'
 
 function Testimonial() {
   return (
-    <div className='w-full py-16 md:py-32 px-4 sm:px-6 lg:px-8 h-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 lg:gap-6'>
+    <div className='w-full py-10 md:py-20 px-4 sm:px-6 lg:px-8 h-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 lg:gap-6'>
         <div className='w-full max-w-2xl mx-auto md:mx-0'>
              <motion.h1 
                 initial={{ opacity: 0, x: -50 }}

@@ -38,7 +38,7 @@ export default function Home() {
       </div>
 
        {/* PROJECTS SECTION */}
-      <div className="w-full mx-auto bg-yellow-200/60">
+      <div className="w-full mx-auto bg-gray-100/60">
         <Project />
       </div>
 

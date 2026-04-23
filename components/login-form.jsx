@@ -24,6 +24,7 @@ import {
 import Loading from "@/lib/loading";
 import { handleAuthRedirect } from "@/lib/authRedirect";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
@@ -51,7 +52,7 @@ export function LoginForm({ className, ...props }) {
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-// login with email and password
+  // login with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,19 +101,6 @@ export function LoginForm({ className, ...props }) {
 
       // Reload to get latest verification status
       await user.reload();
-
-      // // Ensure loader shows at least 4 seconds
-      // const elapsed = Date.now() - startTime;
-      // if (elapsed < 4000) {
-      //   await delay(4000 - elapsed);
-      // }
-
-      // // Redirect logic
-      // if (!user.emailVerified || !user.isApproved) {
-      //   router.push("/verification");
-      // } else {
-      //   router.push("/dash_board");
-      // }
 
       await handleAuthRedirect(user, router);
 
@@ -167,7 +155,7 @@ export function LoginForm({ className, ...props }) {
   };
 
   // login with google
-    const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {
     setLoading(true);
     setError("");
 
@@ -192,7 +180,7 @@ export function LoginForm({ className, ...props }) {
         });
       }
 
-     await handleAuthRedirect(user, router);
+      await handleAuthRedirect(user, router);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -274,13 +262,23 @@ export function LoginForm({ className, ...props }) {
 
               {/* SUBMIT BUTTON */}
               <Field>
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  className="bg-[#ffbf00] hover:bg-[#f5c84a] cursor-pointer text-black"
-                >
-                  {loading ? "Please wait..." : isSignUp ? "Sign Up" : "Login"}
-                </Button>
+                <div className="group flex justify-center sm:justify-start">
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] gap-5 cursor-pointer text-black flex items-center justify-center px-4 sm:px-5 py-4 w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading
+                      ? "Please wait..."
+                      : isSignUp
+                        ? "Sign Up"
+                        : "Login"}
+
+                    <span className="bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300">
+                      <FiArrowUpRight className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+                    </span>
+                  </Button>
+                </div>
               </Field>
 
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-gray-100 *:data-[slot=field-separator-content]:px-3 *:data-[slot=field-separator-content]:py-1 *:data-[slot=field-separator-content]:rounded-full">

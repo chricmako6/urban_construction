@@ -1,11 +1,12 @@
-'use client';
-import React, { useState, useContext, useEffect } from 'react'
-import { motion } from 'framer-motion';
+"use client";
+import React, { useState, useContext, useEffect } from "react";
+import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
-import { TiShoppingCart } from 'react-icons/ti';
-import { StoreContext } from '@/app/hooks/context/StoreContext';
-import Link from 'next/link';
+import { TiShoppingCart } from "react-icons/ti";
+import { StoreContext } from "@/app/hooks/context/StoreContext";
+import Link from "next/link";
+import Image from "next/image";
 
 function Navbar() {
   const { products } = useContext(StoreContext);
@@ -22,98 +23,99 @@ function Navbar() {
   };
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '#services', label: 'Services' },
-    { href: '#projects', label: 'Projects' },
-    { href: '/shop', label: 'Shop' },
-    { href: '/cart', label: 'AddCart' },
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "#services", label: "Services" },
+    { href: "#projects", label: "Projects" },
+    { href: "/shop", label: "Shop" },
+    { href: "/cart", label: "AddCart" },
   ];
 
   return (
-    <div className='w-full bg-[#383635] py-5 md:py-12 p-5 mx-auto sticky top-0 left-0 z-100'>
-      <div className='flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row'>
+    <div className="w-full bg-[#1a1a1a] py-3 mx-auto sticky top-0 left-0 z-100">
+      <div className="flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row">
         {/* Logo */}
         <div>
-            <h1 className='text-white font-bold text-xl md:text-2xl'>
-              <img src="/assert/.png" 
-              alt="Jenganasi Logo" />
-            </h1>
+            <Image
+              src="/assert/logo.png"
+              alt="Logo"
+              width={145}
+              height={135}
+            />
         </div>
 
         {/* Desktop Navigation */}
-        <div className='hidden lg:flex justify-center items-center'>
-            {navLinks.map((link) => (
-              // WISH LIST ICON WITH NOTIFICATION BADGE
-              link.label === "AddCart" ? (
-                    <Link
-                      key={link.label} 
-                      href={link.href} 
-                      className='relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1'
-                    >
-                      <TiShoppingCart className="text-lg w-5 h-5"/>
-                      {/* cart Badge */}
-                      {
-                        mounted &&
-                        <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                         {products.length}
-                        </span>
-                      }
-                    </Link>
-                  ) : (
-                    <Link
-                      key={link.label} 
-                      href={link.href} 
-                      className='text-white px-4 hover:text-[#ffd061] transition-colors duration-300'
-                    >
-                      {link.label}
-                    </Link>
-                  )
-             ))}
+        <div className="hidden lg:flex justify-center items-center">
+          {navLinks.map((link) =>
+            // WISH LIST ICON WITH NOTIFICATION BADGE
+            link.label === "AddCart" ? (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="relative text-white px-4 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-1"
+              >
+                <TiShoppingCart className="text-lg w-5 h-5" />
+                {/* cart Badge */}
+                {mounted && (
+                  <span className="absolute -top-1.5 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {products.length}
+                  </span>
+                )}
+              </Link>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-white px-4 hover:text-[#ffd061] transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
 
-            {/* Animated button */}
-            <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className='flex group'
-            >
-            <button className='group/btn bg-[#ffd061] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold'>
-                Get a Quote
-                <span className='bg-[#383635] inline-block p-1 rounded-sm ml-2 group-hover/btn:rotate-45 transition-transform duration-300'>
-                  <FiArrowUpRight className='text-white w-5 h-5' />
-                </span>
-            </button>
-            </motion.div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className='lg:hidden flex items-center gap-4'>
+          {/* Animated button */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='hidden md:flex'
+            className="flex group"
           >
-            <button className='bg-[#ffd061] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold text-sm'>
-                Get a Quote
-                <motion.span 
-                className='bg-[#383635] inline-block p-1 rounded-sm'
+            <button className="group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold">
+              Get a Quote
+              <span className="bg-[#383635] inline-block p-1 rounded-sm ml-2 group-hover/btn:rotate-45 transition-transform duration-300">
+                <FiArrowUpRight className="text-white w-5 h-5" />
+              </span>
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden flex items-center gap-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="hidden md:flex"
+          >
+            <button className="bg-[#ffd061] cursor-pointer text-black flex items-center gap-3 px-5 py-2 rounded-md font-semibold text-sm">
+              Get a Quote
+              <motion.span
+                className="bg-[#383635] inline-block p-1 rounded-sm"
                 whileHover={{ rotate: 45 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                >
-                <FiArrowUpRight className='text-white w-4 h-4' />
-                </motion.span>
+              >
+                <FiArrowUpRight className="text-white w-4 h-4" />
+              </motion.span>
             </button>
           </motion.div>
 
-          <button 
+          <button
             onClick={toggleMobileMenu}
-            className='text-white text-2xl md:text-3xl'
+            className="text-white text-2xl md:text-3xl"
           >
             {mobileMenuOpen ? <HiX /> : <HiOutlineMenuAlt3 />}
           </button>
@@ -123,39 +125,39 @@ function Navbar() {
       {/* Mobile Navigation Menu */}
       <motion.div
         initial={{ opacity: 0, height: 0 }}
-        animate={{ 
-          opacity: mobileMenuOpen ? 1 : 0, 
-          height: mobileMenuOpen ? 'auto' : 0 
+        animate={{
+          opacity: mobileMenuOpen ? 1 : 0,
+          height: mobileMenuOpen ? "auto" : 0,
         }}
         transition={{ duration: 0.3 }}
-        className='lg:hidden overflow-hidden'
+        className="lg:hidden overflow-hidden"
       >
-        <div className='flex flex-col gap-4 px-4 py-6 bg-[#2a2928]'>
-          {navLinks.map((link) => (
+        <div className="flex flex-col gap-4 px-4 py-6 bg-[#2a2928]">
+          {navLinks.map((link) =>
             link.label === "AddCart" ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className='relative text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-2'
-                  onClick={() => setMobileMenuOpen(false)}
-                 >
-                  <TiShoppingCart className="text-lg w-5 h-5"/>
-                  <span className="absolute top-0 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                    {products.length}
-                  </span>
-                </a>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className='text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300'
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              )
-            ))}
-          
+              <a
+                key={link.label}
+                href={link.href}
+                className="relative text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300 flex items-center gap-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <TiShoppingCart className="text-lg w-5 h-5" />
+                <span className="absolute top-0 left-7 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                  {products.length}
+                </span>
+              </a>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-white px-4 py-2 hover:text-[#ffd061] transition-colors duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ),
+          )}
+
           {/* Mobile Get Quote Button */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -163,23 +165,23 @@ function Navbar() {
             transition={{ delay: 0.2, duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='flex lg:hidden'
+            className="flex lg:hidden"
           >
-            <button className='w-full bg-[#ffd061] cursor-pointer text-black flex items-center justify-center gap-3 px-5 py-2 rounded-md font-semibold'>
-                Get a Quote
-                <motion.span 
-                className='bg-[#383635] inline-block p-1 rounded-sm'
+            <button className="w-full bg-[#ffd061] cursor-pointer text-black flex items-center justify-center gap-3 px-5 py-2 rounded-md font-semibold">
+              Get a Quote
+              <motion.span
+                className="bg-[#383635] inline-block p-1 rounded-sm"
                 whileHover={{ rotate: 45 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                >
-                <FiArrowUpRight className='text-white w-4 h-4' />
-                </motion.span>
+              >
+                <FiArrowUpRight className="text-white w-4 h-4" />
+              </motion.span>
             </button>
           </motion.div>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

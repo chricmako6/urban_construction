@@ -16,7 +16,7 @@ function Aboutsession2() {
   }
 
   return (
-    <div className='py-16 md:py-32 flex flex-col items-center justify-center px-4 md:px-0'>
+    <div className='py-10 md:py-20 flex flex-col items-center justify-center px-4 md:px-0'>
       
       {/* MAIN GRID */}
       <div className='flex flex-col md:flex-row mx-auto max-w-5xl w-full gap-5'>

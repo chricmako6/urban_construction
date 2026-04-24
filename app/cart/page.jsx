@@ -1,14 +1,15 @@
 "use client";
-import React, {useContext, useState} from 'react'
-import Link from 'next/link';
-import Navbar from '@/component/01/navbar'
-import { StoreContext } from '@/app/hooks/context/StoreContext';
-import Footer from '@/component/01/footer';
-import CartProduct from '@/component/03/cartProduct';
+import React, { useContext, useState } from "react";
+import Link from "next/link";
+import Navbar from "@/component/01/navbar";
+import { StoreContext } from "@/app/hooks/context/StoreContext";
+import Footer from "@/component/01/footer";
+import CartProduct from "@/component/03/cartProduct";
+import { FiArrowUpRight } from "react-icons/fi";
 
 function pageCart() {
   const { products, clearCart } = useContext(StoreContext);
-  
+
   // Helper to extract numeric price
   const getNumericPrice = (price) => {
     if (typeof price === "string") {
@@ -19,11 +20,11 @@ function pageCart() {
   };
 
   // Calculate subtotal from all cart items
-  const subtotal = products.reduce((acc ,  item) => {
-  const numericPrice = getNumericPrice(item.price);
-  const itemTotal = numericPrice * (item.quantity || 1);
+  const subtotal = products.reduce((acc, item) => {
+    const numericPrice = getNumericPrice(item.price);
+    const itemTotal = numericPrice * (item.quantity || 1);
 
-   return acc + itemTotal;
+    return acc + itemTotal;
   }, 0);
 
   // Other calculations
@@ -34,44 +35,49 @@ function pageCart() {
   const finalTotal = subtotal + deliveryCost + tax - discount;
 
   return (
-    <div className='max-w-full'>
+    <div className="max-w-full">
       <Navbar />
       <div className="p-4">
         <div className="bg-white my-20 rounded-lg  shadow-md p-4 md:max-w-7xl mx-auto">
           {/* THIS IS FOR CART */}
-          <div className='border-b border-gray-300 p-4 flex justify-between items-center'>
+          <div className="border-b border-gray-300 p-4 flex justify-between items-center">
             <div>
-              <h1 className='text-2xl font-bold'>Your Cart</h1>
-              <p className='text-leading'> {products.length} Products in Your Cart</p>
+              <h1 className="text-2xl font-bold">Your Cart</h1>
+              <p className="text-leading">
+                {" "}
+                {products.length} Products in Your Cart
+              </p>
             </div>
             <div>
-              <button onClick={() =>clearCart()} className='cursor-pointer bg-[#ffd061] hover:bg-[#f5c84a] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 mt-4'>
-                Clear Cart
+              <button
+                onClick={() =>clearCart()}
+                className="group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] cursor-pointer text-black flex justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 md:w-fit w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300"
+              >
+                CLEAR CART
+                <span className="bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300">
+                  <FiArrowUpRight className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+                </span>
               </button>
             </div>
           </div>
 
           <div className="md:flex gap-4">
             {/* THIS IS FOR CART ITEMS */}
-              <div className='mt-5 md:w-6xl max-w-full'>
-              {products.map((product ) => 
+            <div className="mt-5 md:w-6xl max-w-full">
+              {products.map((product) => (
                 <CartProduct key={product.id} item={product} />
-              )}
-
+              ))}
             </div>
 
             {/* THIS IS FOR CHECKOUT */}
             <div className="mt-5 md:w-xl ">
-              <h2 className='text-xl font-bold mb-4'>Checkout</h2>
-
-            
+              <h2 className="text-xl font-bold mb-4">Checkout</h2>
 
               <div className="bg-gray-100 flex flex-col p-4 rounded-lg shadow-md">
                 <div className="flex justify-between">
                   <span>Items</span>
                   <span>{products.length}</span>
                 </div>
-
 
                 <div className="flex leading-relaxed justify-between py-1">
                   <span>Delivery Cost</span>
@@ -83,15 +89,16 @@ function pageCart() {
                   <span>$5</span>
                 </div>
 
-
                 <div className="flex leading-relaxed justify-between py-1">
                   <span>Discount</span>
                   <span>10%</span>
                 </div>
-                
+
                 <div className="flex leading-relaxed justify-between py-1 border-b border-gray-300 mb-4 pb-4">
                   <span>Subtotal</span>
-                  <span className="text-green-600">Tshs: <b>{subtotal.toFixed(2)}</b></span>
+                  <span className="text-green-600">
+                    Tshs: <b>{subtotal.toFixed(2)}</b>
+                  </span>
                 </div>
 
                 <div className="flex leading-relaxed justify-between font-bold text-lg">
@@ -99,7 +106,9 @@ function pageCart() {
                   {products.length === 0 ? (
                     <span className="text-gray-500">Tshs: 0.00</span>
                   ) : (
-                    <span className="text-green-600">Tshs: <b>{finalTotal.toFixed(2)}</b></span>
+                    <span className="text-green-600">
+                      Tshs: <b>{finalTotal.toFixed(2)}</b>
+                    </span>
                   )}
                 </div>
 
@@ -119,13 +128,12 @@ function pageCart() {
                 )}
               </div>
             </div>
-
           </div>
         </div>
       </div>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default pageCart
+export default pageCart;

@@ -19,7 +19,7 @@ function AboutSession1() {
   }
 
   return (
-    <div className='py-16 md:py-32 flex flex-col items-center justify-center px-4 md:px-0'>
+    <div className='py-10 md:py-20 flex flex-col items-center justify-center px-4 md:px-0'>
       
       {/* HEADER */}
       <motion.div 

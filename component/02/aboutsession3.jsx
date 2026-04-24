@@ -60,7 +60,7 @@ function Aboutsession3() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className='flex flex-col items-center justify-center bg-[#383635] py-16 md:py-32 px-4 md:px-0'
+      className='py-10 md:py-20 flex flex-col items-center justify-center bg-[#383635] px-4 md:px-0'
     >
       
       {/* MAIN GRID */}

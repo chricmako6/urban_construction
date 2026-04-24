@@ -25,6 +25,7 @@ import Loading from "@/lib/loading";
 import { handleAuthRedirect } from "@/lib/authRedirect";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiArrowUpRight } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
@@ -196,33 +197,62 @@ export function LoginForm({ className, ...props }) {
           {/* UPDATED: added onSubmit */}
           <form className="p-6 md:p-8" onSubmit={handleSubmit}>
             <FieldGroup>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">
-                  {isSignUp ? "Create an account" : "Welcome back"}
-                </h1>
-                <p className="text-balance text-muted-foreground">
-                  {isSignUp
-                    ? "Sign up to get started"
-                    : "Login to your account"}
-                </p>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={isSignUp ? "signup-text" : "login-text"}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="flex flex-col items-center gap-2 text-center"
+                >
+                  <motion.h1
+                    className="text-2xl font-bold"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    {isSignUp ? "Create an account" : "Welcome back"}
+                  </motion.h1>
+
+                  <motion.p
+                    className="text-balance text-muted-foreground"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {isSignUp
+                      ? "Sign up to get started"
+                      : "Login to your account"}
+                  </motion.p>
+                </motion.div>
+              </AnimatePresence>
 
               {error && <div className="text-red-500 text-sm">{error}</div>}
 
               {/* SIGN UP FIELD */}
-              {isSignUp && (
-                <Field>
-                  <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="eg.Chris Mac"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </Field>
-              )}
+              <AnimatePresence mode="wait">
+                {isSignUp && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Field>
+                      <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="eg.Chris Mac"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Field>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* EMAIL */}
               <Field>
@@ -344,7 +374,7 @@ export function LoginForm({ className, ...props }) {
               </Field>
 
               {/* TOGGLE LOGIN/SIGNUP */}
-              <FieldDescription className="text-center">
+              {/* <FieldDescription className="text-center">
                 {isSignUp ? (
                   <>
                     Already have an account?{" "}
@@ -368,7 +398,43 @@ export function LoginForm({ className, ...props }) {
                     </button>
                   </>
                 )}
-              </FieldDescription>
+              </FieldDescription> */}
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={isSignUp ? "signup" : "login"}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <FieldDescription className="text-center">
+                    {isSignUp ? (
+                      <>
+                        Already have an account?{" "}
+                        <button
+                          type="button"
+                          onClick={() => setIsSignUp(false)}
+                          className="hover:text-[#f5c84a] cursor-pointer"
+                        >
+                          Login
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        Don&apos;t have an account?{" "}
+                        <button
+                          type="button"
+                          onClick={() => setIsSignUp(true)}
+                          className="hover:text-[#f5c84a] cursor-pointer"
+                        >
+                          Sign up
+                        </button>
+                      </>
+                    )}
+                  </FieldDescription>
+                </motion.div>
+              </AnimatePresence>
             </FieldGroup>
           </form>
 

@@ -176,8 +176,9 @@ export function LoginForm({ className, ...props }) {
           email: user.email,
           role: "user",
           status: "active",
-          isApproved: true,
+          isApproved: false,
           createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
       }
 

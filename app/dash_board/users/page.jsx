@@ -39,7 +39,7 @@ export default function PageProject() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  // ✅ REALTIME FETCH USERS
+  // REALTIME FETCH USERS
   useEffect(() => {
     setLoading(true);
 
@@ -64,7 +64,7 @@ export default function PageProject() {
     return () => unsubscribe(); // cleanup
   }, []);
 
-  // ✅ SEARCH (CLIENT SIDE)
+  // SEARCH (CLIENT SIDE)
   const searchUsers = useCallback((query) => {
     if (!query) {
       setFiltered(products);
@@ -92,7 +92,7 @@ export default function PageProject() {
     return () => clearTimeout(delay);
   }, [search, searchUsers]);
 
-  // ✅ FILTER STATUS
+  // FILTER STATUS
   useEffect(() => {
     let data = [...products];
 
@@ -107,7 +107,7 @@ export default function PageProject() {
     setCurrentPage(1);
   }, [statusFilter, products]);
 
-  // ✅ ACTIVATE USER
+  // ACTIVATE USER
   const handleActivate = async (id) => {
     try {
       await updateDoc(doc(db, "users", id), {
@@ -119,7 +119,7 @@ export default function PageProject() {
     }
   };
 
-  // ✅ DEACTIVATE USER
+  // DEACTIVATE USER
   const handleDeactivate = async (id) => {
     try {
       await updateDoc(doc(db, "users", id), {
@@ -131,7 +131,7 @@ export default function PageProject() {
     }
   };
 
-  // ✅ DELETE USER (Firestore only)
+  // DELETE USER (Firestore only)
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this user?"
@@ -146,7 +146,7 @@ export default function PageProject() {
     }
   };
 
-  // ✅ PAGINATION
+  // PAGINATION
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const start = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentData = filtered.slice(start, start + ITEMS_PER_PAGE);

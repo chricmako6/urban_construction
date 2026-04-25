@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const ITEMS_PER_PAGE = 10;
 
-const API = "http://localhost:4000/api/products";
+const API = "http://localhost:4000";
 
 const getStatusStyle = (status) => {
   switch (status) {

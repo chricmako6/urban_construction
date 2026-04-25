@@ -6,7 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import imageCompression from "browser-image-compression";
 import { useParams, useRouter } from "next/navigation";
 
-const API = "http://localhost:4000";
+const API = "https://jenganasisi-backend.vercel.app/api/projects";
 
 export default function EditProject() {
   const { id } = useParams();
@@ -16,9 +16,9 @@ export default function EditProject() {
 
   const [form, setForm] = useState({
     name: "",
-    image: "",
     category: "",
     solution: "",
+    description: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -35,9 +35,9 @@ export default function EditProject() {
         // Load ALL fields
         setForm({
           name: data.name || "",
-          image: data.image || "",
           category: data.category || "",
           solution: data.solution || "",
+          description: data.description || "",
         });
 
         // Load existing images
@@ -72,15 +72,11 @@ export default function EditProject() {
     try {
       const formData = new FormData();
 
-      // Object.keys(form).forEach((key) => {
-      //   formData.append(key, form[key]);
-      // });    // append text fields
-  
       Object.keys(form).forEach((key) => {
-      if (form[key] !== "" && form[key] !== null) {
-        formData.append(key, form[key]);
-      }
-    });
+        if (form[key] !== "" && form[key] !== null) {
+          formData.append(key, form[key]);
+        }
+      });
 
       // append new images
       imageFiles.forEach((file) => {
@@ -92,15 +88,11 @@ export default function EditProject() {
         formData.append("image", JSON.stringify(images));
       }
 
-      await axios.put(
-        `${API}/update/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.put(`${API}/update/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       alert("Project updated successfully!");
 
@@ -129,13 +121,13 @@ export default function EditProject() {
             maxWidthOrHeight: 800,
             useWebWorker: true,
           });
-        })
+        }),
       );
 
       setImageFiles((prev) => [...prev, ...compressedFiles]);
 
       const previewUrls = compressedFiles.map((file) =>
-        URL.createObjectURL(file)
+        URL.createObjectURL(file),
       );
 
       setImages((prev) => [...prev, ...previewUrls]);
@@ -211,7 +203,7 @@ export default function EditProject() {
 
         {/* PRODUCT NAME */}
         <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">Product Name</label>
+          <label className="text-sm font-medium">Project Name</label>
           <input
             name="name"
             value={form.name}
@@ -233,45 +225,34 @@ export default function EditProject() {
           />
         </div>
 
-        {/* PRICE */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">Price (Tshs)</label>
-          <input
-            name="price"
-            value={form.price}
-            onChange={handleChange}
-            type="number"
-            placeholder="Enter price"
-            className="border p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
-          />
-        </div>
-
-        {/* STOCK */}
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium">Stock</label>
-          <input
-            name="stock"
-            value={form.stock}
-            onChange={handleChange}
-            type="number"
-            placeholder="Available units"
-            className="border p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
-          />
-        </div>
-
         {/* SOLUTION */}
-        <div className="flex flex-col gap-1 md:col-span-2">
-          <label className="text-sm font-medium">Solution</label>
-          <textarea
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium">
+            Solution <span className="text-red-500">*</span>
+          </label>
+          <input
             name="solution"
             value={form.solution}
             onChange={handleChange}
-            rows={4}
             placeholder="Enter solution..."
-            className="border h-40 p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
+            className="border p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
           />
         </div>
 
+        {/* DESCRIPTION */}
+        <div className="flex flex-col gap-1 md:col-span-2">
+          <label className="text-sm font-medium">
+            Description <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Enter description..."
+            className="border h-40 p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
+          />
+        </div>
 
         {/* BUTTON */}
         <div className="md:col-span-2 flex justify-end mt-4">

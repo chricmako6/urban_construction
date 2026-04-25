@@ -6,7 +6,7 @@ import imageCompression from "browser-image-compression";
 import { FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-const API = "http://localhost:4000/api/projects"; 
+const API = "https://jenganasisi-backend.vercel.app/api/projects";
 
 function pageAddProject() {
   const router = useRouter();
@@ -15,8 +15,8 @@ function pageAddProject() {
 
   const [form, setForm] = useState({
     name: "",
-    image: "",
     category: "",
+    description:"",
     solution:"",
   });
 
@@ -27,8 +27,8 @@ function pageAddProject() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.solution || !form.image) {
-      setError("Project name, solution, and image are required");
+    if (!form.name || !form.solution || !form.category || images.length === 0) {
+      setError("Project name, solution, category, and at least one image are required");
       return;
     }
 
@@ -66,8 +66,8 @@ function pageAddProject() {
       // reset
       setForm({
         name: "",
-        image: "",
         category: "",
+        description: "",
         solution: "",
       });
 
@@ -213,16 +213,28 @@ function pageAddProject() {
           />
         </div>
 
-
         {/* SOLUTION */}
-        <div className="flex flex-col gap-1 md:col-span-2">
+         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium">Solution <span className="text-red-500">*</span></label>
-          <textarea
+          <input
             name="solution"
             value={form.solution}
             onChange={handleChange}
-            rows={4}
             placeholder="Enter solution..."
+            className="border p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
+          />
+        </div>
+
+
+        {/* DESCRIPTION */}
+        <div className="flex flex-col gap-1 md:col-span-2">
+          <label className="text-sm font-medium">Description <span className="text-red-500">*</span></label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Enter description..."
             className="border h-40 p-3 rounded-xl outline-none focus:ring-1 focus:ring-[#ffd061]"
           />
         </div>

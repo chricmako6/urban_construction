@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const ITEMS_PER_PAGE = 10;
 
-const API = "http://localhost:4000/api/products";
+const API = "https://jenganasisi-backend.vercel.app/api/projects";
 
 const getStatusStyle = (status) => {
   switch (status) {
@@ -124,7 +124,7 @@ export default function pageProject() {
 
     try {
       await axios.delete(
-        `http://localhost:4000`,
+        `https://jenganasisi-backend.vercel.app/api/projects/remove/${id}`,
       );
 
       // remove from UI instantly (better UX)
@@ -197,8 +197,8 @@ export default function pageProject() {
             <tr>
               <th className="p-3 text-left">Name</th>
               <th className="p-3 text-left">ID</th>
-              <th className="p-3 text-center">Category</th>
-              <th className="p-3 text-center">Stock</th>
+              <th className="p-3 text-left">Category</th>
+              <th className="p-3 text-center">Status</th>
               <th className="p-3 text-right">Action</th>
             </tr>
           </thead>
@@ -240,7 +240,7 @@ export default function pageProject() {
                     {item.category}
                   </td>
 
-                  <td className="p-3 text-center">
+                  {/* <td className="p-3 text-center">
                     <span
                       className={`${
                         item.stock === 0
@@ -256,9 +256,7 @@ export default function pageProject() {
                           ? "Low Stock"
                           : item.stock}
                     </span>
-                  </td>
-
-                  <td className="p-3 text-center">Tshs:{item.price}</td>
+                  </td> */}
 
                   <td className="p-3 text-center">
                     <span
@@ -285,7 +283,7 @@ export default function pageProject() {
                               View
                             </a>
                             <a
-                              href={`/dash_board/product-add/${item._id || item.id}`}
+                              href={`/dash_board/projecr-add/${item._id || item.id}`}
                               className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
                             >
                               <FaEdit className="w-5 h-5" />

@@ -77,26 +77,11 @@ function dashSide({ setPageLoading }) {
         },
       ],
     },
-     {
-      title: "Checkouts",
-      icon: <BsCartCheck />,
-      options: [{ name: "checkouts", path: "/dash_board/checkouts" }],
-    },
-    {
-      title: "Customers",
-      icon: <HiUsers />,
-      options: [{ name: "all customers info", path: "/dash_board/customers" }],
-    },
     {
       title: "Settings",
       icon: <IoSettingsSharp />,
       options: [
         { name: "all users", path: "/dash_board/users", icon: <FaUsers /> },
-        {
-          name: "add user",
-          path: "/dash_board/user-add",
-          icon: <AiOutlinePlus />,
-        },
       ],
     },
   ];

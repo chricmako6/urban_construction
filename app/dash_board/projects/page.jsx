@@ -283,7 +283,7 @@ export default function pageProject() {
                               View
                             </a>
                             <a
-                              href={`/dash_board/projecr-add/${item._id || item.id}`}
+                              href={`/dash_board/project-add/${item._id || item.id}`}
                               className="hover:text-[#ffd061] font-bold flex items-center gap-2 px-3 py-2 text-xs text-gray-500"
                             >
                               <FaEdit className="w-5 h-5" />

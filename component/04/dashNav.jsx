@@ -54,7 +54,7 @@ function DashNav() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       await signOut(getAuth());
-      router.push("/login"); 
+      router.push("/login");
     } catch (error) {
       console.error("Logout error:", error);
       setLoggingOut(false);
@@ -69,11 +69,7 @@ function DashNav() {
           <div className="w-16 h-16 border-4 border-[#ffd061] border-t-transparent rounded-full animate-spin absolute top-0 left-0"></div>
         </div>
 
-        <p className="mt-6 text-lg font-semibold text-gray-800">Logging out</p>
-
-        <p className="text-sm text-gray-500 mt-1">
-          Please wait while we end your session...
-        </p>
+        <p className="py-3 md:py-5 text-sm font-bold">Logout wait...</p>
       </div>
     );
   }

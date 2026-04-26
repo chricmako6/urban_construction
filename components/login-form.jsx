@@ -21,15 +21,17 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import Loading from "@/lib/loading";
+// import Loading from "@/lib/loading";
 import { handleAuthRedirect } from "@/lib/authRedirect";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { FiArrowUpRight } from "react-icons/fi";
+import { Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   // ADDED: form state
   const [formData, setFormData] = useState({
@@ -102,6 +104,12 @@ export function LoginForm({ className, ...props }) {
 
       // Reload to get latest verification status
       await user.reload();
+
+      // await handleAuthRedirect(user, router);
+      setSuccess(true);
+
+      // small delay for animation
+      await delay(1200);
 
       await handleAuthRedirect(user, router);
 
@@ -192,7 +200,7 @@ export function LoginForm({ className, ...props }) {
 
   return (
     <div className={cn("flex flex-col", className)} {...props}>
-      {loading && <Loading isSignUp={isSignUp} />}
+      {/* {loading && <Loading isSignUp={isSignUp} />} */}
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2 bg-gray-100">
           {/* UPDATED: added onSubmit */}
@@ -299,11 +307,22 @@ export function LoginForm({ className, ...props }) {
                     disabled={loading}
                     className="group/btn bg-[#ffd061] shadow hover:bg-[#f5c84a] gap-5 cursor-pointer text-black flex items-center justify-center px-4 sm:px-5 py-4 w-full rounded-md font-semibold text-sm sm:text-base transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading
+                    {/* {loading
                       ? "Please wait..."
                       : isSignUp
                         ? "Sign Up"
-                        : "Login"}
+                        : "Login"} */}
+
+                    {loading ? (
+                      <span className="flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Processing...
+                      </span>
+                    ) : isSignUp ? (
+                      "Sign Up"
+                    ) : (
+                      "Login"
+                    )}
 
                     <span className="bg-[#383635] inline-block p-1 rounded-sm group-hover/btn:rotate-45 transition-transform duration-300">
                       <FiArrowUpRight className="text-white w-4 h-4 sm:w-5 sm:h-5" />
@@ -373,33 +392,6 @@ export function LoginForm({ className, ...props }) {
                   <span className="sr-only">Login with Meta</span>
                 </Button>
               </Field>
-
-              {/* TOGGLE LOGIN/SIGNUP */}
-              {/* <FieldDescription className="text-center">
-                {isSignUp ? (
-                  <>
-                    Already have an account?{" "}
-                    <button
-                      type="button"
-                      onClick={() => setIsSignUp(false)}
-                      className="hover:text-[#f5c84a] cursor-pointer"
-                    >
-                      Login
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    Don&apos;t have an account?{" "}
-                    <button
-                      type="button"
-                      onClick={() => setIsSignUp(true)}
-                      className="hover:text-[#f5c84a] cursor-pointer"
-                    >
-                      Sign up
-                    </button>
-                  </>
-                )}
-              </FieldDescription> */}
 
               <AnimatePresence mode="wait">
                 <motion.div

@@ -35,13 +35,15 @@ function Navbar() {
     <div className="w-full bg-[#1a1a1a] py-3 mx-auto sticky top-0 left-0 z-100">
       <div className="flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row">
         {/* Logo */}
-        <div>
-            <Image
-              src="/assert/logo.png"
-              alt="Logo"
-              width={130}
-              height={130}
-            />
+        <div className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[130px] md:h-[130px] transition-all duration-300">
+          <Image
+            src="/assert/logo.png"
+            alt="Company Logo"
+            fill
+            sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, 130px"
+            className="object-contain"
+            priority
+          />
         </div>
 
         {/* Desktop Navigation */}

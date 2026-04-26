@@ -81,7 +81,7 @@ function Testimonial() {
             stiffness: 100,
             damping: 10
         }}
-        className='md:w-115 md:h-130 sm:h-112.5 sm:w-96 h-96 w-80 bg-[#ffd061] relative mx-auto'
+        className='rounded-lg md:w-115 md:h-130 sm:h-112.5 sm:w-96 h-96 w-80 bg-[#ffd061] relative mx-auto'
         >
 
          <Image
@@ -89,7 +89,7 @@ function Testimonial() {
             alt="Construction project testimonial"
             fill={true}
             sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, 460px"
-            className="object-cover bg-center shadow-xl"
+            className="object-cover bg-center shadow-xl rounded-lg"
             priority={false}
             quality={85}
         />
@@ -104,7 +104,7 @@ function Testimonial() {
             damping: 10,
             delay: 0.1
         }}
-        className='z-10 sm:z-20 md:z-9999 absolute shadow-md bg-white h-auto min-h-45 sm:min-h-50 md:h-49 w-[90%] sm:w-[85%] md:w-[70%] lg:w-190 max-w-95 sm:max-w-112.5 md:max-w-none mt-40 sm:mt-45 md:mt-55 lg:mt-80 right-1/2 transform translate-x-1/2 md:right-9 md:translate-x-0 md:transform-none flex justify-center items-center mx-auto p-3 sm:p-4 md:p-0'
+        className='rounded-lg z-10 sm:z-20 md:z-9999 absolute shadow-md bg-white h-auto min-h-45 sm:min-h-50 md:h-49 w-[90%] sm:w-[85%] md:w-[70%] lg:w-190 max-w-95 sm:max-w-112.5 md:max-w-none mt-40 sm:mt-45 md:mt-55 lg:mt-80 right-1/2 transform translate-x-1/2 md:right-9 md:translate-x-0 md:transform-none flex justify-center items-center mx-auto p-3 sm:p-4 md:p-0'
         >
         <TestCard />
         </motion.div>

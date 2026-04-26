@@ -86,7 +86,7 @@ function About() {
             stiffness: 100,
             damping: 10
         }}
-        className='w-80 h-96 sm:w-96 sm:h-112.5 md:w-115 md:h-130 shadow-2xl bg-[#ffd061] relative ml-auto mr-auto md:ml-6 mt-8 md:mt-0'
+        className='rounded-lg w-80 h-96 sm:w-96 sm:h-112.5 md:w-115 md:h-130 shadow-2xl bg-[#ffd061] relative ml-auto mr-auto md:ml-6 mt-8 md:mt-0'
         >
         <motion.div 
             initial={{ opacity: 0, scale: 0.8, x: 70 }}
@@ -99,7 +99,7 @@ function About() {
                 damping: 10,
                 delay: 0.1
             }}
-            className='z-50 absolute shadow-2xl h-96 w-80 sm:h-112.5 sm:w-96 md:h-130 md:w-115 mt-4 ml-4'
+            className='rounded-lg z-50 absolute shadow-2xl h-96 w-80 sm:h-112.5 sm:w-96 md:h-130 md:w-115 mt-4 ml-4'
             style={{
                 backgroundImage: 'url(/assert/04.jpeg)',
                 backgroundSize: 'cover',

@@ -25,8 +25,8 @@ function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "#services", label: "Services" },
-    { href: "#projects", label: "Projects" },
+    { href: "/services", label: "Services" },
+    { href: "/projects", label: "Projects" },
     { href: "/shop", label: "Shop" },
     { href: "/cart", label: "AddCart" },
   ];
@@ -35,7 +35,9 @@ function Navbar() {
     <div className="w-full bg-[#1a1a1a] py-3 mx-auto sticky top-0 left-0 z-100">
       <div className="flex justify-between md:justify-center items-center px-4 md:px-8 lg:gap-60 lg:flex-row">
         {/* Logo */}
-        <div className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[130px] md:h-[130px] transition-all duration-300">
+        <motion.div 
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[130px] md:h-[130px] transition-all duration-300">
           <Image
             src="/assert/logo.png"
             alt="Company Logo"
@@ -44,7 +46,7 @@ function Navbar() {
             className="object-contain"
             priority
           />
-        </div>
+        </motion.div>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex justify-center items-center">

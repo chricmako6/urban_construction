@@ -43,13 +43,15 @@ function Footer() {
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                className=""
+                className="relative w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[130px] md:h-[130px] transition-all duration-300"
               >
                 <Image
                   src="/assert/logo.png"
-                  alt="Logo"
-                  width={145}
-                  height={145}
+                  alt="Company Logo"
+                  fill
+                  sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, 130px"
+                  className="object-contain"
+                  priority
                 />
               </motion.div>
             </div>
